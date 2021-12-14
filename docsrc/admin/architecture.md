@@ -1,8 +1,5 @@
-.. _architecture:
-
-=====================
- System architecture
-=====================
+(architecture)=
+# System architecture
 * CentOS 7
 * Docker
 * Squid
