@@ -1,5 +1,5 @@
 (architecture)=
-# System architecture
+# Architecture
 * CentOS 7
 * Docker
 * Squid
