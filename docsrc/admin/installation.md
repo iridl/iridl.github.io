@@ -41,38 +41,38 @@ The above advantages could be achieved by automating the installation process wi
 We typically install and run ansible on a developer's laptop, and configure the server from the laptop over ssh. Ansible can also be installed and run on the server itself, but we will not cover that configuration here.
 
 * Create a python 3 virtual environment in which to install ansible. For example,
-```
-mkdir ~/venv && python3 -m venv ~/venv/ansible
-```
+
+        mkdir ~/venv && python3 -m venv ~/venv/ansible
+
 * Activate the virtual environment:
-```
-source ~/venv/ansible/bin/activate
-```
+
+        source ~/venv/ansible/bin/activate
+
 * In the virtual environment, Upgrade `pip` to the latest available version and install `wheel`:
-```
-pip install -U pip wheel
-```
+
+        pip install -U pip wheel
+
 * Install ansible:
-```
-pip install ansible==4.5.0
-```
+
+        pip install ansible==4.5.0
+
 (newer versions might work but are untested).
 
 ## Create a configuration repository
 * Create a git repository to track your Data Library configuration. At IRI we call ours `dlconfig`.
 * `cd` to the configuration repository.
 * Install the IRIDL ansible collection in the working directory by running
-```
-ansible-galaxy collection install \
-    -p . \
-    git+https://github.com/iridl/iridl-ansible.git
-```
+
+        ansible-galaxy collection install \
+            -p . \
+            git+https://github.com/iridl/iridl-ansible.git
+
 * The previous command should have downloaded the collection to a subdirectory called `ansible_collections`. Add and commit that directory to your git repository, to ensure that you will use the same version of the collection every time you run the playbook.
 * Copy template configuration files from the collection to the top level of the repository:
-```
-cp ansible_collections/iridl/iridl/example/* .
-```
-* Customize `inventory.yaml`, `playbook.yaml`, and `secrets.yaml` following the comments in those files.
+
+        cp ansible_collections/iridl/iridl/example/* .
+
+* Customize `inventory.yaml`, `playbook.yaml`, and `secrets.yaml` following the comments in those files. There are references in the comments to "dlentries" and "maproom" repositories. These will eventually be explained in the User Guide; in the meantime, you will need to work with IRI staff to create them.
 
 Never edit the contents of the `ansible_collections` directory. All customization should be made in the configuration files that you copied from the template. In the future when it comes time to upgrade to a newer version of the DL software, you will run the `ansible-galaxy` command again and commit the new version to your configuration repository. Don't upgrade without checking the release notes first, because in some cases an upgrade may require manual migration steps. (At this writing, there are no upgrade release notes because this is the playbook's initial release.)
 
@@ -89,15 +89,20 @@ In the course of the installation, the playbook will reboot the server. Before r
 
 
 From the root directory of the configuration repository, run the following command:
-```shell
-ansible-playbook \
-    --ask-become-pass \
-    -i inventory.yaml \
-    -e @~/dlsecrets.yaml \
-    -e run_update_script=yes \
-    datalibrary.yaml
-```
+
+    ansible-playbook \
+        --ask-become-pass \
+        -i inventory.yaml \
+        -e @~/dlsecrets.yaml \
+        -e run_update_script=yes \
+        datalibrary.yaml
+
 Each step of the installation will be printed to the terminal. At a site with a fast connection to the internet, the playbook generally finishes within ten minutes, but if bandwidth is limited it may take a few hours, as the installation process involves downloading several GB of software packages and container images.
 
+You should now be able to visit your Data Library server in a browser, but the maprooms are not yet functional because the data that underlies them has yet to be installed.
+
+## Install datasets
+Among other things, the ansible playbook has created structures (directories, groups, a database, and permissions) to support the installation of datasets. You can now install your data as described in {ref}`installing-data`. A member of the IRI staff will typically be involved in this process, as it may involve copying large amounts of data from an IRI server to yours.
+
 ## Use your new Data Library
-You should now be able to visit your Data Library server in a browser. For next steps, see {doc}`/user/index` and the {doc}`maintenance` section of the current guide.
+You should now be able to visit your Data Library server in a browser. For next steps, see the {doc}`maintenance` page of the current guide, particularly the section {ref}`debugging`, and the {doc}`/user/index`.
