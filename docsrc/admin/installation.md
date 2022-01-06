@@ -10,9 +10,6 @@ The above advantages could be achieved by automating the installation process wi
 * When the server configuration needs to change, those changes can be described in the playbook and checked into version control, so there is a record of what was changed and when. Running the playbook then applies the changes to the server.
 * An ansible playbook can be run in "check mode". In this mode, the playbook makes no changes, but merely reports any differences between the server's configuration and the desired state. Knowing what changes the tool will make before it makes them helps avoid some kinds of configuration errors.
 
-We typically install and run ansible on a developer's laptop, and configure the server from the laptop over ssh. Ansible can also be installed and run on the server itself, but we will not cover that configuration here.
-
-
 
 ## Recommended hardware
 The following hardware configurations have been found to give good performance:
@@ -40,25 +37,19 @@ Before running the installation script, perform the following steps to prepare t
 * Install CentOS 7 (minimal server configuration). Note that Red Hat has terminated support for CentOS 8 prematurely, while maintenance updates will still be available for CentOS 7 through June 2024. Consequently, plans to migrate the Data Library to CentOS 8 have been abandoned. If you have thoughts about what we should target as the next platform after CentOS 7, please communicate them to [help@iri.columbia.edu](mailto:help@iri.columbia.edu).
 * Create a user account for the system administrator who will be performing the installation. Make that user a member of the `wheel` group so that they will be able to perform commands as root using `sudo`.
 * Mount a volume with at least 1TB of storage space, preferably with mirror RAID, at `/data`. List the volume in `/etc/fstab` to ensure that it will be mounted at boot time. We recommend using LVM to create logical volumes, and formatting the volume with XFS. Note that an XFS filesystem can be expanded but not shrunk, so it may be preferable to leave some disk space unallocated, to be used for snapshots or unanticipated storage needs, rather than putting all of the available space into the XFS-formatted volume.
+* Install ansible and git:
 
-## Install ansible
-* Create a python 3 virtual environment in which to install ansible. For example,
+        sudo yum install centos-release-ansible29  # enables additional yum repository
+        sudo yum install -y ansible git
 
-        mkdir ~/venv && python3 -m venv ~/venv/ansible
+* Disable SELinux and reboot:
 
-* Activate the virtual environment:
+        sudo sed -i s/SELINUX=enforcing/SELINUX=disabled/ /etc/selinux/config
+        sudo shutdown -r now
 
-        source ~/venv/ansible/bin/activate
-
-* In the virtual environment, Upgrade `pip` to the latest available version and install `wheel`:
-
-        pip install -U pip wheel
-
-* Install ansible:
-
-        pip install ansible==4.5.0
-
-(newer versions might work but are untested).
+```{note}
+If you feel SELinux is important to the security of your server, please start a conversation with us at help@iri.columbia.edu.
+```
 
 ## Create a configuration repository
 * Create a git repository to track your Data Library configuration. At IRI we call ours `dlconfig`.
@@ -80,15 +71,6 @@ Never edit the contents of the `ansible_collections` directory. All customizatio
 
 ## Run the ansible playbook
 Now we are ready to run the playbook, which will download, configure, and install the Data Library software using the parameters you defined in the configuration files.
-
-```{warning}
-The playbook disables SELinux. If you feel SELinux is important to the security of your server, please open a conversation with us at help@iri.columbia.edu.
-```
-
-```{warning}
-In the course of the installation, the playbook will reboot the server. Before running the playbook, ensure that the ssh daemon will be started and all necessary filesystems mounted automatically at boot.
-```
-
 
 From the root directory of the configuration repository, run the following command:
 
