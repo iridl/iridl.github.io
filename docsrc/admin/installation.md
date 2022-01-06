@@ -73,7 +73,11 @@ If you feel SELinux is important to the security of your server, please start a 
 
         cp ansible_collections/iridl/iridl/example/* .
 
-* Customize `inventory.yaml`, `playbook.yaml`, and `secrets.yaml` following the comments in those files. There are references in the comments to "dlentries" and "maproom" repositories. These will eventually be explained in the User Guide; in the meantime, you will need to work with IRI staff to create them.
+* Move `secrets.yaml` out of the git repository. For security reasons, unencrypted secrets should not be committed to version control.
+
+        mv secrets.yaml ..
+
+* Customize `inventory.yaml`, `playbook.yaml`, and `secrets.yaml` following the comments in those files. There are references in the comments to "dlentries" and "maproom" repositories. You will need to work with IRI staff to create these repositories. Commit your customizations.
 
 Never edit the contents of the `ansible_collections` directory. All customization should be made in the configuration files that you copied from the template. In the future when it comes time to upgrade to a newer version of the DL software, you will run the `ansible-galaxy` command again and commit the new version to your configuration repository. Don't upgrade without checking the release notes first, because in some cases an upgrade may require manual migration steps. (At this writing, there are no upgrade release notes because this is the playbook's initial release.)
 
@@ -85,7 +89,7 @@ From the root directory of the configuration repository, run the following comma
     ansible-playbook \
         --ask-become-pass \
         -i inventory.yaml \
-        -e @~/dlsecrets.yaml \
+        -e @../secrets.yaml \
         -e run_update_script=yes \
         datalibrary.yaml
 
