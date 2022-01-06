@@ -53,14 +53,22 @@ If you feel SELinux is important to the security of your server, please start a 
 
 ## Create a configuration repository
 * Create a git repository to track your Data Library configuration. At IRI we call ours `dlconfig`.
-* `cd` to the configuration repository.
-* Install the IRIDL ansible collection in the working directory by running
+
+        mkdir dlconfig
+        cd dlconfig
+        git init
+
+* Inside the new git repository, install the IRIDL ansible collection:
 
         ansible-galaxy collection install \
             -p . \
             git+https://github.com/iridl/iridl-ansible.git
 
 * The previous command should have downloaded the collection to a subdirectory called `ansible_collections`. Add and commit that directory to your git repository, to ensure that you will use the same version of the collection every time you run the playbook.
+
+        git add ansible_collections
+        git commit -m "add iridl ansible collection"
+
 * Copy template configuration files from the collection to the top level of the repository:
 
         cp ansible_collections/iridl/iridl/example/* .
