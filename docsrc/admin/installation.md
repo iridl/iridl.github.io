@@ -1,6 +1,19 @@
 # Installation
 This section provides instructions for installing the Data Library software on a server.
 
+Installation of the Data Library software is automated using [ansible](https://docs.ansible.com/ansible_community.html), a configuration management tool.
+Automating the installation and configuration process has the following advantages over doing it by hand:
+* Convenience: an automated installation process takes less of the system administrator's time.
+* Repeatability: having relevant system configuration details documented in executable form makes it easier to reproduce the same configuration on another server, *e.g.* after a hardware failure or upgrade.
+
+The above advantages could be achieved by automating the installation process with a bash script, but using ansible instead of bash brings further advantages. The same ansible "playbook" (configuration management script) that performs the initial software installation can also be used subsequently to manage the server's configuration.
+* When the server configuration needs to change, those changes can be described in the playbook and checked into version control, so there is a record of what was changed and when. Running the playbook then applies the changes to the server.
+* An ansible playbook can be run in "check mode". In this mode, the playbook makes no changes, but merely reports any differences between the server's configuration and the desired state. Knowing what changes the tool will make before it makes them helps avoid some kinds of configuration errors.
+
+We typically install and run ansible on a developer's laptop, and configure the server from the laptop over ssh. Ansible can also be installed and run on the server itself, but we will not cover that configuration here.
+
+
+
 ## Recommended hardware
 The following hardware configurations have been found to give good performance:
 
@@ -29,17 +42,6 @@ Before running the installation script, perform the following steps to prepare t
 * Mount a volume with at least 1TB of storage space, preferably with mirror RAID, at `/data`. List the volume in `/etc/fstab` to ensure that it will be mounted at boot time. We recommend using LVM to create logical volumes, and formatting the volume with XFS. Note that an XFS filesystem can be expanded but not shrunk, so it may be preferable to leave some disk space unallocated, to be used for snapshots or unanticipated storage needs, rather than putting all of the available space into the XFS-formatted volume.
 
 ## Install ansible
-Installation of the Data Library software is automated using [ansible](https://docs.ansible.com/ansible_community.html), a configuration management tool.
-Automating the installation and configuration process has the following advantages over doing it by hand:
-* Convenience: an automated installation process takes less of the system administrator's time.
-* Repeatability: having relevant system configuration details documented in executable form makes it easier to reproduce the same configuration on another server, *e.g.* after a hardware failure or upgrade.
-
-The above advantages could be achieved by automating the installation process with a bash script, but using ansible instead of bash brings further advantages. The same ansible "playbook" (configuration management script) that performs the initial software installation can also be used subsequently to manage the server's configuration.
-* When the server configuration needs to change, those changes can be described in the playbook and checked into version control, so there is a record of what was changed and when. Running the playbook then applies the changes to the server.
-* An ansible playbook can be run in "check mode". In this mode, the playbook makes no changes, but merely reports any differences between the server's configuration and the desired state. Knowing what changes the tool will make before it makes them helps avoid some kinds of configuration errors.
-
-We typically install and run ansible on a developer's laptop, and configure the server from the laptop over ssh. Ansible can also be installed and run on the server itself, but we will not cover that configuration here.
-
 * Create a python 3 virtual environment in which to install ansible. For example,
 
         mkdir ~/venv && python3 -m venv ~/venv/ansible
