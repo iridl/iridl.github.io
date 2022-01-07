@@ -8,6 +8,7 @@ This guide provides information to help a system administrator install, configur
 * Install a linux distribution on a server.
 * Manage unix users and groups, *e.g.* create a user, set a user's password, add a user to a group.
 * Manage storage volumes, *e.g.* configure LVM; configure RAID; format and mount filesystems.
+* Manage containerized services using `docker-compose`.
 
 You will be using [ansible](https://docs.ansible.com/ansible_community.html), a configuration management tool, to install and configure the Data Library software. We do not assume prior familiarity with ansible, but after working through the installation instructions we do recommend that you read the ansible documentation.
 
