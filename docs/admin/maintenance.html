@@ -1,0 +1,152 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+    <title>Maintenance &#8212; IRI Data Library  documentation</title>
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/classic.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/graphviz.css" />
+    
+    <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+    <script src="../_static/jquery.js"></script>
+    <script src="../_static/underscore.js"></script>
+    <script src="../_static/doctools.js"></script>
+    
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="prev" title="Installation" href="installation.html" /> 
+  </head><body>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="installation.html" title="Installation"
+             accesskey="P">previous</a></li>
+        <li class="nav-item nav-item-0"><a href="../index.html">IRI Data Library  documentation</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="index.html" accesskey="U">System Administrator Guide</a> &#187;</li>
+        <li class="nav-item nav-item-this"><a href="">Maintenance</a></li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <section class="tex2jax_ignore mathjax_ignore" id="maintenance">
+<h1>Maintenance<a class="headerlink" href="#maintenance" title="Permalink to this headline">¶</a></h1>
+<section id="configuration-updates-using-ansible">
+<span id="ansible-update"></span><h2>Configuration updates using ansible<a class="headerlink" href="#configuration-updates-using-ansible" title="Permalink to this headline">¶</a></h2>
+<p>The <a class="reference internal" href="installation.html#installation"><span class="std std-ref">Installation</span></a> section explains how to create an ansible playbook and use it for the initial installation of the Data Library software. We also recommend that you use continue using ansible to manage configuration changes and software updates over time.</p>
+<p>To make a configuration change,</p>
+<ul>
+<li><p>In your dlconfig repository, edit the relevant variable in <code class="docutils literal notranslate"><span class="pre">playbook.yaml</span></code>. Advanced ansible users can also add custom tasks to the playbook.</p></li>
+<li><p>Run the playbook in “check mode” to verify that ansible will make the change you intended:</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>  ansible-playbook --check --diff -i inventory.yaml -e @~/secrets.yaml playbook.yaml
+</pre></div>
+</div>
+</li>
+<li><p>After verifying the diff, run the playbook without <code class="docutils literal notranslate"><span class="pre">--check</span></code> to apply the change.</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>  ansible-playbook -i inventory.yaml -e @~/secrets.yaml playbook.yaml
+</pre></div>
+</div>
+</li>
+<li><p>Commit and push your changes to your git host.</p></li>
+</ul>
+<p>To update to a new version of the Data Library software, first consult the release notes for any backwards-compatibility warnings and manual migration steps. Then  use <code class="docutils literal notranslate"><span class="pre">ansible-galaxy</span></code> to update the <code class="docutils literal notranslate"><span class="pre">ansible_collections</span></code> directory of your dlconfig repository:</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span> ansible-galaxy collection install iridl.iridl:==x.y.z
+</pre></div>
+</div>
+<p>where <code class="docutils literal notranslate"><span class="pre">x.y.z</span></code> is the new Data Library version number. Remember to commit and push your changes.</p>
+</section>
+<section id="adding-user-accounts">
+<h2>Adding user accounts<a class="headerlink" href="#adding-user-accounts" title="Permalink to this headline">¶</a></h2>
+<p>As described in <a class="reference internal" href="overview.html#groups"><span class="std std-ref">User groups</span></a>, users with accounts on the Data Library server can be divided in two groups: administrators and authors.</p>
+<p>Administrator accounts should be created “by hand”, <em>i.e.</em> outside of ansible’s control. Remember to add administrators to the <code class="docutils literal notranslate"><span class="pre">wheel</span></code> group so they will have sudo privileges.</p>
+<p>Author accounts should be created by adding the user to the <code class="docutils literal notranslate"><span class="pre">datag_users</span></code> list in <code class="docutils literal notranslate"><span class="pre">playbook.yaml</span></code> and running ansible (see <a class="reference internal" href="#ansible-update"><span class="std std-ref">Configuration updates using ansible</span></a>). Ansible will create the user account, add the new user to the <code class="docutils literal notranslate"><span class="pre">datag</span></code> group, and create a personal data catalog directory (see <a class="reference internal" href="overview.html#paths"><span class="std std-ref">Important file and directory paths</span></a>) for the user. Ansible does not set the user’s password, so you should do that by hand after running the playbook. Remember to commit and push your playbook changes.</p>
+</section>
+<section id="debugging-tips">
+<span id="debugging"></span><h2>Debugging tips<a class="headerlink" href="#debugging-tips" title="Permalink to this headline">¶</a></h2>
+<ul>
+<li><p>To see what services are running under docker, use <code class="docutils literal notranslate"><span class="pre">sudo</span> <span class="pre">docker</span> <span class="pre">ps</span></code>.</p></li>
+<li><p>To start and stop services, cd to <code class="docutils literal notranslate"><span class="pre">/usr/local/datalib</span></code> and then use <code class="docutils literal notranslate"><span class="pre">docker-compose</span></code>, <em>e.g.</em></p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>  cd /usr/local/datalib
+  sudo docker-compose up -d maproom
+</pre></div>
+</div>
+</li>
+<li><p>Most services output logs to stdout, which is captured by the docker daemon and routed to journald. You can read the logs by using <code class="docutils literal notranslate"><span class="pre">journalctl</span></code>, <em>e.g.</em></p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>  sudo journalctl CONTAINER_NAME=datalib_maproom_1 --since=&#39;1 hour ago&#39;
+</pre></div>
+</div>
+</li>
+<li><p>squid produces two separate logs: the error log and the access log. The latter contains a line for each request served. The error log is piped to journalctl, while the access log is written to a docker volume. To read the access log, use <code class="docutils literal notranslate"><span class="pre">docker</span> <span class="pre">exec</span></code> to run a command in the squid container, <em>e.g.</em></p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>  sudo docker exec -it datalib_squid_1 tail -n 100 /var/log/squid/access.log
+</pre></div>
+</div>
+</li>
+<li><p>If an embedded image in a maproom is broken/empty, copy the image URL to a new browser window and remove the .gif at the end. Sometimes this will get you an informative error message instead of just an empty response.</p></li>
+<li><p>If there’s an error message about a specific file or database table, look into that as described below. If no specific file or table is mentioned, identify the datasets that are used in the query, and read the catalog entries (dlentries) for those datasets to identify the files and/or tables that they use.</p></li>
+<li><p>To check on a database table, exec into the postgres container and use psql. If the table doesn’t exist, either run the sql script that creates it, or add it to the sql scripts if it’s missing. If the table exists, check that the readonlyaccess role has select permission for it. (Our install process is supposed to grant that permission, but in rehearsing the installation we have sometimes needed to grant it by hand.)</p></li>
+</ul>
+</section>
+</section>
+
+
+            <div class="clearer"></div>
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="../index.html">Table of Contents</a></h3>
+  <p class="caption" role="heading"><span class="caption-text">Content:</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../user/index.html">User Guide</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="index.html">System Administrator Guide</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="overview.html">Overview</a></li>
+<li class="toctree-l2"><a class="reference internal" href="installation.html">Installation</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">Maintenance</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#configuration-updates-using-ansible">Configuration updates using ansible</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#adding-user-accounts">Adding user accounts</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#debugging-tips">Debugging tips</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false"/>
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</div>
+<script>$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="installation.html" title="Installation"
+             >previous</a></li>
+        <li class="nav-item nav-item-0"><a href="../index.html">IRI Data Library  documentation</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="index.html" >System Administrator Guide</a> &#187;</li>
+        <li class="nav-item nav-item-this"><a href="">Maintenance</a></li> 
+      </ul>
+    </div>
+    <div class="footer" role="contentinfo">
+        &#169; Copyright 2021, IRI.
+      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 4.3.1.
+    </div>
+  </body>
+</html>
