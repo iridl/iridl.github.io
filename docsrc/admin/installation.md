@@ -1,14 +1,8 @@
+(installation)=
 # Installation
 This section provides instructions for installing the Data Library software on a server.
 
 Installation of the Data Library software is automated using [ansible](https://docs.ansible.com/ansible_community.html), a configuration management tool.
-Automating the installation and configuration process has the following advantages over doing it by hand:
-* Convenience: an automated installation process takes less of the system administrator's time.
-* Repeatability: having relevant system configuration details documented in executable form makes it easier to reproduce the same configuration on another server, *e.g.* after a hardware failure or upgrade.
-
-The above advantages could be achieved by automating the installation process with a bash script, but using ansible instead of bash brings further advantages. The same ansible "playbook" (configuration management script) that performs the initial software installation can also be used subsequently to manage the server's configuration.
-* When the server configuration needs to change, those changes can be described in the playbook and checked into version control, so there is a record of what was changed and when. Running the playbook then applies the changes to the server.
-* An ansible playbook can be run in "check mode". In this mode, the playbook makes no changes, but merely reports any differences between the server's configuration and the desired state. Knowing what changes the tool will make before it makes them helps avoid some kinds of configuration errors.
 
 
 ## Recommended hardware
@@ -34,7 +28,7 @@ We recommend a server that has at least 4 internal 3.5” HD slots for future ex
 
 ## Prepare the server
 Before running the installation script, perform the following steps to prepare the server:
-* Install CentOS 7 (minimal server configuration). Note that Red Hat has terminated support for CentOS 8 prematurely, while maintenance updates will still be available for CentOS 7 through June 2024. Consequently, plans to migrate the Data Library to CentOS 8 have been abandoned. If you have thoughts about what we should target as the next platform after CentOS 7, please communicate them to [help@iri.columbia.edu](mailto:help@iri.columbia.edu).
+* Install CentOS 7 (minimal server configuration). For more information on this choice of operating system, see {ref}`infrastructure`.
 * Create a user account for the system administrator who will be performing the installation. Make that user a member of the `wheel` group so that they will be able to perform commands as root using `sudo`.
 * Mount a volume with at least 1TB of storage space, preferably with mirror RAID, at `/data`. List the volume in `/etc/fstab` to ensure that it will be mounted at boot time. We recommend using LVM to create logical volumes, and formatting the volume with XFS. Note that an XFS filesystem can be expanded but not shrunk, so it may be preferable to leave some disk space unallocated, to be used for snapshots or unanticipated storage needs, rather than putting all of the available space into the XFS-formatted volume.
 * Install ansible and git:
@@ -101,4 +95,4 @@ You should now be able to visit your Data Library server in a browser, but the m
 Among other things, the ansible playbook has created structures (directories, groups, a database, and permissions) to support the installation of datasets. You can now install your data as described in {ref}`installing-data`. A member of the IRI staff will typically be involved in this process, as it may involve copying large amounts of data from an IRI server to yours.
 
 ## Use your new Data Library
-You should now be able to visit your Data Library server in a browser. For next steps, see the {doc}`maintenance` page of the current guide, particularly the section {ref}`debugging`, and the {doc}`/user/index`.
+You should now be able to visit your Data Library server in a browser. For next steps, see the {doc}`maintenance` page of the current guide, and the {doc}`/user/index`.

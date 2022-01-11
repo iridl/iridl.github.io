@@ -1,13 +1,24 @@
-(architecture)=
-# Architecture
+(overview)=
+# Overview
 
 This section gives an overview of the components of the Data Library system.
 
+(infrastructure)=
 ## Infrastructure
 
-The Data Library ansible playbook currently targets CentOS 7. IRI does not test or support the software on other platforms. Plans to migrate to CentOS 8 have been abandoned because Red Hat has ended support for it prematurely. Support for CentOS 7 is scheduled to continue through June 2024; we are currently evaluating options for the successor to this platform.
+The Data Library ansible playbook currently targets CentOS 7. IRI does not test or support the software on other platforms. Plans to migrate to CentOS 8 have been abandoned because Red Hat has ended support for it prematurely. Support for CentOS 7 is scheduled to continue through June 2024; If you have thoughts about what we should target as the next platform after CentOS 7, please communicate them to [help@iri.columbia.edu](mailto:help@iri.columbia.edu).
 
 The Data Library services run under Docker, using docker-compose. Most services log to stdout, which the Docker daemon forwards to journald.
+
+## Configuration management using ansible
+
+Installation and configuration of the Data Library software is automated using [ansible](https://docs.ansible.com/ansible_community.html), a configuration management tool. Automating the installation and configuration process has the following advantages over doing it by hand:
+* Convenience: an automated installation process makes setting up a new Data Library site quicker.
+* Repeatability: having relevant system configuration details documented in executable form makes it easier to reproduce the same configuration on another server, *e.g.* after a hardware failure or upgrade.
+
+The above advantages could be achieved by automating the installation process with a shell script, but using ansible instead of a shell script brings further advantages. The same ansible "playbook" (configuration management script) that performs the initial software installation can also be used subsequently to manage the server's configuration.
+* When the server configuration needs to change, those changes can be described in the playbook and checked into version control, so there is a record of what was changed and when. Running the playbook then applies the changes to the server.
+* An ansible playbook can be run in "check mode". In this mode, the playbook makes no changes, but merely reports any differences between the server's configuration and the desired state. Knowing what changes the tool will make before it makes them gives the administrator more confidence in the tool and helps avoid some kinds of configuration errors.
 
 ## Software components
 
@@ -19,15 +30,20 @@ The system is composed of four containerized services.
 
 Squid routes the root URL `/` and URLs that begin with `/maproom` to httpd; all other URLs are routed to ingrid.
 
+
+(groups)=
 ## User groups
 
 Two kinds of users will need accounts (unix logins) on a Data Library server:
 - **Administrators** are responsible for system configuration, software updates, backups, and user support. They are members of the `wheel` group and thus have permission to assume root privileges using `sudo`.
 - **Authors** are responsible for adding and extending datasets to the Data Library, and for creating maprooms. By virtue of being members of the `datag` group, they have permission to add data files to the directory read by ingrid, and to execute SQL queries that modify ingrid's database. They don't have general `sudo` privileges, but they are granted targeted permission to run certain scripts in `/usr/local/bin` as root.
 
+User accounts for authors are managed by the ansible playbook, but administrators are not.
+
+(paths)=
 ## Important file and directory paths
 
-Ingrid datasets are defined in a *data catalog*, which is defined in a git repository traditionally named `dlentries` or `dlentries_countryname`, e.g. `dlentries_madagascar`. Authors cannot edit ingrid's copy of the data catalog directly; to make changes, they edit the catalog in another location, push their changes to their git host, and then run `/usr/local/bin/update_datalib` on the server, which downloads the latest catalog from the git host.
+Ingrid datasets are defined in a *data catalog*, which is developed in a git repository traditionally named `dlentries` or `dlentries_countryname`, e.g. `dlentries_madagascar`. Authors cannot edit ingrid's copy of the data catalog directly; to make changes, they edit the catalog in another location, push their changes to their git host, and then run `/usr/local/bin/update_datalib` on the server, which downloads the latest catalog from the git host.
 
 Catalog entries refer to data files, which should be located in subdirectories of `/data/datalib/data`. Members of the `datag` group have permission to write to that directory, and ingrid has permission to read from it.
 
@@ -38,6 +54,3 @@ Catalog entries in the main catalog should refer to data files located in `/data
 Configuration files for the Data Library services are located under `/usr/local/datalib`. In particular, the docker-compose file that defines the Data Library services is  `/usr/local/datalib/docker-compose.yaml`, so do use the `docker-compose` command to manage services, an administrator should first `cd /usr/local/datalib` and then run `sudo docker-compose`. Note that administrators should not edit most configuration files directly. The configuration is managed by ansible, so changes should be made by modifying the ansible configuration and then applying it using `ansible-playbook`. This process will be explained in more detail below.
 
 In the typical configuration, `/data` is a mount point for a large storage volume that is distinct from the root volume. In addition to `/data/datalib`, which was mentioned above, there is `/data/docker`. `/var/lib/docker` is a symbolic link to `/data/docker`, so data created by the Docker daemon and containers, such as container images and volumes, are stored in that directory.
-
-
-## Configuration updates using ansible

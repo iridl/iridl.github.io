@@ -1,5 +1,36 @@
 # Maintenance
 
+(ansible-update)=
+## Configuration updates using ansible
+
+The {ref}`installation` section explains how to create an ansible playbook and use it for the initial installation of the Data Library software. We also recommend that you use continue using ansible to manage configuration changes and software updates over time.
+
+To make a configuration change,
+- In your dlconfig repository, edit the relevant variable in `playbook.yaml`. Advanced ansible users can also add custom tasks to the playbook.
+- Run the playbook in "check mode" to verify that ansible will make the change you intended:
+
+        ansible-playbook --check --diff -i inventory.yaml -e @~/secrets.yaml playbook.yaml
+
+- After verifying the diff, run the playbook without `--check` to apply the change.
+
+        ansible-playbook -i inventory.yaml -e @~/secrets.yaml playbook.yaml
+
+- Commit and push your changes to your git host.
+
+To update to a new version of the Data Library software, first consult the release notes for any backwards-compatibility warnings and manual migration steps. Then  use `ansible-galaxy` to update the `ansible_collections` directory of your dlconfig repository:
+
+     ansible-galaxy collection install iridl.iridl:==x.y.z
+
+where `x.y.z` is the new Data Library version number. Remember to commit and push your changes.
+
+## Adding user accounts
+
+As described in {ref}`groups`, users with accounts on the Data Library server can be divided in two groups: administrators and authors.
+
+Administrator accounts should be created "by hand", *i.e.* outside of ansible's control. Remember to add administrators to the `wheel` group so they will have sudo privileges.
+
+Author accounts should be created by adding the user to the `datag_users` list in `playbook.yaml` and running ansible (see {ref}`ansible-update`). Ansible will create the user account, add the new user to the `datag` group, and create a personal data catalog directory (see {ref}`paths`) for the user. Ansible does not set the user's password, so you should do that by hand after running the playbook. Remember to commit and push your playbook changes.
+
 (debugging)=
 ## Debugging tips
 
@@ -15,7 +46,7 @@
         sudo journalctl CONTAINER_NAME=datalib_maproom_1 --since='1 hour ago'
 
 
-- squid produces two separate logs: the error log and the access log. The latter contains a line for each request served. The error log is piped to journalctl, while the access log is written to a docker volume. To read the access log, exec into the squid container:
+- squid produces two separate logs: the error log and the access log. The latter contains a line for each request served. The error log is piped to journalctl, while the access log is written to a docker volume. To read the access log, use `docker exec` to run a command in the squid container, *e.g.*
 
         sudo docker exec -it datalib_squid_1 tail -n 100 /var/log/squid/access.log
 
