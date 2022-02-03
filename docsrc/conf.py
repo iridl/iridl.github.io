@@ -64,3 +64,6 @@ html_sidebars = {
 # Suppress index link in navbar, since the index is empty and thus
 # useless. Enable if/when we start adding index entries.
 html_use_index = False
+
+# Used by sphinx.ext.githubpages to generate docs/CNAME
+html_baseurl = 'dldocs.iri.columbia.edu'
