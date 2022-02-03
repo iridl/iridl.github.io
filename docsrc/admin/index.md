@@ -15,6 +15,7 @@ You will be using [ansible](https://docs.ansible.com/ansible_community.html), a 
 ```{toctree}
 
 overview
+hwrequirements
 installation
 maintenance
 ```

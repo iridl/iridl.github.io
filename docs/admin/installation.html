@@ -9,7 +9,6 @@
     <title>Installation &#8212; IRI Data Library  documentation</title>
     <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
     <link rel="stylesheet" type="text/css" href="../_static/classic.css" />
-    <link rel="stylesheet" type="text/css" href="../_static/graphviz.css" />
     
     <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
     <script src="../_static/jquery.js"></script>
@@ -18,7 +17,7 @@
     
     <link rel="search" title="Search" href="../search.html" />
     <link rel="next" title="Maintenance" href="maintenance.html" />
-    <link rel="prev" title="Overview" href="overview.html" /> 
+    <link rel="prev" title="Server Requirements" href="hwrequirements.html" /> 
   </head><body>
     <div class="related" role="navigation" aria-label="related navigation">
       <h3>Navigation</h3>
@@ -27,7 +26,7 @@
           <a href="maintenance.html" title="Maintenance"
              accesskey="N">next</a></li>
         <li class="right" >
-          <a href="overview.html" title="Overview"
+          <a href="hwrequirements.html" title="Server Requirements"
              accesskey="P">previous</a> |</li>
         <li class="nav-item nav-item-0"><a href="../index.html">IRI Data Library  documentation</a> &#187;</li>
           <li class="nav-item nav-item-1"><a href="index.html" accesskey="U">System Administrator Guide</a> &#187;</li>
@@ -44,29 +43,6 @@
 <span id="id1"></span><h1>Installation<a class="headerlink" href="#installation" title="Permalink to this headline">¶</a></h1>
 <p>This section provides instructions for installing the Data Library software on a server.</p>
 <p>Installation of the Data Library software is automated using <a class="reference external" href="https://docs.ansible.com/ansible_community.html">ansible</a>, a configuration management tool.</p>
-<section id="recommended-hardware">
-<h2>Recommended hardware<a class="headerlink" href="#recommended-hardware" title="Permalink to this headline">¶</a></h2>
-<p>The following hardware configurations have been found to give good performance:</p>
-<p>Basic Requirements:</p>
-<ul class="simple">
-<li><p>1x Intel Xeon E-series 8 core</p></li>
-<li><p>Dual 1GB Ethernet</p></li>
-<li><p>32-64 GB RAM</p></li>
-<li><p>128GB OS Hard Drive</p></li>
-<li><p>(2) internal 4 TB HD for data. Mirror RAID</p></li>
-<li><p>(1) External 8TB HD for backups</p></li>
-</ul>
-<p>High End Requirements:</p>
-<ul class="simple">
-<li><p>2x Intel Xeon Silver 4208 or better</p></li>
-<li><p>Dual 10GB Ethernet</p></li>
-<li><p>64-128 GB RAM</p></li>
-<li><p>128GB OS HD</p></li>
-<li><p>(2) internal 4 TB HD for data. Mirror RAID</p></li>
-<li><p>(1) External 8TB HD for backups</p></li>
-</ul>
-<p>We recommend a server that has at least 4 internal 3.5” HD slots for future expansion. A 1250VA uninterruptible power supply (UPS) is also recommended.</p>
-</section>
 <section id="prepare-the-server">
 <h2>Prepare the server<a class="headerlink" href="#prepare-the-server" title="Permalink to this headline">¶</a></h2>
 <p>Before running the installation script, perform the following steps to prepare the server:</p>
@@ -167,8 +143,8 @@
 <li class="toctree-l1"><a class="reference internal" href="../user/index.html">User Guide</a></li>
 <li class="toctree-l1 current"><a class="reference internal" href="index.html">System Administrator Guide</a><ul class="current">
 <li class="toctree-l2"><a class="reference internal" href="overview.html">Overview</a></li>
+<li class="toctree-l2"><a class="reference internal" href="hwrequirements.html">Server Requirements</a></li>
 <li class="toctree-l2 current"><a class="current reference internal" href="#">Installation</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="#recommended-hardware">Recommended hardware</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#prepare-the-server">Prepare the server</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#create-a-configuration-repository">Create a configuration repository</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#run-the-ansible-playbook">Run the ansible playbook</a></li>
@@ -202,7 +178,7 @@
           <a href="maintenance.html" title="Maintenance"
              >next</a></li>
         <li class="right" >
-          <a href="overview.html" title="Overview"
+          <a href="hwrequirements.html" title="Server Requirements"
              >previous</a> |</li>
         <li class="nav-item nav-item-0"><a href="../index.html">IRI Data Library  documentation</a> &#187;</li>
           <li class="nav-item nav-item-1"><a href="index.html" >System Administrator Guide</a> &#187;</li>
