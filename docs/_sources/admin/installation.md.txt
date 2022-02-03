@@ -4,28 +4,6 @@ This section provides instructions for installing the Data Library software on a
 
 Installation of the Data Library software is automated using [ansible](https://docs.ansible.com/ansible_community.html), a configuration management tool.
 
-
-## Recommended hardware
-The following hardware configurations have been found to give good performance:
-
-Basic Requirements:
-* 1x Intel Xeon E-series 8 core
-* Dual 1GB Ethernet
-* 32-64 GB RAM
-* 128GB OS Hard Drive
-* (2) internal 4 TB HD for data. Mirror RAID
-* (1) External 8TB HD for backups
-
-High End Requirements:
-* 2x Intel Xeon Silver 4208 or better
-* Dual 10GB Ethernet
-* 64-128 GB RAM
-* 128GB OS HD
-* (2) internal 4 TB HD for data. Mirror RAID
-* (1) External 8TB HD for backups
-
-We recommend a server that has at least 4 internal 3.5” HD slots for future expansion. A 1250VA uninterruptible power supply (UPS) is also recommended.
-
 ## Prepare the server
 Before running the installation script, perform the following steps to prepare the server:
 * Install CentOS 7 (minimal server configuration). For more information on this choice of operating system, see {ref}`infrastructure`.
