@@ -66,4 +66,4 @@ html_sidebars = {
 html_use_index = False
 
 # Used by sphinx.ext.githubpages to generate docs/CNAME
-html_baseurl = 'dldocs.iri.columbia.edu'
+html_baseurl = 'https://dldocs.iri.columbia.edu'
