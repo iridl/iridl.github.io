@@ -51,9 +51,8 @@
 <li><p>Install CentOS 7 (minimal server configuration). For more information on this choice of operating system, see <a class="reference internal" href="overview.html#infrastructure"><span class="std std-ref">Infrastructure</span></a>.</p></li>
 <li><p>Create a user account for the system administrator who will be performing the installation. Make that user a member of the <code class="docutils literal notranslate"><span class="pre">wheel</span></code> group so that they will be able to perform commands as root using <code class="docutils literal notranslate"><span class="pre">sudo</span></code>.</p></li>
 <li><p>Mount a volume with at least 1TB of storage space, preferably with mirror RAID, at <code class="docutils literal notranslate"><span class="pre">/data</span></code>. List the volume in <code class="docutils literal notranslate"><span class="pre">/etc/fstab</span></code> to ensure that it will be mounted at boot time. We recommend using LVM to create logical volumes, and formatting the volume with XFS. Note that an XFS filesystem can be expanded but not shrunk, so it may be preferable to leave some disk space unallocated, to be used for snapshots or unanticipated storage needs, rather than putting all of the available space into the XFS-formatted volume.</p></li>
-<li><p>Install ansible and git:</p>
-<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>  sudo yum install centos-release-ansible29  # enables additional yum repository
-  sudo yum install -y ansible git
+<li><p>Install git and python3:</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>  sudo yum install -y git python3
 </pre></div>
 </div>
 </li>
@@ -68,6 +67,17 @@
 <p class="admonition-title">Note</p>
 <p>If you feel SELinux is important to the security of your server, please start a conversation with us at help&#64;iri.columbia.edu.</p>
 </div>
+<ul>
+<li><p>Log back in, create a python <a class="reference external" href="https://docs.python.org/3/library/venv.html">venv</a> (virtual environment) and install ansible in it:</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>  # Note: do not use sudo here
+  python3 -m venv $HOME/venv-dlconfig
+  source $HOME/venv-dlconfig/bin/activate
+  pip install -U pip wheel
+  pip install ansible==4.5.0
+</pre></div>
+</div>
+</li>
+</ul>
 </section>
 <section id="create-a-configuration-repository">
 <h2>Create a configuration repository<a class="headerlink" href="#create-a-configuration-repository" title="Permalink to this headline">¶</a></h2>
@@ -102,7 +112,7 @@
 </pre></div>
 </div>
 </li>
-<li><p>Customize <code class="docutils literal notranslate"><span class="pre">inventory.yaml</span></code>, <code class="docutils literal notranslate"><span class="pre">playbook.yaml</span></code>, and <code class="docutils literal notranslate"><span class="pre">../secrets.yaml</span></code> following the comments in those files. There are references in the comments to “dlentries” and “maproom” repositories. You will need to work with IRI staff to create these repositories. Commit your customizations and push them to your git server for safe keeping; back up <code class="docutils literal notranslate"><span class="pre">secrets.yaml</span></code> by other means, such as copying it to another machine.</p></li>
+<li><p>Modify <code class="docutils literal notranslate"><span class="pre">playbook.yaml</span></code> and <code class="docutils literal notranslate"><span class="pre">../secrets.yaml</span></code>, following the comments in those files. There are references in the comments to “dlentries” and “maproom” repositories. You will need to work with IRI staff to create these repositories. Commit your customizations and push them to your git server for safe keeping; back up <code class="docutils literal notranslate"><span class="pre">secrets.yaml</span></code> by other means, such as copying it to another machine.</p></li>
 </ul>
 <p>Never edit the contents of the <code class="docutils literal notranslate"><span class="pre">ansible_collections</span></code> directory. All customization should be made in the configuration files that you copied from the template. In the future when it comes time to upgrade to a newer version of the DL software, you will run the <code class="docutils literal notranslate"><span class="pre">ansible-galaxy</span></code> command again and commit the new version to your configuration repository. Don’t upgrade without checking the release notes first, because in some cases an upgrade may require manual migration steps. (At this writing, there are no upgrade release notes because this is the playbook’s initial release.)</p>
 </section>
@@ -112,10 +122,10 @@
 <p>From the root directory of the configuration repository, run the following command:</p>
 <div class="highlight-none notranslate"><div class="highlight"><pre><span></span>ansible-playbook \
     --ask-become-pass \
-    -i inventory.yaml \
+    -i inventory.cfg \
     -e @../secrets.yaml \
     -e run_update_script=yes \
-    datalibrary.yaml
+    playbook.yaml
 </pre></div>
 </div>
 <p>Each step of the installation will be printed to the terminal. At a site with a fast connection to the internet, the playbook generally finishes within ten minutes, but if bandwidth is limited it may take a few hours, as the installation process involves downloading several GB of software packages and container images.</p>
