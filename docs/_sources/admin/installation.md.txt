@@ -13,6 +13,12 @@ Before running the installation script, perform the following steps to prepare t
 
         sudo yum install -y git python3
 
+* Install ansible with pip. The `--user` option causes it to be installed in ~/.local, to avoid interfering with python packages provided by CentOS.
+
+        # Note: do not use sudo here.
+        python3 -m pip install --user --upgrade pip
+        python3 -m pip install --user ansible==4.5.0
+
 * Disable SELinux and reboot:
 
         sudo sed -i s/SELINUX=enforcing/SELINUX=disabled/ /etc/selinux/config
@@ -22,16 +28,8 @@ Before running the installation script, perform the following steps to prepare t
 If you feel SELinux is important to the security of your server, please start a conversation with us at help@iri.columbia.edu.
 ```
 
-* Log back in, create a python [venv](https://docs.python.org/3/library/venv.html) (virtual environment) and install ansible in it:
-
-        # Note: do not use sudo here
-        python3 -m venv $HOME/venv-dlconfig
-        source $HOME/venv-dlconfig/bin/activate
-        pip install -U pip wheel
-        pip install ansible==4.5.0
-
 ## Create a configuration repository
-* Create a git repository to track your Data Library configuration. At IRI we call ours `dlconfig`.
+* Log back into the server after rebooting. Create a git repository to track your Data Library configuration. At IRI we call ours `dlconfig`.
 
         mkdir dlconfig
         cd dlconfig
