@@ -54,7 +54,9 @@ If you feel SELinux is important to the security of your server, please start a 
 
         mv secrets.yaml ..
 
-* Modify `playbook.yaml` and `../secrets.yaml`, following the comments in those files. There are references in the comments to "dlentries" and "maproom" repositories. You will need to work with IRI staff to create these repositories. Commit your customizations and push them to your git server for safe keeping; back up `secrets.yaml` by other means, such as copying it to another machine.
+* Modify `playbook.yaml` and `../secrets.yaml` to customize them to the specifics of your site. The files that you copied contain example configuration values that should be replaced with real email addresses, user names, *etc.* The files include comments that explain the purpose of each configuration option. If you are not ready to set up your real Data Library server but merely want to practice the installation process, *e.g.* in a virtual machine, you can use the example files without modification.
+
+* Commit your customizations and push them to your git server for safe keeping; back up `secrets.yaml` by other means, such as copying it to another machine.
 
 Never edit the contents of the `ansible_collections` directory. All customization should be made in the configuration files that you copied from the template. In the future when it comes time to upgrade to a newer version of the DL software, you will run the `ansible-galaxy` command again and commit the new version to your configuration repository. Don't upgrade without checking the release notes first, because in some cases an upgrade may require manual migration steps. (At this writing, there are no upgrade release notes because this is the playbook's initial release.)
 

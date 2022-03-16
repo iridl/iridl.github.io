@@ -9,7 +9,7 @@ has the capacity for 2 operating system disks (SSD or NVME) and 2 Data disks, th
 recommended.  Ideally the server should have at least 4 internal drive bays.  You will be installing the CentOS7 operating system, so don't pay for an operating
 system if you can avoid it.
 
-Typical costs for servers with the appropriate specifications range from $3,000 to $5,000 in the United States.  Plus an additional cost for the UPS.
+Typical costs for servers with the appropriate specifications range from \$3,000 to \$5,000 in the United States.  Plus an additional cost for the UPS.
 
 ## CPU
 For a minimal server, the basic requirements include a high performance CPU such as Intel Xeon or AMD Epyc, with a minimum of 8 cores.
