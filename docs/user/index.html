@@ -1,10 +1,10 @@
 
 <!DOCTYPE html>
 
-<html>
+<html lang="en">
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.19: https://docutils.sourceforge.io/" />
 
     <title>User Guide &#8212; IRI Data Library  documentation</title>
     <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
@@ -13,7 +13,9 @@
     <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
     <script src="../_static/jquery.js"></script>
     <script src="../_static/underscore.js"></script>
+    <script src="../_static/_sphinx_javascript_frameworks_compat.js"></script>
     <script src="../_static/doctools.js"></script>
+    <script src="../_static/sphinx_highlight.js"></script>
     
     <link rel="canonical" href="https://dldocs.iri.columbia.edu/user/index.html" />
     <link rel="search" title="Search" href="../search.html" />
@@ -39,13 +41,13 @@
         <div class="bodywrapper">
           <div class="body" role="main">
             
-  <section class="tex2jax_ignore mathjax_ignore" id="user-guide">
-<h1>User Guide<a class="headerlink" href="#user-guide" title="Permalink to this headline">¶</a></h1>
+  <section id="user-guide">
+<h1>User Guide<a class="headerlink" href="#user-guide" title="Permalink to this heading">¶</a></h1>
 <section id="installing-data">
-<span id="id1"></span><h2>Installing data<a class="headerlink" href="#installing-data" title="Permalink to this headline">¶</a></h2>
+<span id="id1"></span><h2>Installing data<a class="headerlink" href="#installing-data" title="Permalink to this heading">¶</a></h2>
 <p>A Data Library dataset is made up of a set of files and/or database tables containing the data, and a <em>catalog entry</em>, which is a set of instructions for reading the data and transforming it into the Data Library’s internal representation. Training materials covering how to create these resources will be provided separately; in the current document, we will assume that the resources have already been created, and explain how to install them on a Data Library server.</p>
 <section id="data-files">
-<h3>Data files<a class="headerlink" href="#data-files" title="Permalink to this headline">¶</a></h3>
+<h3>Data files<a class="headerlink" href="#data-files" title="Permalink to this heading">¶</a></h3>
 <p>Data files (<em>e.g.</em> NetCDF, GRIB, or GeoTIFF files) should be installed in <code class="docutils literal notranslate"><span class="pre">/data/datalib/data</span></code>. All members of the group <code class="docutils literal notranslate"><span class="pre">datag</span></code> have permission to create and modify files this directory.</p>
 <p>Any files and directories that are <em>created</em> under <code class="docutils literal notranslate"><span class="pre">/data/datalib/data</span></code> will also be writable by anyone in the <code class="docutils literal notranslate"><span class="pre">datag</span></code> group, but files created elsewhere, <em>e.g.</em> in a user’s home directory, and then <em>moved</em> into <code class="docutils literal notranslate"><span class="pre">/data/datalib/data</span></code> may not be modifiable by other users, which can cause problems if the dataset needs to be updated when the owner is unavailable. The easiest way to avoid this problem is to transfer files directly into <code class="docutils literal notranslate"><span class="pre">/data/datalib/data</span></code> when loading them onto the machine. If you have already created a directory <code class="docutils literal notranslate"><span class="pre">/data/datalib/data/mydir</span></code> with the wrong permissions, you can correct them with the following commands:</p>
 <div class="highlight-none notranslate"><div class="highlight"><pre><span></span>chgrp -R datag /data/datalib/data/mydir
@@ -54,7 +56,7 @@ find /data/datalib/data/mydir -type d -exec chmod g+s {} \;
 </div>
 </section>
 <section id="database-tables">
-<h3>Database tables<a class="headerlink" href="#database-tables" title="Permalink to this headline">¶</a></h3>
+<h3>Database tables<a class="headerlink" href="#database-tables" title="Permalink to this heading">¶</a></h3>
 <p>The following command opens a <code class="docutils literal notranslate"><span class="pre">psql</span></code> session to the PostgreSQL database, allowing you to enter SQL queries interactively:</p>
 <div class="highlight-none notranslate"><div class="highlight"><pre><span></span>sudo /usr/local/bin/sql_interactive
 </pre></div>
@@ -66,10 +68,10 @@ find /data/datalib/data/mydir -type d -exec chmod g+s {} \;
 </section>
 </section>
 <section id="dataset-and-maproom-development">
-<h2>Dataset and maproom development<a class="headerlink" href="#dataset-and-maproom-development" title="Permalink to this headline">¶</a></h2>
+<h2>Dataset and maproom development<a class="headerlink" href="#dataset-and-maproom-development" title="Permalink to this heading">¶</a></h2>
 </section>
 <section id="catalog-entries">
-<h2>Catalog entries<a class="headerlink" href="#catalog-entries" title="Permalink to this headline">¶</a></h2>
+<h2>Catalog entries<a class="headerlink" href="#catalog-entries" title="Permalink to this heading">¶</a></h2>
 <p>The main data catalog is located in <code class="docutils literal notranslate"><span class="pre">/usr/local/datalib/dlentries</span></code>. This copy of the catalog is read-only for non-admin users. The procedure for creating or modifying catalog entries is to push the changes to your git host and then run the <code class="docutils literal notranslate"><span class="pre">update_datalib</span></code> script as described in <a class="reference internal" href="#update-script"><span class="std std-ref">Installing updates</span></a> below.</p>
 <p>Each user also has his/her own personal data catalog at</p>
 <div class="highlight-none notranslate"><div class="highlight"><pre><span></span>/data/datalib/home/&lt;username&gt;/DataCatalog
@@ -82,11 +84,11 @@ find /data/datalib/data/mydir -type d -exec chmod g+s {} \;
 <p>in a browser, in order to validate your changes before pushing them to your git host. Your personal data catalog can reference files in either <code class="docutils literal notranslate"><span class="pre">/data/datalib/data</span></code> or <code class="docutils literal notranslate"><span class="pre">/data/datalib/home/&lt;username&gt;</span></code>.</p>
 </section>
 <section id="maprooms">
-<h2>Maprooms<a class="headerlink" href="#maprooms" title="Permalink to this headline">¶</a></h2>
+<h2>Maprooms<a class="headerlink" href="#maprooms" title="Permalink to this heading">¶</a></h2>
 <p>The maproom HTML pages are located in <code class="docutils literal notranslate"><span class="pre">/usr/local/datalib/maproom</span></code>. As for the main data catalog, these files are read-only; all changes must be made via git. Unlike for data catalog development, maproom development typically takes place on a developer’s own computer rather than on the server. This process is documented elsewhere.</p>
 </section>
 <section id="installing-updates">
-<span id="update-script"></span><h2>Installing updates<a class="headerlink" href="#installing-updates" title="Permalink to this headline">¶</a></h2>
+<span id="update-script"></span><h2>Installing updates<a class="headerlink" href="#installing-updates" title="Permalink to this heading">¶</a></h2>
 <p>When you have created or modified a maproom or a dataset and you want to install your changes on the server, perform these steps:</p>
 <ul>
 <li><p>Commit your changes and push them to your git host.</p></li>
@@ -107,8 +109,9 @@ find /data/datalib/data/mydir -type d -exec chmod g+s {} \;
       </div>
       <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
         <div class="sphinxsidebarwrapper">
-  <h3><a href="../index.html">Table of Contents</a></h3>
-  <p class="caption" role="heading"><span class="caption-text">Content:</span></p>
+  <div>
+    <h3><a href="../index.html">Table of Contents</a></h3>
+    <p class="caption" role="heading"><span class="caption-text">Content:</span></p>
 <ul class="current">
 <li class="toctree-l1 current"><a class="current reference internal" href="#">User Guide</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="#installing-data">Installing data</a><ul>
@@ -125,6 +128,7 @@ find /data/datalib/data/mydir -type d -exec chmod g+s {} \;
 <li class="toctree-l1"><a class="reference internal" href="../admin/index.html">System Administrator Guide</a></li>
 </ul>
 
+  </div>
 <div id="searchbox" style="display: none" role="search">
   <h3 id="searchlabel">Quick search</h3>
     <div class="searchformwrapper">
@@ -134,7 +138,7 @@ find /data/datalib/data/mydir -type d -exec chmod g+s {} \;
     </form>
     </div>
 </div>
-<script>$('#searchbox').show(0);</script>
+<script>document.getElementById('searchbox').style.display = "block"</script>
         </div>
       </div>
       <div class="clearer"></div>
@@ -154,7 +158,7 @@ find /data/datalib/data/mydir -type d -exec chmod g+s {} \;
     </div>
     <div class="footer" role="contentinfo">
         &#169; Copyright 2021, IRI.
-      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 4.3.1.
+      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 5.3.0.
     </div>
   </body>
 </html>
