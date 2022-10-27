@@ -1,10 +1,10 @@
 
 <!DOCTYPE html>
 
-<html>
+<html lang="en">
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.19: https://docutils.sourceforge.io/" />
 
     <title>Overview &#8212; IRI Data Library  documentation</title>
     <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
@@ -13,7 +13,9 @@
     <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
     <script src="../_static/jquery.js"></script>
     <script src="../_static/underscore.js"></script>
+    <script src="../_static/_sphinx_javascript_frameworks_compat.js"></script>
     <script src="../_static/doctools.js"></script>
+    <script src="../_static/sphinx_highlight.js"></script>
     
     <link rel="canonical" href="https://dldocs.iri.columbia.edu/admin/overview.html" />
     <link rel="search" title="Search" href="../search.html" />
@@ -40,16 +42,16 @@
         <div class="bodywrapper">
           <div class="body" role="main">
             
-  <section class="tex2jax_ignore mathjax_ignore" id="overview">
-<span id="id1"></span><h1>Overview<a class="headerlink" href="#overview" title="Permalink to this headline">¶</a></h1>
+  <section id="overview">
+<span id="id1"></span><h1>Overview<a class="headerlink" href="#overview" title="Permalink to this heading">¶</a></h1>
 <p>This section gives an overview of the components of the Data Library system.</p>
 <section id="infrastructure">
-<span id="id2"></span><h2>Infrastructure<a class="headerlink" href="#infrastructure" title="Permalink to this headline">¶</a></h2>
+<span id="id2"></span><h2>Infrastructure<a class="headerlink" href="#infrastructure" title="Permalink to this heading">¶</a></h2>
 <p>The Data Library ansible playbook currently targets CentOS 7. IRI does not test or support the software on other platforms. Plans to migrate to CentOS 8 have been abandoned because Red Hat has ended support for it prematurely. Support for CentOS 7 is scheduled to continue through June 2024; If you have thoughts about what we should target as the next platform after CentOS 7, please communicate them to <a class="reference external" href="mailto:help&#37;&#52;&#48;iri&#46;columbia&#46;edu">help<span>&#64;</span>iri<span>&#46;</span>columbia<span>&#46;</span>edu</a>.</p>
 <p>The Data Library services run under Docker, using docker-compose. Most services log to stdout, which the Docker daemon forwards to journald.</p>
 </section>
 <section id="configuration-management-using-ansible">
-<h2>Configuration management using ansible<a class="headerlink" href="#configuration-management-using-ansible" title="Permalink to this headline">¶</a></h2>
+<h2>Configuration management using ansible<a class="headerlink" href="#configuration-management-using-ansible" title="Permalink to this heading">¶</a></h2>
 <p>Installation and configuration of the Data Library software is automated using <a class="reference external" href="https://docs.ansible.com/ansible_community.html">ansible</a>, a configuration management tool. Automating the installation and configuration process has the following advantages over doing it by hand:</p>
 <ul class="simple">
 <li><p>Convenience: an automated installation process makes setting up a new Data Library site quicker.</p></li>
@@ -62,7 +64,7 @@
 </ul>
 </section>
 <section id="software-components">
-<h2>Software components<a class="headerlink" href="#software-components" title="Permalink to this headline">¶</a></h2>
+<h2>Software components<a class="headerlink" href="#software-components" title="Permalink to this heading">¶</a></h2>
 <p>The system is composed of four containerized services.</p>
 <ul class="simple">
 <li><p><strong>squid</strong> is configured as both forward and reverse proxy. This is the only service that is directly reachable from the public network interface (the others listen only on a docker virtual network). Docker forwards the host’s port 80 to squid, which then forwards each request to one of the three other services depending on the URL path.</p></li>
@@ -73,7 +75,7 @@
 <p>Squid routes the root URL <code class="docutils literal notranslate"><span class="pre">/</span></code> and URLs that begin with <code class="docutils literal notranslate"><span class="pre">/maproom</span></code> to httpd; all other URLs are routed to ingrid.</p>
 </section>
 <section id="user-groups">
-<span id="groups"></span><h2>User groups<a class="headerlink" href="#user-groups" title="Permalink to this headline">¶</a></h2>
+<span id="groups"></span><h2>User groups<a class="headerlink" href="#user-groups" title="Permalink to this heading">¶</a></h2>
 <p>Two kinds of users will need accounts (unix logins) on a Data Library server:</p>
 <ul class="simple">
 <li><p><strong>Administrators</strong> are responsible for system configuration, software updates, backups, and user support. They are members of the <code class="docutils literal notranslate"><span class="pre">wheel</span></code> group and thus have permission to assume root privileges using <code class="docutils literal notranslate"><span class="pre">sudo</span></code>.</p></li>
@@ -82,7 +84,7 @@
 <p>User accounts for authors are managed by the ansible playbook, but administrators are not.</p>
 </section>
 <section id="important-file-and-directory-paths">
-<span id="paths"></span><h2>Important file and directory paths<a class="headerlink" href="#important-file-and-directory-paths" title="Permalink to this headline">¶</a></h2>
+<span id="paths"></span><h2>Important file and directory paths<a class="headerlink" href="#important-file-and-directory-paths" title="Permalink to this heading">¶</a></h2>
 <p>Ingrid datasets are defined in a <em>data catalog</em>, which is developed in a git repository traditionally named <code class="docutils literal notranslate"><span class="pre">dlentries</span></code> or <code class="docutils literal notranslate"><span class="pre">dlentries_countryname</span></code>, e.g. <code class="docutils literal notranslate"><span class="pre">dlentries_madagascar</span></code>. Authors cannot edit ingrid’s copy of the data catalog directly; to make changes, they edit the catalog in another location, push their changes to their git host, and then run <code class="docutils literal notranslate"><span class="pre">/usr/local/bin/update_datalib</span></code> on the server, which downloads the latest catalog from the git host.</p>
 <p>Catalog entries refer to data files, which should be located in subdirectories of <code class="docutils literal notranslate"><span class="pre">/data/datalib/data</span></code>. Members of the <code class="docutils literal notranslate"><span class="pre">datag</span></code> group have permission to write to that directory, and ingrid has permission to read from it.</p>
 <p>Each member of the <code class="docutils literal notranslate"><span class="pre">datag</span></code> group also has their own personal data catalog, located in <code class="docutils literal notranslate"><span class="pre">/data/datalib/home/&lt;username&gt;/DataCatalog</span></code>. Whereas authors don’t have permission to edit the main data catalog except by pushing changes to the git host, each author can edit their own personal data catalog directly. This is useful for testing catalog entries during development.</p>
@@ -99,8 +101,9 @@
       </div>
       <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
         <div class="sphinxsidebarwrapper">
-  <h3><a href="../index.html">Table of Contents</a></h3>
-  <p class="caption" role="heading"><span class="caption-text">Content:</span></p>
+  <div>
+    <h3><a href="../index.html">Table of Contents</a></h3>
+    <p class="caption" role="heading"><span class="caption-text">Content:</span></p>
 <ul class="current">
 <li class="toctree-l1"><a class="reference internal" href="../user/index.html">User Guide</a></li>
 <li class="toctree-l1 current"><a class="reference internal" href="index.html">System Administrator Guide</a><ul class="current">
@@ -119,6 +122,7 @@
 </li>
 </ul>
 
+  </div>
 <div id="searchbox" style="display: none" role="search">
   <h3 id="searchlabel">Quick search</h3>
     <div class="searchformwrapper">
@@ -128,7 +132,7 @@
     </form>
     </div>
 </div>
-<script>$('#searchbox').show(0);</script>
+<script>document.getElementById('searchbox').style.display = "block"</script>
         </div>
       </div>
       <div class="clearer"></div>
@@ -149,7 +153,7 @@
     </div>
     <div class="footer" role="contentinfo">
         &#169; Copyright 2021, IRI.
-      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 4.3.1.
+      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 5.3.0.
     </div>
   </body>
 </html>

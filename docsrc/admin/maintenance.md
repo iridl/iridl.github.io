@@ -9,11 +9,20 @@ To make a configuration change,
 - In your dlconfig repository, edit the relevant variable in `playbook.yaml`. Advanced ansible users can also add custom tasks to the playbook.
 - Run the playbook in "check mode" to verify that ansible will make the change you intended:
 
-        ansible-playbook --check --diff -i inventory.yaml -e @~/secrets.yaml playbook.yaml
+        ansible-playbook \
+          --check \
+          --diff \
+          --ask-become-pass \
+          -i inventory.yaml \
+          playbook.yaml
 
-- After verifying the diff, run the playbook without `--check` to apply the change.
+- After verifying the diff, run the playbook without `--check --diff` to apply the change.
 
-        ansible-playbook -i inventory.yaml -e @~/secrets.yaml playbook.yaml
+        ansible-playbook \
+          --ask-become-pass \
+          -i inventory.yaml \
+          playbook.yaml
+
 
 - Commit and push your changes to your git host.
 
