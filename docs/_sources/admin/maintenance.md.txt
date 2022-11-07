@@ -13,16 +13,17 @@ To make a configuration change,
           --check \
           --diff \
           --ask-become-pass \
-          -i inventory.yaml \
+          -i inventory.cfg \
+          -e @../secrets.yaml \
           playbook.yaml
 
 - After verifying the diff, run the playbook without `--check --diff` to apply the change.
 
         ansible-playbook \
           --ask-become-pass \
-          -i inventory.yaml \
+          -i inventory.cfg \
+          -e @../secrets.yaml \
           playbook.yaml
-
 
 - Commit and push your changes to your git host.
 

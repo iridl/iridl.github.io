@@ -51,7 +51,8 @@
     --check \
     --diff \
     --ask-become-pass \
-    -i inventory.yaml \
+    -i inventory.cfg \
+    -e @../secrets.yaml \
     playbook.yaml
 </pre></div>
 </div>
@@ -59,7 +60,8 @@
 <li><p>After verifying the diff, run the playbook without <code class="docutils literal notranslate"><span class="pre">--check</span> <span class="pre">--diff</span></code> to apply the change.</p>
 <div class="highlight-none notranslate"><div class="highlight"><pre><span></span>  ansible-playbook \
     --ask-become-pass \
-    -i inventory.yaml \
+    -i inventory.cfg \
+    -e @../secrets.yaml \
     playbook.yaml
 </pre></div>
 </div>
