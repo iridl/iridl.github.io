@@ -16,14 +16,14 @@
     
     <link rel="canonical" href="https://dldocs.iri.columbia.edu/admin/index.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="Overview" href="overview.html" />
+    <link rel="next" title="Prerequisites" href="prerequisites.html" />
     <link rel="prev" title="User Guide" href="../user/index.html" /> 
   </head><body>
     <div class="related" role="navigation" aria-label="related navigation">
       <h3>Navigation</h3>
       <ul>
         <li class="right" style="margin-right: 10px">
-          <a href="overview.html" title="Overview"
+          <a href="prerequisites.html" title="Prerequisites"
              accesskey="N">next</a></li>
         <li class="right" >
           <a href="../user/index.html" title="User Guide"
@@ -41,26 +41,9 @@
   <section id="system-administrator-guide">
 <h1>System Administrator Guide<a class="headerlink" href="#system-administrator-guide" title="Permalink to this heading">¶</a></h1>
 <p>This guide provides information to help a system administrator install, configure, and maintain a server running the Data Library software.</p>
-<p><strong>Prerequisites:</strong> This is not a tutorial on linux system administration. We will assume that the reader is able to perform tasks such as</p>
-<ul class="simple">
-<li><p>Create a git repository, commit content to the repository, collaborate with others by pushing, pulling and merging git branches.</p></li>
-<li><p>Manage ssh keys for use with ssh and git.</p></li>
-<li><p>Install a linux distribution on a server.</p></li>
-<li><p>Manage unix users and groups, <em>e.g.</em> create a user, set a user’s password, add a user to a group.</p></li>
-<li><p>Manage storage volumes, <em>e.g.</em> configure LVM; configure RAID; format and mount filesystems.</p></li>
-<li><p>Manage containerized services using <code class="docutils literal notranslate"><span class="pre">docker-compose</span></code>.</p></li>
-</ul>
-<p>You will be using <a class="reference external" href="https://docs.ansible.com/ansible_community.html">ansible</a>, a configuration management tool, to install and configure the Data Library software. We do not assume prior familiarity with ansible, but after working through the installation instructions we do recommend that you read the ansible documentation.</p>
 <div class="toctree-wrapper compound">
 <ul>
-<li class="toctree-l1"><a class="reference internal" href="overview.html">Overview</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="overview.html#infrastructure">Infrastructure</a></li>
-<li class="toctree-l2"><a class="reference internal" href="overview.html#configuration-management-using-ansible">Configuration management using ansible</a></li>
-<li class="toctree-l2"><a class="reference internal" href="overview.html#software-components">Software components</a></li>
-<li class="toctree-l2"><a class="reference internal" href="overview.html#user-groups">User groups</a></li>
-<li class="toctree-l2"><a class="reference internal" href="overview.html#important-file-and-directory-paths">Important file and directory paths</a></li>
-</ul>
-</li>
+<li class="toctree-l1"><a class="reference internal" href="prerequisites.html">Prerequisites</a></li>
 <li class="toctree-l1"><a class="reference internal" href="hwrequirements.html">Server Requirements</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="hwrequirements.html#cpu">CPU</a></li>
 <li class="toctree-l2"><a class="reference internal" href="hwrequirements.html#ram">RAM</a></li>
@@ -72,6 +55,14 @@
 <li class="toctree-l3"><a class="reference internal" href="hwrequirements.html#high-end-requirements">High End Requirements</a></li>
 </ul>
 </li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="overview.html">Overview</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="overview.html#infrastructure">Infrastructure</a></li>
+<li class="toctree-l2"><a class="reference internal" href="overview.html#configuration-management-using-ansible">Configuration management using ansible</a></li>
+<li class="toctree-l2"><a class="reference internal" href="overview.html#software-components">Software components</a></li>
+<li class="toctree-l2"><a class="reference internal" href="overview.html#user-groups">User groups</a></li>
+<li class="toctree-l2"><a class="reference internal" href="overview.html#important-file-and-directory-paths">Important file and directory paths</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="installation.html">Installation</a><ul>
@@ -105,8 +96,9 @@
 <ul class="current">
 <li class="toctree-l1"><a class="reference internal" href="../user/index.html">User Guide</a></li>
 <li class="toctree-l1 current"><a class="current reference internal" href="#">System Administrator Guide</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="overview.html">Overview</a></li>
+<li class="toctree-l2"><a class="reference internal" href="prerequisites.html">Prerequisites</a></li>
 <li class="toctree-l2"><a class="reference internal" href="hwrequirements.html">Server Requirements</a></li>
+<li class="toctree-l2"><a class="reference internal" href="overview.html">Overview</a></li>
 <li class="toctree-l2"><a class="reference internal" href="installation.html">Installation</a></li>
 <li class="toctree-l2"><a class="reference internal" href="maintenance.html">Maintenance</a></li>
 </ul>
@@ -132,7 +124,7 @@
       <h3>Navigation</h3>
       <ul>
         <li class="right" style="margin-right: 10px">
-          <a href="overview.html" title="Overview"
+          <a href="prerequisites.html" title="Prerequisites"
              >next</a></li>
         <li class="right" >
           <a href="../user/index.html" title="User Guide"
