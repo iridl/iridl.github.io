@@ -1,25 +1,24 @@
-
 <!DOCTYPE html>
 
-<html lang="en">
+<html lang="en" data-content_root="../">
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.19: https://docutils.sourceforge.io/" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
     <title>Overview &#8212; IRI Data Library  documentation</title>
-    <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
-    <link rel="stylesheet" type="text/css" href="../_static/classic.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=fa44fd50" />
+    <link rel="stylesheet" type="text/css" href="../_static/classic.css?v=def86cc0" />
     
-    <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
-    <script src="../_static/doctools.js"></script>
-    <script src="../_static/sphinx_highlight.js"></script>
+    <script src="../_static/documentation_options.js?v=5929fcd5"></script>
+    <script src="../_static/doctools.js?v=9a2dae69"></script>
+    <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
     
     <link rel="canonical" href="https://dldocs.iri.columbia.edu/admin/overview.html" />
     <link rel="search" title="Search" href="../search.html" />
     <link rel="next" title="Installation" href="installation.html" />
     <link rel="prev" title="Server Requirements" href="hwrequirements.html" /> 
   </head><body>
-    <div class="related" role="navigation" aria-label="related navigation">
+    <div class="related" role="navigation" aria-label="Related">
       <h3>Navigation</h3>
       <ul>
         <li class="right" style="margin-right: 10px">
@@ -40,54 +39,91 @@
           <div class="body" role="main">
             
   <section id="overview">
-<span id="id1"></span><h1>Overview<a class="headerlink" href="#overview" title="Permalink to this heading">¶</a></h1>
+<span id="id1"></span><h1>Overview<a class="headerlink" href="#overview" title="Link to this heading">¶</a></h1>
 <p>This section gives an overview of the components of the Data Library system.</p>
 <section id="infrastructure">
-<span id="id2"></span><h2>Infrastructure<a class="headerlink" href="#infrastructure" title="Permalink to this heading">¶</a></h2>
-<p>The Data Library ansible playbook currently targets CentOS 7. IRI does not test or support the software on other platforms. Plans to migrate to CentOS 8 have been abandoned because Red Hat has ended support for it prematurely. Support for CentOS 7 is scheduled to continue through June 2024; If you have thoughts about what we should target as the next platform after CentOS 7, please communicate them to <a class="reference external" href="mailto:help&#37;&#52;&#48;iri&#46;columbia&#46;edu">help<span>&#64;</span>iri<span>&#46;</span>columbia<span>&#46;</span>edu</a>.</p>
-<p>The Data Library services run under Docker, using docker-compose. Most services log to stdout, which the Docker daemon forwards to journald.</p>
+<span id="id2"></span><h2>Infrastructure<a class="headerlink" href="#infrastructure" title="Link to this heading">¶</a></h2>
+<p>The Data Library ansible playbook currently targets CentOS7 and CentOS Stream 9. IRI does not test or support the software on other
+platforms.  CentOS7 is at its End of Life, and is no longer recommended to install.</p>
+<p>The Data Library services runs under Docker, using docker compose. Most services log to stdout, which the Docker daemon
+forwards to journald.</p>
 </section>
 <section id="configuration-management-using-ansible">
-<h2>Configuration management using ansible<a class="headerlink" href="#configuration-management-using-ansible" title="Permalink to this heading">¶</a></h2>
-<p>Installation and configuration of the Data Library software is automated using <a class="reference external" href="https://docs.ansible.com/ansible_community.html">ansible</a>, a configuration management tool. Automating the installation and configuration process has the following advantages over doing it by hand:</p>
+<h2>Configuration management using ansible<a class="headerlink" href="#configuration-management-using-ansible" title="Link to this heading">¶</a></h2>
+<p>Installation and configuration of the Data Library software is automated
+using <a class="reference external" href="https://docs.ansible.com/ansible_community.html">ansible</a>, a configuration management tool. Automating the
+installation and configuration process has the following advantages over doing it by hand:</p>
 <ul class="simple">
 <li><p>Convenience: an automated installation process makes setting up a new Data Library site quicker.</p></li>
-<li><p>Repeatability: having relevant system configuration details documented in executable form makes it easier to reproduce the same configuration on another server, <em>e.g.</em> after a hardware failure or upgrade.</p></li>
+<li><p>Repeatability: having relevant system configuration details documented in executable form makes it easier to reproduce
+the same configuration on another server, <em>e.g.</em> after a hardware failure or upgrade.</p></li>
 </ul>
-<p>The above advantages could be achieved by automating the installation process with a shell script, but using ansible instead of a shell script brings further advantages. The same ansible “playbook” (configuration management script) that performs the initial software installation can also be used subsequently to manage the server’s configuration.</p>
+<p>The above advantages could be achieved by automating the installation process with a shell script, but using ansible
+instead of a shell script brings further advantages. The same ansible “playbook” (configuration management script) that
+performs the initial software installation can also be used subsequently to manage the server’s configuration.</p>
 <ul class="simple">
-<li><p>When the server configuration needs to change, those changes can be described in the playbook and checked into version control, so there is a record of what was changed and when. Running the playbook then applies the changes to the server.</p></li>
-<li><p>An ansible playbook can be run in “check mode”. In this mode, the playbook makes no changes, but merely reports any differences between the server’s configuration and the desired state. Knowing what changes the tool will make before it makes them gives the administrator more confidence in the tool and helps avoid some kinds of configuration errors.</p></li>
+<li><p>When the server configuration needs to change, those changes can be described in the playbook and checked into version
+control, so there is a record of what was changed and when. Running the playbook then applies the changes to the
+server.</p></li>
+<li><p>An ansible playbook can be run in “check mode”. In this mode, the playbook makes no changes, but merely reports any
+differences between the server’s configuration and the desired state. Knowing what changes the tool will make before
+it makes them gives the administrator more confidence in the tool and helps avoid some kinds of configuration errors.</p></li>
 </ul>
 </section>
 <section id="software-components">
-<h2>Software components<a class="headerlink" href="#software-components" title="Permalink to this heading">¶</a></h2>
+<h2>Software components<a class="headerlink" href="#software-components" title="Link to this heading">¶</a></h2>
 <p>The system is composed of four containerized services.</p>
 <ul class="simple">
-<li><p><strong>squid</strong> is configured as both forward and reverse proxy. This is the only service that is directly reachable from the public network interface (the others listen only on a docker virtual network). Docker forwards the host’s port 80 to squid, which then forwards each request to one of the three other services depending on the URL path.</p></li>
+<li><p><strong>squid</strong> is configured as both forward and reverse proxy. This is the only service that is directly reachable from
+the public network interface (the others listen only on a docker virtual network). Docker forwards the host’s port 80
+to squid, which then forwards each request to one of the three other services depending on the URL path.</p></li>
 <li><p><strong>ingrid</strong> is a web application for browsing, analyzing, and visualizing climate data in a browser.</p></li>
-<li><p><strong>PostgreSQL</strong> is used by ingrid to store relational data. It is used with the PostGIS plugin to store GIS shapes, particularly boundaries of administrative regions (countries, states, cities, <em>etc.</em>) and bodies of water.</p></li>
-<li><p>Apache <strong>httpd</strong> serves web applications called <em>maprooms</em>. Whereas ingrid is a general-purpose tool that lets the user perform arbitrary calculations, each maproom is tailored to a particular dataset and a particular application. Maprooms typically embed interactive maps that are generated by ingrid.</p></li>
+<li><p><strong>PostgreSQL</strong> is used by ingrid to store relational data. It is used with the PostGIS plugin to store GIS shapes,
+particularly boundaries of administrative regions (countries, states, cities, <em>etc.</em>) and bodies of water.</p></li>
+<li><p>Apache <strong>httpd</strong> serves web applications called <em>maprooms</em>. Whereas ingrid is a general-purpose tool that lets the
+user perform arbitrary calculations, each maproom is tailored to a particular dataset and a particular application.
+Maprooms typically embed interactive maps that are generated by ingrid.</p></li>
 </ul>
 <p>Squid routes the root URL <code class="docutils literal notranslate"><span class="pre">/</span></code> and URLs that begin with <code class="docutils literal notranslate"><span class="pre">/maproom</span></code> to httpd; all other URLs are routed to ingrid.</p>
 </section>
 <section id="user-groups">
-<span id="groups"></span><h2>User groups<a class="headerlink" href="#user-groups" title="Permalink to this heading">¶</a></h2>
+<span id="groups"></span><h2>User groups<a class="headerlink" href="#user-groups" title="Link to this heading">¶</a></h2>
 <p>Two kinds of users will need accounts (unix logins) on a Data Library server:</p>
 <ul class="simple">
-<li><p><strong>Administrators</strong> are responsible for system configuration, software updates, backups, and user support. They are members of the <code class="docutils literal notranslate"><span class="pre">wheel</span></code> group and thus have permission to assume root privileges using <code class="docutils literal notranslate"><span class="pre">sudo</span></code>.</p></li>
-<li><p><strong>Authors</strong> are responsible for adding and extending datasets to the Data Library, and for creating maprooms. By virtue of being members of the <code class="docutils literal notranslate"><span class="pre">datag</span></code> group, they have permission to add data files to the directory read by ingrid, and to execute SQL queries that modify ingrid’s database. They don’t have general <code class="docutils literal notranslate"><span class="pre">sudo</span></code> privileges, but they are granted targeted permission to run certain scripts in <code class="docutils literal notranslate"><span class="pre">/usr/local/bin</span></code> as root.</p></li>
+<li><p><strong>Administrators</strong> are responsible for system configuration, software updates, backups, and user support. They are
+members of the <code class="docutils literal notranslate"><span class="pre">wheel</span></code> group and thus have permission to assume root privileges using <code class="docutils literal notranslate"><span class="pre">sudo</span></code>.</p></li>
+<li><p><strong>Authors</strong> are responsible for adding and extending datasets to the Data Library, and for creating maprooms. By
+virtue of being members of the <code class="docutils literal notranslate"><span class="pre">datag</span></code> group, they have permission to add data files to the directory read by ingrid,
+and to execute SQL queries that modify ingrid’s database. They don’t have general <code class="docutils literal notranslate"><span class="pre">sudo</span></code> privileges, but they are
+granted targeted permission to run certain scripts in <code class="docutils literal notranslate"><span class="pre">/usr/local/bin</span></code> as root.</p></li>
 </ul>
 <p>User accounts for authors are managed by the ansible playbook, but administrators are not.</p>
 </section>
 <section id="important-file-and-directory-paths">
-<span id="paths"></span><h2>Important file and directory paths<a class="headerlink" href="#important-file-and-directory-paths" title="Permalink to this heading">¶</a></h2>
-<p>Ingrid datasets are defined in a <em>data catalog</em>, which is developed in a git repository traditionally named <code class="docutils literal notranslate"><span class="pre">dlentries</span></code> or <code class="docutils literal notranslate"><span class="pre">dlentries_countryname</span></code>, e.g. <code class="docutils literal notranslate"><span class="pre">dlentries_madagascar</span></code>. Authors cannot edit ingrid’s copy of the data catalog directly; to make changes, they edit the catalog in another location, push their changes to their git host, and then run <code class="docutils literal notranslate"><span class="pre">/usr/local/bin/update_datalib</span></code> on the server, which downloads the latest catalog from the git host.</p>
-<p>Catalog entries refer to data files, which should be located in subdirectories of <code class="docutils literal notranslate"><span class="pre">/data/datalib/data</span></code>. Members of the <code class="docutils literal notranslate"><span class="pre">datag</span></code> group have permission to write to that directory, and ingrid has permission to read from it.</p>
-<p>Each member of the <code class="docutils literal notranslate"><span class="pre">datag</span></code> group also has their own personal data catalog, located in <code class="docutils literal notranslate"><span class="pre">/data/datalib/home/&lt;username&gt;/DataCatalog</span></code>. Whereas authors don’t have permission to edit the main data catalog except by pushing changes to the git host, each author can edit their own personal data catalog directly. This is useful for testing catalog entries during development.</p>
-<p>Catalog entries in the main catalog should refer to data files located in <code class="docutils literal notranslate"><span class="pre">/data/datalib/data</span></code>. All members of the <code class="docutils literal notranslate"><span class="pre">datag</span></code> group have permission to modify the files in that directory. Catalog entries in personal data catalogs can refer to data files in <code class="docutils literal notranslate"><span class="pre">/data/datalib/data</span></code> or <code class="docutils literal notranslate"><span class="pre">/data/datalib/home/&lt;username&gt;</span></code>.</p>
-<p>Configuration files for the Data Library services are located under <code class="docutils literal notranslate"><span class="pre">/usr/local/datalib</span></code>. In particular, the docker-compose file that defines the Data Library services is  <code class="docutils literal notranslate"><span class="pre">/usr/local/datalib/docker-compose.yaml</span></code>, so do use the <code class="docutils literal notranslate"><span class="pre">docker-compose</span></code> command to manage services, an administrator should first <code class="docutils literal notranslate"><span class="pre">cd</span> <span class="pre">/usr/local/datalib</span></code> and then run <code class="docutils literal notranslate"><span class="pre">sudo</span> <span class="pre">docker-compose</span></code>. Note that administrators should not edit most configuration files directly. The configuration is managed by ansible, so changes should be made by modifying the ansible configuration and then applying it using <code class="docutils literal notranslate"><span class="pre">ansible-playbook</span></code>. This process will be explained in more detail below.</p>
-<p>In the typical configuration, <code class="docutils literal notranslate"><span class="pre">/data</span></code> is a mount point for a large storage volume that is distinct from the root volume. In addition to <code class="docutils literal notranslate"><span class="pre">/data/datalib</span></code>, which was mentioned above, there is <code class="docutils literal notranslate"><span class="pre">/data/docker</span></code>. <code class="docutils literal notranslate"><span class="pre">/var/lib/docker</span></code> is a symbolic link to <code class="docutils literal notranslate"><span class="pre">/data/docker</span></code>, so data created by the Docker daemon and containers, such as container images and volumes, are stored in that directory.</p>
+<span id="paths"></span><h2>Important file and directory paths<a class="headerlink" href="#important-file-and-directory-paths" title="Link to this heading">¶</a></h2>
+<p>Ingrid datasets are defined in a <em>data catalog</em>, which is developed in a git repository traditionally named <code class="docutils literal notranslate"><span class="pre">dlentries</span></code>
+or <code class="docutils literal notranslate"><span class="pre">dlentries_countryname</span></code>, e.g. <code class="docutils literal notranslate"><span class="pre">dlentries_madagascar</span></code>. Authors cannot edit ingrid’s copy of the data catalog directly;
+to make changes, they edit the catalog in another location, push their changes to their git host, and then
+run <code class="docutils literal notranslate"><span class="pre">/usr/local/bin/update_datalib</span></code> on the server, which downloads the latest catalog from the git host.</p>
+<p>Catalog entries refer to data files, which should be located in subdirectories of <code class="docutils literal notranslate"><span class="pre">/data/datalib/data</span></code>. Members of
+the <code class="docutils literal notranslate"><span class="pre">datag</span></code> group have permission to write to that directory, and ingrid has permission to read from it.</p>
+<p>Each member of the <code class="docutils literal notranslate"><span class="pre">datag</span></code> group also has their own personal data catalog, located
+in <code class="docutils literal notranslate"><span class="pre">/data/datalib/home/&lt;username&gt;/DataCatalog</span></code>. Whereas authors don’t have permission to edit the main data catalog
+except by pushing changes to the git host, each author can edit their own personal data catalog directly. This is useful
+for testing catalog entries during development.</p>
+<p>Catalog entries in the main catalog should refer to data files located in <code class="docutils literal notranslate"><span class="pre">/data/datalib/data</span></code>. All members of
+the <code class="docutils literal notranslate"><span class="pre">datag</span></code> group have permission to modify the files in that directory. Catalog entries in personal data catalogs can
+refer to data files in <code class="docutils literal notranslate"><span class="pre">/data/datalib/data</span></code> or <code class="docutils literal notranslate"><span class="pre">/data/datalib/home/&lt;username&gt;</span></code>.</p>
+<p>Configuration files for the Data Library services are located under <code class="docutils literal notranslate"><span class="pre">/usr/local/datalib</span></code>. In particular, the
+docker-compose file that defines the Data Library services is  <code class="docutils literal notranslate"><span class="pre">/usr/local/datalib/docker-compose.yaml</span></code>, so do use
+the <code class="docutils literal notranslate"><span class="pre">docker-compose</span></code> command to manage services, an administrator should first <code class="docutils literal notranslate"><span class="pre">cd</span> <span class="pre">/usr/local/datalib</span></code> and then
+run <code class="docutils literal notranslate"><span class="pre">sudo</span> <span class="pre">docker-compose</span></code>. Note that administrators should not edit most configuration files directly. The configuration
+is managed by ansible, so changes should be made by modifying the ansible configuration and then applying it
+using <code class="docutils literal notranslate"><span class="pre">ansible-playbook</span></code>. This process will be explained in more detail below.</p>
+<p>In the typical configuration, <code class="docutils literal notranslate"><span class="pre">/data</span></code> is a mount point for a large storage volume that is distinct from the root volume.
+In addition to <code class="docutils literal notranslate"><span class="pre">/data/datalib</span></code>, which was mentioned above, there is <code class="docutils literal notranslate"><span class="pre">/data/docker</span></code>. <code class="docutils literal notranslate"><span class="pre">/var/lib/docker</span></code> is a symbolic link
+to <code class="docutils literal notranslate"><span class="pre">/data/docker</span></code>, so data created by the Docker daemon and containers, such as container images and volumes, are stored
+in that directory.</p>
 </section>
 </section>
 
@@ -96,7 +132,7 @@
           </div>
         </div>
       </div>
-      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+      <div class="sphinxsidebar" role="navigation" aria-label="Main">
         <div class="sphinxsidebarwrapper">
   <div>
     <h3><a href="../index.html">Table of Contents</a></h3>
@@ -121,7 +157,7 @@
 </ul>
 
   </div>
-<div id="searchbox" style="display: none" role="search">
+<search id="searchbox" style="display: none" role="search">
   <h3 id="searchlabel">Quick search</h3>
     <div class="searchformwrapper">
     <form class="search" action="../search.html" method="get">
@@ -129,13 +165,13 @@
       <input type="submit" value="Go" />
     </form>
     </div>
-</div>
+</search>
 <script>document.getElementById('searchbox').style.display = "block"</script>
         </div>
       </div>
       <div class="clearer"></div>
     </div>
-    <div class="related" role="navigation" aria-label="related navigation">
+    <div class="related" role="navigation" aria-label="Related">
       <h3>Navigation</h3>
       <ul>
         <li class="right" style="margin-right: 10px">
@@ -150,8 +186,8 @@
       </ul>
     </div>
     <div class="footer" role="contentinfo">
-        &#169; Copyright 2021, IRI.
-      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 6.1.3.
+    &#169; Copyright 2021, IRI.
+      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 7.4.7.
     </div>
   </body>
 </html>

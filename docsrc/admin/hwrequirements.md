@@ -13,7 +13,7 @@ Typical costs for servers with the appropriate specifications range from \$3,000
 
 ## CPU
 For a minimal server, the basic requirements include a high performance CPU such as Intel Xeon or AMD Epyc, with a minimum of 8 cores.
-For a more powerwerful server, we'd recommend a dual core server.
+For a more powerful server, we'd recommend a dual core server.
 
 ## RAM
 The ability of the Data Library to process large datasets depends on the amount of memory installed on the system.  While a Data Library may work with
@@ -24,10 +24,10 @@ the better the performance you will have.  For most cases, 128GB will be more th
 We recommend using 2 disks for the operating system, configured as mirror devices.  For best results, use fast disks such as SSDs or NVME for
 the operating system.  These can be as small as 128GB. If you want to speed up DL results, increase this to 256GB and place the squid cache on this device.
 
-You will need space for your Datasets.  We recommend getting multiple disks so you can mirror the drive and an external disk to backup the data regularly.
+You will need space for your Datasets.  We recommend getting multiple disks, so you can mirror the drive and an external disk to back up the data regularly.
 Mirroring is not considered a backup, it is simply a convenience for higher availability.  A separate backup of your data is very important. The amount of disk
 space you may need is unique to your installation.  We suggest getting disks that are about twice the size you think you need.  You will use 2 disks to mirror
-the actual data and one disk, preferably an external USB disk, to backup your data.
+the actual data and one disk, preferably an external USB disk, to back up your data.
 
 ## Networking
 You should use the highest network speed you have access to.  If you have a 10Gb network, you should try to place your server on this network, with a 10Gb
@@ -50,7 +50,7 @@ will depend on your server.
 * (1) external HD for backups
   * the same size as the internal hard drives.
 
-### High End Requirements
+### High-End Requirements
 * 2x Intel Xeon Scalable, 8 core or higher
 * 64 - 128GB RAM
 * 128	to 256GB HD for	Operating System, preferably SSD or NVME

@@ -1,25 +1,24 @@
-
 <!DOCTYPE html>
 
-<html lang="en">
+<html lang="en" data-content_root="../">
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.19: https://docutils.sourceforge.io/" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
     <title>Server Requirements &#8212; IRI Data Library  documentation</title>
-    <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
-    <link rel="stylesheet" type="text/css" href="../_static/classic.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=fa44fd50" />
+    <link rel="stylesheet" type="text/css" href="../_static/classic.css?v=def86cc0" />
     
-    <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
-    <script src="../_static/doctools.js"></script>
-    <script src="../_static/sphinx_highlight.js"></script>
+    <script src="../_static/documentation_options.js?v=5929fcd5"></script>
+    <script src="../_static/doctools.js?v=9a2dae69"></script>
+    <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
     
     <link rel="canonical" href="https://dldocs.iri.columbia.edu/admin/hwrequirements.html" />
     <link rel="search" title="Search" href="../search.html" />
     <link rel="next" title="Overview" href="overview.html" />
     <link rel="prev" title="Prerequisites" href="prerequisites.html" /> 
   </head><body>
-    <div class="related" role="navigation" aria-label="related navigation">
+    <div class="related" role="navigation" aria-label="Related">
       <h3>Navigation</h3>
       <ul>
         <li class="right" style="margin-right: 10px">
@@ -40,7 +39,7 @@
           <div class="body" role="main">
             
   <section id="server-requirements">
-<span id="hwrequirements"></span><h1>Server Requirements<a class="headerlink" href="#server-requirements" title="Permalink to this heading">¶</a></h1>
+<span id="hwrequirements"></span><h1>Server Requirements<a class="headerlink" href="#server-requirements" title="Link to this heading">¶</a></h1>
 <p>The Data Library can be run on a single server/workstation, providing it has enough CPU power, memory, disk space, and internet bandwidth. Each
 installation is different, so determining your requirements depends on the performance you expect to achieve, how many people will be using it at
 the same time and how much data you intend to store on the server.  The following are general recommendations. If you have questions about the
@@ -51,40 +50,40 @@ recommended.  Ideally the server should have at least 4 internal drive bays.  Yo
 system if you can avoid it.</p>
 <p>Typical costs for servers with the appropriate specifications range from $3,000 to $5,000 in the United States.  Plus an additional cost for the UPS.</p>
 <section id="cpu">
-<h2>CPU<a class="headerlink" href="#cpu" title="Permalink to this heading">¶</a></h2>
+<h2>CPU<a class="headerlink" href="#cpu" title="Link to this heading">¶</a></h2>
 <p>For a minimal server, the basic requirements include a high performance CPU such as Intel Xeon or AMD Epyc, with a minimum of 8 cores.
-For a more powerwerful server, we’d recommend a dual core server.</p>
+For a more powerful server, we’d recommend a dual core server.</p>
 </section>
 <section id="ram">
-<h2>RAM<a class="headerlink" href="#ram" title="Permalink to this heading">¶</a></h2>
+<h2>RAM<a class="headerlink" href="#ram" title="Link to this heading">¶</a></h2>
 <p>The ability of the Data Library to process large datasets depends on the amount of memory installed on the system.  While a Data Library may work with
 as little as 32GB of RAM, we recommend a minimum of 64GB. If you have 2 processors, you should double that to 128GB.  The more memory you can install,
 the better the performance you will have.  For most cases, 128GB will be more than enough.</p>
 </section>
 <section id="disk-space">
-<h2>Disk Space<a class="headerlink" href="#disk-space" title="Permalink to this heading">¶</a></h2>
+<h2>Disk Space<a class="headerlink" href="#disk-space" title="Link to this heading">¶</a></h2>
 <p>We recommend using 2 disks for the operating system, configured as mirror devices.  For best results, use fast disks such as SSDs or NVME for
 the operating system.  These can be as small as 128GB. If you want to speed up DL results, increase this to 256GB and place the squid cache on this device.</p>
-<p>You will need space for your Datasets.  We recommend getting multiple disks so you can mirror the drive and an external disk to backup the data regularly.
+<p>You will need space for your Datasets.  We recommend getting multiple disks, so you can mirror the drive and an external disk to back up the data regularly.
 Mirroring is not considered a backup, it is simply a convenience for higher availability.  A separate backup of your data is very important. The amount of disk
 space you may need is unique to your installation.  We suggest getting disks that are about twice the size you think you need.  You will use 2 disks to mirror
-the actual data and one disk, preferably an external USB disk, to backup your data.</p>
+the actual data and one disk, preferably an external USB disk, to back up your data.</p>
 </section>
 <section id="networking">
-<h2>Networking<a class="headerlink" href="#networking" title="Permalink to this heading">¶</a></h2>
+<h2>Networking<a class="headerlink" href="#networking" title="Link to this heading">¶</a></h2>
 <p>You should use the highest network speed you have access to.  If you have a 10Gb network, you should try to place your server on this network, with a 10Gb
 network card on your server.  But this is entirely optional.  Whatever network you have access to will work.</p>
 </section>
 <section id="graphics">
-<h2>Graphics<a class="headerlink" href="#graphics" title="Permalink to this heading">¶</a></h2>
+<h2>Graphics<a class="headerlink" href="#graphics" title="Link to this heading">¶</a></h2>
 <p>The Data Library will not take advantage of any GPU card you have installed.  A simple graphics card is sufficient.</p>
 </section>
 <section id="ups">
-<h2>UPS<a class="headerlink" href="#ups" title="Permalink to this heading">¶</a></h2>
+<h2>UPS<a class="headerlink" href="#ups" title="Link to this heading">¶</a></h2>
 <p>An uninterruptible power supply that can power your server for whatever downtime you’re likely to run into.  Typically a 1250VA UPS is sufficient, but it
 will depend on your server.</p>
 <section id="basic-requirements">
-<h3>Basic Requirements<a class="headerlink" href="#basic-requirements" title="Permalink to this heading">¶</a></h3>
+<h3>Basic Requirements<a class="headerlink" href="#basic-requirements" title="Link to this heading">¶</a></h3>
 <ul class="simple">
 <li><p>1 Intel Xeon processor, 4-8 cores</p></li>
 <li><p>32 to 64GB RAM</p></li>
@@ -106,7 +105,7 @@ will depend on your server.</p>
 </ul>
 </section>
 <section id="high-end-requirements">
-<h3>High End Requirements<a class="headerlink" href="#high-end-requirements" title="Permalink to this heading">¶</a></h3>
+<h3>High-End Requirements<a class="headerlink" href="#high-end-requirements" title="Link to this heading">¶</a></h3>
 <ul class="simple">
 <li><p>2x Intel Xeon Scalable, 8 core or higher</p></li>
 <li><p>64 - 128GB RAM</p></li>
@@ -135,7 +134,7 @@ will depend on your server.</p>
           </div>
         </div>
       </div>
-      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+      <div class="sphinxsidebar" role="navigation" aria-label="Main">
         <div class="sphinxsidebarwrapper">
   <div>
     <h3><a href="../index.html">Table of Contents</a></h3>
@@ -152,7 +151,7 @@ will depend on your server.</p>
 <li class="toctree-l3"><a class="reference internal" href="#graphics">Graphics</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#ups">UPS</a><ul>
 <li class="toctree-l4"><a class="reference internal" href="#basic-requirements">Basic Requirements</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#high-end-requirements">High End Requirements</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#high-end-requirements">High-End Requirements</a></li>
 </ul>
 </li>
 </ul>
@@ -165,7 +164,7 @@ will depend on your server.</p>
 </ul>
 
   </div>
-<div id="searchbox" style="display: none" role="search">
+<search id="searchbox" style="display: none" role="search">
   <h3 id="searchlabel">Quick search</h3>
     <div class="searchformwrapper">
     <form class="search" action="../search.html" method="get">
@@ -173,13 +172,13 @@ will depend on your server.</p>
       <input type="submit" value="Go" />
     </form>
     </div>
-</div>
+</search>
 <script>document.getElementById('searchbox').style.display = "block"</script>
         </div>
       </div>
       <div class="clearer"></div>
     </div>
-    <div class="related" role="navigation" aria-label="related navigation">
+    <div class="related" role="navigation" aria-label="Related">
       <h3>Navigation</h3>
       <ul>
         <li class="right" style="margin-right: 10px">
@@ -194,8 +193,8 @@ will depend on your server.</p>
       </ul>
     </div>
     <div class="footer" role="contentinfo">
-        &#169; Copyright 2021, IRI.
-      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 6.1.3.
+    &#169; Copyright 2021, IRI.
+      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 7.4.7.
     </div>
   </body>
 </html>
