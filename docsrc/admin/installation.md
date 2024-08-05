@@ -61,9 +61,8 @@ If you feel SELinux is important to the security of your server, please start a 
 
         ansible-galaxy collection install \
             -p . \
-            git+https://github.com/iridl/iridl-ansible.git
-
-        ansible-galaxy collection install -p . community.docker
+            git+https://github.com/iridl/iridl-ansible.git \
+            community.docker
 
 * The previous command should have downloaded the collection to a subdirectory called `ansible_collections`. Add and
   commit that directory to your git repository, to ensure that you will use the same version of the collection every
