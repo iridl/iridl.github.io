@@ -67,14 +67,14 @@ An uninterruptible power supply that can power your server for whatever downtime
 you're likely to run into. Typically a 1250VA UPS is sufficient, but it
 will depend on your server.
 
-### Basic Requirements
+## Basic Requirements
 
 * 1 Intel Xeon processor, 4-8 cores
 * 32 to 64GB RAM
 * Storage
     * See notes above on storage
 
-### High-End Requirements
+## High-End Requirements
 
 * 2x Intel Xeon Scalable, 8 core or higher
 * 64 - 128GB RAM
