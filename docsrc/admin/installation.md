@@ -130,7 +130,12 @@ parameters you defined in the configuration files.
 From the root directory of the configuration repository, run the following
 command:
 
-    ansible-playbook -v --ask-become-pass -i inventory.cfg -e @../secrets.yaml -e run_update_script=yes playbook.yaml
+    ansible-playbook \
+       --ask-become-pass \
+       -i inventory.cfg \
+       -e @../secrets.yaml 
+       -e run_update_script=yes \
+       playbook.yaml
 
 Each step of the installation will be printed to the terminal. At a site with a
 fast connection to the internet, the
