@@ -62,6 +62,7 @@ The Data Library will not take advantage of any GPU card you have installed. A
 simple graphics card is sufficient.
 
 ## UPS
+
 An uninterruptible power supply that can power your server for whatever downtime
 you're likely to run into. Typically a 1250VA UPS is sufficient, but it
 will depend on your server.
