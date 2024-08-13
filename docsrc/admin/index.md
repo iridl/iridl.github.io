@@ -7,6 +7,7 @@ This guide provides information to help a system administrator install, configur
 prerequisites
 hwrequirements
 overview
+centos7
 installation
 maintenance
 ```
