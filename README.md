@@ -3,6 +3,7 @@
 This repo contains the documentation served at <http://dldocs.iri.columbia.edu>.
 
 ## One-time setup
+use python 3.9
 ```
 mkdir ~/venvs
 python3 -m venv ~/venvs/sphinx
