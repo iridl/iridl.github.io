@@ -11,8 +11,13 @@ and software updates over time.
 
 To make a configuration change,
 
-- In your dlconfig repository, edit the relevant variable in `playbook.yaml`.
-  Advanced ansible users can also add custom tasks to the playbook.
+- Make sure your local copy of the dlconfig repository is up to date:
+
+        cd dlconfig
+        git pull --ff-only
+  
+- Make your changes in `playbook.yaml`.
+
 - Run the playbook in "check mode" to verify that ansible will make the change
   you intended:
 
@@ -33,7 +38,11 @@ To make a configuration change,
           -e @../secrets.yaml \
           playbook.yaml
 
-- Commit and push your changes to your git host.
+- Review, commit, and push your changes to your git host.
+
+        git diff
+        git commit -a -m "Description of the changes you made"
+        git push
 
 To update to a new version of the Data Library software, first consult the
 release notes for any backwards-compatibility warnings and manual migration
