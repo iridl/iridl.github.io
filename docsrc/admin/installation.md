@@ -133,7 +133,7 @@ command:
     ansible-playbook \
        --ask-become-pass \
        -i inventory.cfg \
-       -e @../secrets.yaml 
+       -e @../secrets.yaml \
        -e run_update_script=yes \
        playbook.yaml
 
