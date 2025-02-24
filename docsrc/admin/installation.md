@@ -33,31 +33,41 @@ a configuration management tool.
           installation. Under the Advanced configuration, make the user a member of the `wheel` group so they will be able to
           perform commands as root using `sudo`.
 
-### Post Installation
+### Post Operating System Installation
 
-Once the server boots back up, you can install the requirements for installing the Data Library Software.
-
-* Bring the server up to the most recent version of CentOS Stream 9
-
-        sudo dnf update -y
-
-* Install git and ansible:
-
-        sudo dnf install -y git ansible-core
+Once the server boots up after the installation, you can install the requirements necessary for 
+installing the Data Library Software.
 
 * Disable SELinux:
 
-        sudo sed -i s/SELINUX=enforcing/SELINUX=permissive/ /etc/selinux/config
-        sudo setenforce permissive
+      sudo sed -i s/SELINUX=enforcing/SELINUX=permissive/ /etc/selinux/config 
+      sudo setenforce permissive
+
+* Bring the server up to the most recent version of CentOS Stream 9
+
+      sudo dnf update -y
+
+  If any changes were installed, reboot now.
+
+*     sudo shutdown -r now
+
+* Install git and ansible:
+
+      sudo dnf install -y git ansible-core
+
+* Allow http port through the firewall.
+
+      sudo firewall-cmd --add-service=http
+      sudo firewall-cmd --add-service=http --permanent
 
    **Note:**
    If you feel SELinux is important to the security of your server, please start a conversation with us at help@iri.columbia.edu.
 
-#### Configure bitbucket
+#### Configure bitbucket git repository
 
 * Create a new SSH Key
 
-        ssh-keygen -t ed25519 -b 4096 -f ~/id_bitbucket
+      ssh-keygen -t ed25519 -b 4096 -f ~/.ssh/id_bitbucket
 
   _This will create an ssh key for use with bitbucket in ~/.ssh/id_bitbucket. Set a good passphrase different 
    from your password. You will need to use this passphrase every time you need to commit changes to the bitbucket repository,
@@ -65,17 +75,17 @@ Once the server boots back up, you can install the requirements for installing t
 
 * Add the key to your ~/.ssh/config file
 
-        vi ~/.ssh/config
+      vi ~/.ssh/config
 
   Add these lines to the file and save it.
 
-        Host bitbucket.org
-           AddKeysToAgent yes
-           IdentityFile ~/.ssh/id_bitbucket
+      Host bitbucket.org
+        AddKeysToAgent yes
+        IdentityFile ~/.ssh/id_bitbucket
 
 * Provide the details to Bitbucket.org
   * Login to your bitbucket.org account
-  * Select the *Settings* gear icon in the upper right of the browser window and select **Personal Bitbucket Settings**.
+  * Select the **Settings** gear icon in the upper right of the browser window and select **Personal Bitbucket Settings**.
   * Under **Security**, select **SSH Keys**
   * Select **Add Key**
   * In the Add SSH key dialog, provide a Label to help you identify which key you are adding. For example, you could use
@@ -90,7 +100,11 @@ Once the server boots back up, you can install the requirements for installing t
 
         ssh -T git@bitbucket.org
 
-  It should return, "authenticated via ssh key"
+  It should return:
+
+        authenticated via ssh key
+
+        You can use git to connect to Bitbucket. Shell access is disabled
 
 #### Configure your Data Library repository
 
