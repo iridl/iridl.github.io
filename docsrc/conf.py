@@ -18,7 +18,7 @@
 # -- Project information -----------------------------------------------------
 
 project = 'IRI Data Library'
-copyright = '2021, IRI'
+copyright = '2025, IRI'
 author = 'IRI'
 
 
