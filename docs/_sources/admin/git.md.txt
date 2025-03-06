@@ -1,0 +1,52 @@
+# Configure Git
+
+We currently use [bitbucket.org](https://bitbucket.org) as our cloud git repository.
+
+The person installing and maintaining the Data Library should have or [create an account](https://id.atlassian.com/signup?application=bitbucket&continue=https%3A%2F%2Fbitbucket.org%2Faccount%2Fsignin%2F%3Fnext%3D%252F%26redirectCount%3D1) with [https://bitbucket.org](https://bitbucket.org).
+
+Once you have an account inform the [Data Library staff](mailto:help@iri.coplumbia.edu) to grant you access to the repositories.
+
+## Configure DL Account
+
+* Create a new SSH Key on the Data Library Server
+
+      ssh-keygen -t ed25519 -b 4096 -f ~/.ssh/id_bitbucket
+
+  _This will create an ssh key for use with bitbucket in ~/.ssh/id_bitbucket. Set a good passphrase different
+  from your password. You will need to use this passphrase every time you need to commit changes to the bitbucket repository,
+  so be sure to save it somewhere._
+
+* Add the key to your ~/.ssh/config file
+
+      vi ~/.ssh/config
+
+  Add these lines to the file and save it.
+
+      Host bitbucket.org
+        AddKeysToAgent yes
+        IdentityFile ~/.ssh/id_bitbucket
+
+## Configure Bitbucket
+
+* Provide the details to Bitbucket.org
+    * Login to your bitbucket.org account
+    * Select the **Settings** gear icon in the upper right of the browser window and select **Personal Bitbucket Settings**.
+    * Under **Security**, select **SSH Keys**
+    * Select **Add Key**
+    * In the Add SSH key dialog, provide a Label to help you identify which key you are adding. For example, you could use
+      the account name of the user on the server you're setting the key up for.
+    * Copy the contents of ~/.ssh/id_bitbucket.pub to the **Key** field of the **Add SSH key** dialog.
+    * Select **Add Key**  
+      if it fails, check that you copied the contents properly.  It should look something like:
+
+          ssh-ed25529 LLoWYaPswHzVqQ7L7B07LzIJbntgmHqrE40t17nGXL71QX9IoFGKYoF5pJKUMvR+DZotTm user@example.com
+
+* Make sure the key works. On the Data Library server,
+
+        ssh -T git@bitbucket.org
+
+  It should return:
+
+        authenticated via ssh key
+
+        You can use git to connect to Bitbucket. Shell access is disabled

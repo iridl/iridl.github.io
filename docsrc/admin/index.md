@@ -4,9 +4,10 @@ This guide provides information to help a system administrator install, configur
 
 ```{toctree}
 
-prerequisites
-hwrequirements
 overview
+hwrequirements
+prerequisites
+git
 installation
 maintenance
 ```

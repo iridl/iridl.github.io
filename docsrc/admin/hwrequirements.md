@@ -1,5 +1,3 @@
-(hwrequirements)=
-
 # Server Requirements
 
 The Data Library can be run on a single server/workstation, providing it has
@@ -19,8 +17,8 @@ to \$5,000 in the United States. Plus an additional cost for the UPS.
 ## CPU
 
 For a minimal server, the basic requirements include a high performance CPU such
-as Intel Xeon or AMD Epyc, with a minimum of 8 cores.
-For a more powerful server, we'd recommend a dual core server.
+as Intel Xeon or AMD Epyc, with a minimum of 8 cores. For a more powerful server, we'd recommend a 
+dual cpu server. The CPU must be intel-compatible, we do not support other architectures.
 
 ## RAM
 

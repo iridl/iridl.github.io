@@ -1,22 +1,21 @@
 (overview)=
-
 # Overview
 
 This section gives an overview of the components of the Data Library system.
 
 (infrastructure)=
-
 ## Infrastructure
 
-The Data Library ansible playbook currently targets CentOS7 and CentOS Stream 9.
-IRI does not test or support the software on other
-platforms. CentOS7 is at its End of Life, and is no longer recommended to
-install.
+The Data Library ansible playbook currently targets [CentOS Stream 9](https://www.centos.org/stream9/). IRI does not test or support 
+the software on other platforms.
 
-The Data Library services runs under Docker, using docker compose. Most services
-log to stdout, which the Docker daemon
+_CentOS7 is beyond its end of life and is no longer recommended to install, but we continue to support the 
+installations where it is already installed. Any new installations must be made with CentOS Stream 9_
+
+The Data Library services runs under Docker, using docker compose. Most services log to stdout, which the Docker daemon
 forwards to journald.
 
+(ansible)=
 ## Configuration management using ansible
 
 Installation and configuration of the Data Library software is automated
@@ -51,6 +50,7 @@ manage the server's configuration.
   it makes them gives the administrator more confidence in the tool and helps
   avoid some kinds of configuration errors.
 
+(software)=
 ## Software components
 
 The system is composed of four containerized services.
@@ -77,7 +77,6 @@ Squid routes the root URL `/` and URLs that begin with `/maproom` to httpd; all
 other URLs are routed to ingrid.
 
 (groups)=
-
 ## User groups
 
 Two kinds of users will need accounts (unix logins) on a Data Library server:
@@ -99,7 +98,6 @@ User accounts for authors are managed by the ansible playbook, but
 administrators are not.
 
 (paths)=
-
 ## Important file and directory paths
 
 Ingrid datasets are defined in a *data catalog*, which is developed in a git

@@ -21,7 +21,7 @@ a configuration management tool.
             * Use LVM when creating the filesystems. This is the default.
                 * Don't modify /boot or /boot/efi
             * Increase root partition to 100GB
-            * Create a /data partition large enough to hold all of your data now
+            * Create a /data partition large enough to hold all your data now
               and in the future.
             * Create a /home partition large enough to house your users' data.
             * Leave 10% of the disk unallocated. This will allow you to create
@@ -36,14 +36,17 @@ a configuration management tool.
 ### Post Operating System Installation
 
 Once the server boots up after the installation, you can install the requirements necessary for 
-installing the Data Library Software.
+installing the Data Library Software. You must have **sudo** privileges on your account.
 
 * Disable SELinux:
 
       sudo sed -i s/SELINUX=enforcing/SELINUX=permissive/ /etc/selinux/config 
       sudo setenforce permissive
 
-* Bring the server up to the most recent version of CentOS Stream 9
+  **Note:** If you feel SELinux is important to the security of your server, please start a conversation with us at help@iri.columbia.edu.
+
+
+* Update the server
 
       sudo dnf update -y
 
@@ -54,57 +57,6 @@ installing the Data Library Software.
 * Install git and ansible:
 
       sudo dnf install -y git ansible-core
-
-* Allow http port through the firewall.
-
-      sudo firewall-cmd --add-service=http
-      sudo firewall-cmd --add-service=http --permanent
-
-   **Note:**
-   If you feel SELinux is important to the security of your server, please start a conversation with us at help@iri.columbia.edu.
-
-#### Configure bitbucket git repository
-
-* Create a new SSH Key
-
-      ssh-keygen -t ed25519 -b 4096 -f ~/.ssh/id_bitbucket
-
-  _This will create an ssh key for use with bitbucket in ~/.ssh/id_bitbucket. Set a good passphrase different 
-   from your password. You will need to use this passphrase every time you need to commit changes to the bitbucket repository,
-   so be sure to save it somewhere._
-
-* Add the key to your ~/.ssh/config file
-
-      vi ~/.ssh/config
-
-  Add these lines to the file and save it.
-
-      Host bitbucket.org
-        AddKeysToAgent yes
-        IdentityFile ~/.ssh/id_bitbucket
-
-* Provide the details to Bitbucket.org
-  * Login to your bitbucket.org account
-  * Select the **Settings** gear icon in the upper right of the browser window and select **Personal Bitbucket Settings**.
-  * Under **Security**, select **SSH Keys**
-  * Select **Add Key**
-  * In the Add SSH key dialog, provide a Label to help you identify which key you are adding. For example, you could use
-    the account name of the user on the server you're setting the key up for.
-  * Copy the contents of ~/.ssh/id_bitbucket.pub to the **Key** field of the **Add SSH key** dialog.
-  * Select **Add Key**  
-    if it fails, check that you copied the contents properly.  It should look something like:  
-
-        ssh-ed25529 LLoWYaPswHzVqQ7L7B07LzIJbntgmHqrE40t17nGXL71QX9IoFGKYoF5pJKUMvR+DZotTm user@example.com
-
-* Make sure the key works. On the server,
-
-        ssh -T git@bitbucket.org
-
-  It should return:
-
-        authenticated via ssh key
-
-        You can use git to connect to Bitbucket. Shell access is disabled
 
 #### Configure your Data Library repository
 
@@ -123,6 +75,8 @@ installing the Data Library Software.
 * The previous command should have downloaded the collection to a subdirectory
   called `ansible_collections`. Add that directory to your git repository, and commit
   the changes.
+
+  **Note:** See {doc}`git` to set up your account to work with git.
 
         git add ansible_collections
         git commit -m "add iridl ansible collection"

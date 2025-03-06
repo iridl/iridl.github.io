@@ -2,7 +2,7 @@
 
 # Prerequisites
 
-This is not a tutorial on linux system administration. We will assume that the
+This is not a tutorial on linux system administration. We assume the
 reader is able to perform tasks such as:
 
 * Install a linux distribution on a server.
@@ -29,7 +29,3 @@ configuration management tool, to install and configure the Data Library
 software. This guide does not assume prior familiarity with ansible, but after
 working through the installation instructions we do recommend that you read the
 ansible documentation.
-
-## bitbucket.org account
-
-The person installing and maintaining the Data Library should have an account with https://bitbucket.org.

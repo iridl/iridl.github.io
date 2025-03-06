@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+
+<html lang="en" data-content_root="../">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>Configure Git &#8212; IRI Data Library  documentation</title>
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=03e43079" />
+    <link rel="stylesheet" type="text/css" href="../_static/classic.css?v=2bf1fcf8" />
+    
+    <script src="../_static/documentation_options.js?v=5929fcd5"></script>
+    <script src="../_static/doctools.js?v=9bcbadda"></script>
+    <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+    
+    <link rel="canonical" href="https://dldocs.iri.columbia.edu/admin/git.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Installation" href="installation.html" />
+    <link rel="prev" title="Prerequisites" href="prerequisites.html" /> 
+  </head><body>
+    <div class="related" role="navigation" aria-label="Related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="installation.html" title="Installation"
+             accesskey="N">next</a></li>
+        <li class="right" >
+          <a href="prerequisites.html" title="Prerequisites"
+             accesskey="P">previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../index.html">IRI Data Library  documentation</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="index.html" accesskey="U">System Administrator Guide</a> &#187;</li>
+        <li class="nav-item nav-item-this"><a href="">Configure Git</a></li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <section id="configure-git">
+<h1>Configure Git<a class="headerlink" href="#configure-git" title="Link to this heading">¶</a></h1>
+<p>We currently use <a class="reference external" href="https://bitbucket.org">bitbucket.org</a> as our cloud git repository.</p>
+<p>The person installing and maintaining the Data Library should have or <a class="reference external" href="https://id.atlassian.com/signup?application=bitbucket&amp;amp;continue=https%3A%2F%2Fbitbucket.org%2Faccount%2Fsignin%2F%3Fnext%3D%252F%26redirectCount%3D1">create an account</a> with <a class="reference external" href="https://bitbucket.org">https://bitbucket.org</a>.</p>
+<p>Once you have an account inform the <a class="reference external" href="mailto:help&#37;&#52;&#48;iri&#46;coplumbia&#46;edu">Data Library staff</a> to grant you access to the repositories.</p>
+<section id="configure-dl-account">
+<h2>Configure DL Account<a class="headerlink" href="#configure-dl-account" title="Link to this heading">¶</a></h2>
+<ul>
+<li><p>Create a new SSH Key on the Data Library Server</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>ssh-keygen -t ed25519 -b 4096 -f ~/.ssh/id_bitbucket
+</pre></div>
+</div>
+<p><em>This will create an ssh key for use with bitbucket in ~/.ssh/id_bitbucket. Set a good passphrase different
+from your password. You will need to use this passphrase every time you need to commit changes to the bitbucket repository,
+so be sure to save it somewhere.</em></p>
+</li>
+<li><p>Add the key to your ~/.ssh/config file</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>vi ~/.ssh/config
+</pre></div>
+</div>
+<p>Add these lines to the file and save it.</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>Host bitbucket.org
+  AddKeysToAgent yes
+  IdentityFile ~/.ssh/id_bitbucket
+</pre></div>
+</div>
+</li>
+</ul>
+</section>
+<section id="configure-bitbucket">
+<h2>Configure Bitbucket<a class="headerlink" href="#configure-bitbucket" title="Link to this heading">¶</a></h2>
+<ul>
+<li><p>Provide the details to Bitbucket.org</p>
+<ul>
+<li><p>Login to your bitbucket.org account</p></li>
+<li><p>Select the <strong>Settings</strong> gear icon in the upper right of the browser window and select <strong>Personal Bitbucket Settings</strong>.</p></li>
+<li><p>Under <strong>Security</strong>, select <strong>SSH Keys</strong></p></li>
+<li><p>Select <strong>Add Key</strong></p></li>
+<li><p>In the Add SSH key dialog, provide a Label to help you identify which key you are adding. For example, you could use
+the account name of the user on the server you’re setting the key up for.</p></li>
+<li><p>Copy the contents of ~/.ssh/id_bitbucket.pub to the <strong>Key</strong> field of the <strong>Add SSH key</strong> dialog.</p></li>
+<li><p>Select <strong>Add Key</strong><br />
+if it fails, check that you copied the contents properly.  It should look something like:</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>ssh-ed25529 LLoWYaPswHzVqQ7L7B07LzIJbntgmHqrE40t17nGXL71QX9IoFGKYoF5pJKUMvR+DZotTm user@example.com
+</pre></div>
+</div>
+</li>
+</ul>
+</li>
+<li><p>Make sure the key works. On the Data Library server,</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>  ssh -T git@bitbucket.org
+</pre></div>
+</div>
+<p>It should return:</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>  authenticated via ssh key
+
+  You can use git to connect to Bitbucket. Shell access is disabled
+</pre></div>
+</div>
+</li>
+</ul>
+</section>
+</section>
+
+
+            <div class="clearer"></div>
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="Main">
+        <div class="sphinxsidebarwrapper">
+  <div>
+    <h3><a href="../index.html">Table of Contents</a></h3>
+    <p class="caption" role="heading"><span class="caption-text">Content:</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../user/index.html">User Guide</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="index.html">System Administrator Guide</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="overview.html">Overview</a></li>
+<li class="toctree-l2"><a class="reference internal" href="hwrequirements.html">Server Requirements</a></li>
+<li class="toctree-l2"><a class="reference internal" href="prerequisites.html">Prerequisites</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">Configure Git</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#configure-dl-account">Configure DL Account</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#configure-bitbucket">Configure Bitbucket</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="installation.html">Installation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="maintenance.html">Maintenance</a></li>
+</ul>
+</li>
+</ul>
+
+  </div>
+<search id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false"/>
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</search>
+<script>document.getElementById('searchbox').style.display = "block"</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="Related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="installation.html" title="Installation"
+             >next</a></li>
+        <li class="right" >
+          <a href="prerequisites.html" title="Prerequisites"
+             >previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../index.html">IRI Data Library  documentation</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="index.html" >System Administrator Guide</a> &#187;</li>
+        <li class="nav-item nav-item-this"><a href="">Configure Git</a></li> 
+      </ul>
+    </div>
+    <div class="footer" role="contentinfo">
+    &#169; Copyright 2025, IRI.
+      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 8.1.3.
+    </div>
+  </body>
+</html>

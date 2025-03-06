@@ -2,7 +2,7 @@
 
 # Prerequisites
 
-This is not a tutorial on linux system administration. We will assume that the
+This is not a tutorial on linux system administration. We assume the
 reader is able to perform tasks such as:
 
 * Install a linux distribution on a server.
