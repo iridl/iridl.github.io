@@ -54,9 +54,12 @@ installing the Data Library Software. You must have **sudo** privileges on your 
 
 *     sudo shutdown -r now
 
-* Install git and ansible:
+* Install python3.12, git and ansible:
 
-      sudo dnf install -y git ansible-core
+      sudo dnf install -y git python3.12
+      sudo python3.12 -m venv /opt/datalib_venv3.12
+      sudo /opt/datalib_venv3.12/bin/pip install --upgrade pip
+      sudo /opt/datalib_venv3.12/bin/pip install ansible
 
 #### Configure your Data Library repository
 
@@ -68,9 +71,9 @@ installing the Data Library Software. You must have **sudo** privileges on your 
 
 * Inside the new git repository, install the IRIDL ansible collection and dependencies:
 
+        source /opt/datalib_venv3.12/bin/activate
         ansible-galaxy collection install -p . \
-            git+https://github.com/iridl/iridl-ansible.git \
-            community.docker:3.13.6
+            git+https://github.com/iridl/iridl-ansible.git
 
 * The previous command should have downloaded the collection to a subdirectory
   called `ansible_collections`. Add that directory to your git repository, and commit
