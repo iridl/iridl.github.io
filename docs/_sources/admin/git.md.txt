@@ -1,4 +1,4 @@
-# Configure Git
+# Configuring Git
 
 We currently use [bitbucket.org](https://bitbucket.org) as our cloud git repository.
 

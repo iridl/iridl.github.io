@@ -59,8 +59,7 @@ installing the Data Library Software. You must have **sudo** privileges on your 
       sudo dnf install -y git python3.12
       sudo python3.12 -m venv /opt/datalib_venv3.12
       sudo /opt/datalib_venv3.12/bin/pip install --upgrade pip
-      sudo /opt/datalib_venv3.12/bin/pip install ansible
-
+      sudo /opt/datalib_venv3.12/bin/pip install ansible==11.3.0 requests==2.32.3
 #### Configure your Data Library repository
 
 * Create a configuration repository for your installation.  This will be used to hold and store all your customizations.
@@ -127,6 +126,8 @@ From the root directory of the configuration repository, run the following comma
        playbook.yaml
 
 It will prompt you for a password, which will be the password of the user you are logged in as.
+
+    BECOME password:
 
 Each step of the installation will be printed to the terminal. At a site with a fast connection to the internet, the
 playbook generally finishes within ten minutes, but if bandwidth is limited it may take a few hours, as the 
