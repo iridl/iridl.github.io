@@ -9,12 +9,18 @@ use it for the initial installation of the Data Library software. We also
 recommend that you use continue using ansible to manage configuration changes
 and software updates over time.
 
+You must activate the correct python virtual environment in order to use the
+correct ansible playbook. To always use this version of python, you can add this
+line to the end of your ~/.bash_profile file.
+
+    source /opt/datalib_venv3.1/bin/activate
+
 To make a configuration change,
 
 - Make sure your local copy of the dlconfig repository is up to date:
 
-        cd dlconfig
-        git pull --ff-only
+      cd dlconfig
+      git pull --ff-only
   
 - Make your changes in `playbook.yaml`.
 
