@@ -1,19 +1,16 @@
 # Maintenance
 
 (ansible-update)=
-
 ## Configuration updates using ansible
 
-The {ref}`installation` section explains how to create an ansible playbook and
-use it for the initial installation of the Data Library software. We also
-recommend that you use continue using ansible to manage configuration changes
-and software updates over time.
+The {doc}`Data Library Installation <installation>` section explains how to create an ansible playbook and
+use it for the initial installation of the Data Library software. We also recommend that you use continue using ansible
+to manage configuration changes and software updates over time.
 
-You must activate the correct python virtual environment in order to use the
-correct ansible playbook. To always use this version of python, you can add this
-line to the end of your ~/.bash_profile file.
+You must activate the correct python virtual environment in order to use the correct ansible playbook. To always use 
+this version of python, you can add this line to the end of your ~/.bash_profile file.
 
-    source /opt/datalib_venv3.1/bin/activate
+    source /opt/datalib_venv3.12/bin/activate
 
 To make a configuration change,
 
@@ -27,28 +24,23 @@ To make a configuration change,
 - Run the playbook in "check mode" to verify that ansible will make the change
   you intended:
 
-        ansible-playbook \
-          --check \
-          --diff \
-          --ask-become-pass \
-          -i inventory.cfg \
-          -e @../secrets.yaml \
-          playbook.yaml
+      ./install.bash --check
 
-- After verifying the diff, run the playbook without `--check --diff` to apply
+- After verifying the diff, run the playbook without `--check` to apply
   the change.
 
-        ansible-playbook \
-          --ask-become-pass \
-          -i inventory.cfg \
-          -e @../secrets.yaml \
-          playbook.yaml
+      ./install.bash
+
+- If the Data Library team has made changes to the maprooms that you want to integrate, 
+  run with `--build` to pull the new changes.
+
+      ./install.bash --build
 
 - Review, commit, and push your changes to your git host.
 
-        git diff
-        git commit -a -m "Description of the changes you made"
-        git push
+      git diff
+      git commit -a -m "Description of the changes you made"
+      git push
 
 To update to a new version of the Data Library software, first consult the
 release notes for any backwards-compatibility warnings and manual migration
@@ -62,7 +54,7 @@ push your changes.
 
 ## Adding user accounts
 
-As described in {ref}`groups`, users with accounts on the Data Library server
+As described in {ref}`User groups`, users with accounts on the Data Library server
 can be divided in two groups: administrators and authors.
 
 Administrator accounts should be created "by hand", *i.e.* outside of ansible's
@@ -75,8 +67,6 @@ create the user account, add the new user to the `datag` group, and create a
 personal data catalog directory (see {ref}`paths`) for the user. Ansible does
 not set the user's password, so you should do that by hand after running the
 playbook. Remember to commit and push your playbook changes.
-
-(debugging)=
 
 ## Debugging tips
 
@@ -93,14 +83,12 @@ playbook. Remember to commit and push your playbook changes.
 
         sudo journalctl CONTAINER_NAME=datalib_maproom_1 --since='1 hour ago'
 
-
 - squid produces two separate logs: the error log and the access log. The latter
   contains a line for each request served. The error log is piped to journalctl,
   while the access log is written to a docker volume. To read the access log,
   use `docker exec` to run a command in the squid container, *e.g.*
 
         sudo docker exec -it datalib_squid_1 tail -n 100 /var/log/squid/access.log
-
 
 - If an embedded image in a maproom is broken/empty, copy the image URL to a new
   browser window and remove the .gif at the end. Sometimes this will get you an

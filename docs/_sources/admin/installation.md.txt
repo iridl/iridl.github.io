@@ -1,136 +1,92 @@
-(installation)=
+# Data Library Installation
 
-# Installation
+This section provides instructions for installing the Data Library software on a server configure with CentOS Stream 9.
 
-This section provides instructions for installing the Data Library software on a server.
+```{seealso}
+To install CentOS Stream 9 on the server, please reference {doc}`the server pages <../server/index>`.
+```
 
 Installation of the Data Library software is automated using [ansible](https://docs.ansible.com/ansible_community.html),
-a configuration management tool.
+a configuration management tool which uses python3.12.  A virtual environment for 
+this is installed in /opt/datalib_venv3.12
 
-## Prepare the server
+## Configure your Data Library repository
 
-### Install the CentOS9 Stream Operating System
+  ```{seealso}
+  See {ref}`Configuring git` to set up your account to work with git.
+  ```
 
-* Install CentOS 9 Stream from https://www.centos.org/download.  Select the tab for 9, then download
-  the [x86_64 Architecture ISO](https://mirrors.centos.org/mirrorlist?path=/9-stream/BaseOS/x86_64/iso/CentOS-Stream-9-latest-x86_64-dvd1.iso&redirect=1&protocol=https). We currently only support x86_64.
-    * To create a bootable CD of the Installation ISO,
-      follow [these instructions](https://docs.centos.org/en-US/centos/install-guide/Making_Media/).
-    * **Installation Notes**
-        * Select _Server with GUI_ as your Software Selection to make it easier to maintain.
-        * When configuring your disk partitions (Installation Destination), Select Customize Storage Configuration.
-            * Use LVM when creating the filesystems. This is the default.
-                * Don't modify /boot or /boot/efi
-            * Increase root partition to 100GB
-            * Create a /data partition large enough to hold all your data now
-              and in the future.
-            * Create a /home partition large enough to house your users' data.
-            * Leave 10% of the disk unallocated. This will allow you to create
-              snapshots or increase the size of partitions later if necessary.
-        * Configure the Network and Hostname (and DNS) appropriately for your network.
-        * Set the appropriate Time and Date.
-        * Create a Secure Root Password
-        * Create a user account for the system administrator who will be performing the
-          installation. Under the Advanced configuration, make the user a member of the `wheel` group so they will be able to
-          perform commands as root using `sudo`.
+* Create a configuration repository for your account. This will be used to hold and store all your data library
+  customizations.
+  These will be put into git and shared with any other team members responsible for the DL installations and updates.
 
-### Post Operating System Installation
+      mkdir dlconfig
+      cd dlconfig
+      git init
 
-Once the server boots up after the installation, you can install the requirements necessary for 
-installing the Data Library Software. You must have **sudo** privileges on your account.
+* Inside this new git repository, install the IRIDL ansible collection and dependencies:
 
-* Disable SELinux:
+      ansible-galaxy collection install -p . \
+          git+https://github.com/iridl/iridl-ansible.git
 
-      sudo sed -i s/SELINUX=enforcing/SELINUX=permissive/ /etc/selinux/config 
-      sudo setenforce permissive
+* The previous command should have downloaded the collection to a subdirectory called `ansible_collections`. Add that
+  directory to your git repository, and commit the changes.
 
-  **Note:** If you feel SELinux is important to the security of your server, please start a conversation with us at help@iri.columbia.edu.
+      git add ansible_collections
+      git commit -m "add iridl ansible collection"
 
+* Copy template configuration files from the collection to the top level of the repository:
 
-* Update the server
+      cp ansible_collections/iridl/iridl/example/* .
 
-      sudo dnf update -y
+* Modify `playbook.yaml` and `secrets.yaml` to customize them to the specifics of your site. The files you copied
+  contain example configuration values that should be replaced with real email addresses, usernames, *etc.* The
+  files include comments that explain the purpose of each configuration option. If you are not ready to set up your real
+  Data Library server but merely want to practice the installation process,  *e.g.* in a virtual machine, you can use
+  the example files without modification.
 
-  If any changes were installed, reboot now.
-
-*     sudo shutdown -r now
-
-* Install python3.12, git and ansible:
-
-      sudo dnf install -y git python3.12
-      sudo python3.12 -m venv /opt/datalib_venv3.12
-      sudo /opt/datalib_venv3.12/bin/pip install --upgrade pip
-      sudo /opt/datalib_venv3.12/bin/pip install ansible==11.3.0 requests==2.32.3
-#### Configure your Data Library repository
-
-* Create a configuration repository for your installation.  This will be used to hold and store all your customizations.
-
-        mkdir dlconfig
-        cd dlconfig
-        git init
-
-* Inside the new git repository, install the IRIDL ansible collection and dependencies:
-
-        source /opt/datalib_venv3.12/bin/activate
-        ansible-galaxy collection install -p . \
-            git+https://github.com/iridl/iridl-ansible.git
-
-* The previous command should have downloaded the collection to a subdirectory
-  called `ansible_collections`. Add that directory to your git repository, and commit
-  the changes.
-
-  **Note:** See {doc}`git` to set up your account to work with git.
-
-        git add ansible_collections
-        git commit -m "add iridl ansible collection"
-
-* Copy template configuration files from the collection to the top level of the
-  repository:
-
-        cp ansible_collections/iridl/iridl/example/* .
+```{seealso}
+The secrets.yaml file contains the deploy keys (or access keys) to access the repositories defined in your playbook.yaml
+file.  These are needed because Ansible runs as root, so it needs it's own access to the repositories.  For that reason,
+we want to make sure it only has read access.  See {ref}`Deployment Keys`
+```
 
 * Move `secrets.yaml` out of the git repository. For security reasons, unencrypted secrets should not be committed to
   version control.
 
-        mv secrets.yaml ..
+      mv secrets.yaml ..
 
-* Modify `playbook.yaml` and `../secrets.yaml` to customize them to the specifics of your site. The files you copied 
-  contain example configuration values that should be replaced with real email addresses, usernames, *etc.* The
-  files include comments that explain the purpose of each configuration option. If you are not ready to set up your real
-  Data Library server but merely want to practice the installation process,  *e.g.* in a virtual machine, you can use the
-  example files without modification.
-
-* Commit your customizations and push them to your git server for safe keeping; back up `secrets.yaml` by other means, 
+* Commit your customizations and push them to your git server for safe keeping; back up `secrets.yaml` by other means,
   such as copying it to another machine.
 
-   #### Notes
+      git add inventories.cfg playbook.yaml
+      git commit -m "add inventoriess and playbook"
 
+```{note}
   * Never edit the contents of the `ansible_collections` directory. All customization should be made in the configuration
   files that you copied from the template. In the future when it comes time to upgrade to a newer version of the DL 
   software, you will run the `ansible-galaxy` command again and commit the new version to your configuration repository.
 
   * Don't upgrade without checking the release notes first, because in some cases an upgrade may require manual migration
   steps. (At this writing, there are no upgrade release notes because this is the playbook's initial release.)
+```
 
 ## Run the ansible playbook
 
 Now we are ready to run the playbook, which will download, configure, and install the Data Library software using the
-parameters you defined in the configuration files.
+parameters you defined in the configuration files.  We have created a convenience script, `install.bash`, to 
+perform this.
 
 From the root directory of the configuration repository, run the following command:
 
-    ansible-playbook \
-       --ask-become-pass \
-       -i inventory.cfg \
-       -e @../secrets.yaml \
-       -e run_update_script=yes \
-       playbook.yaml
+    ./install.bash --build
 
 It will prompt you for a password, which will be the password of the user you are logged in as.
 
     BECOME password:
 
 Each step of the installation will be printed to the terminal. At a site with a fast connection to the internet, the
-playbook generally finishes within ten minutes, but if bandwidth is limited it may take a few hours, as the 
+playbook generally finishes within ten minutes, but if bandwidth is limited it may take a few hours, as the
 installation process involves downloading several GB of software packages and container images.
 
 You should now be able to visit your Data Library server in a browser, but the maprooms are not yet functional because

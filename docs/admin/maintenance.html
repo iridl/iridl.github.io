@@ -1,85 +1,141 @@
+
+
 <!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
-<html lang="en" data-content_root="../">
-  <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-VGXWMJJGTJ"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'G-VGXWMJJGTJ');
+    </script>
+    
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Maintenance &mdash; IRI Data Library  documentation</title>
+      <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=b86133f3" />
+      <link rel="stylesheet" type="text/css" href="../_static/css/theme.css?v=e59714d7" />
+      <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=76b2166b" />
 
-    <title>Maintenance &#8212; IRI Data Library  documentation</title>
-    <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=03e43079" />
-    <link rel="stylesheet" type="text/css" href="../_static/classic.css?v=2bf1fcf8" />
-    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=76b2166b" />
-    
-    <script src="../_static/documentation_options.js?v=5929fcd5"></script>
-    <script src="../_static/doctools.js?v=9bcbadda"></script>
-    <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
-    <script src="../_static/clipboard.min.js?v=a7894cd8"></script>
-    <script src="../_static/copybutton.js?v=f281be69"></script>
-    
+  
     <link rel="canonical" href="https://dldocs.iri.columbia.edu/admin/maintenance.html" />
+      <script src="../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="../_static/documentation_options.js?v=5929fcd5"></script>
+      <script src="../_static/doctools.js?v=9bcbadda"></script>
+      <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+      <script src="../_static/clipboard.min.js?v=a7894cd8"></script>
+      <script src="../_static/copybutton.js?v=f281be69"></script>
+    <script src="../_static/js/theme.js"></script>
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="prev" title="Installation" href="installation.html" /> 
-  </head><body>
-    <div class="related" role="navigation" aria-label="Related">
-      <h3>Navigation</h3>
-      <ul>
-        <li class="right" style="margin-right: 10px">
-          <a href="installation.html" title="Installation"
-             accesskey="P">previous</a></li>
-        <li class="nav-item nav-item-0"><a href="../index.html">IRI Data Library  documentation</a> &#187;</li>
-          <li class="nav-item nav-item-1"><a href="index.html" accesskey="U">System Administrator Guide</a> &#187;</li>
-        <li class="nav-item nav-item-this"><a href="">Maintenance</a></li> 
-      </ul>
-    </div>  
+    <link rel="next" title="Server Installation" href="../server/index.html" />
+    <link rel="prev" title="Data Library Installation" href="installation.html" /> 
+</head>
 
-    <div class="document">
-      <div class="documentwrapper">
-        <div class="bodywrapper">
-          <div class="body" role="main">
-            
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../index.html" class="icon icon-home">
+            IRI Data Library
+              <img src="../_static/iri_icon_white.svg" class="logo" alt="Logo"/>
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Content:</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../user/index.html">User Guide</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="index.html">System Administrator Guide</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="overview.html">Overview</a></li>
+<li class="toctree-l2"><a class="reference internal" href="git.html">Configuring git</a></li>
+<li class="toctree-l2"><a class="reference internal" href="installation.html">Data Library Installation</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">Maintenance</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../server/index.html">Server Installation</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">IRI Data Library</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content style-external-links">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="index.html">System Administrator Guide</a></li>
+      <li class="breadcrumb-item active">Maintenance</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../_sources/admin/maintenance.md.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
   <section id="maintenance">
-<h1>Maintenance<a class="headerlink" href="#maintenance" title="Link to this heading">¶</a></h1>
+<h1>Maintenance<a class="headerlink" href="#maintenance" title="Link to this heading"></a></h1>
 <section id="configuration-updates-using-ansible">
-<span id="ansible-update"></span><h2>Configuration updates using ansible<a class="headerlink" href="#configuration-updates-using-ansible" title="Link to this heading">¶</a></h2>
-<p>The <a class="reference internal" href="installation.html#installation"><span class="std std-ref">Installation</span></a> section explains how to create an ansible playbook and
-use it for the initial installation of the Data Library software. We also
-recommend that you use continue using ansible to manage configuration changes
-and software updates over time.</p>
+<span id="ansible-update"></span><h2>Configuration updates using ansible<a class="headerlink" href="#configuration-updates-using-ansible" title="Link to this heading"></a></h2>
+<p>The <a class="reference internal" href="installation.html"><span class="doc">Data Library Installation</span></a> section explains how to create an ansible playbook and
+use it for the initial installation of the Data Library software. We also recommend that you use continue using ansible
+to manage configuration changes and software updates over time.</p>
+<p>You must activate the correct python virtual environment in order to use the correct ansible playbook. To always use
+this version of python, you can add this line to the end of your ~/.bash_profile file.</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>source /opt/datalib_venv3.12/bin/activate
+</pre></div>
+</div>
 <p>To make a configuration change,</p>
 <ul>
 <li><p>Make sure your local copy of the dlconfig repository is up to date:</p>
-<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>  cd dlconfig
-  git pull --ff-only
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>cd dlconfig
+git pull --ff-only
 </pre></div>
 </div>
 </li>
 <li><p>Make your changes in <code class="docutils literal notranslate"><span class="pre">playbook.yaml</span></code>.</p></li>
 <li><p>Run the playbook in “check mode” to verify that ansible will make the change
 you intended:</p>
-<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>  ansible-playbook \
-    --check \
-    --diff \
-    --ask-become-pass \
-    -i inventory.cfg \
-    -e @../secrets.yaml \
-    playbook.yaml
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>./install.bash --check
 </pre></div>
 </div>
 </li>
-<li><p>After verifying the diff, run the playbook without <code class="docutils literal notranslate"><span class="pre">--check</span> <span class="pre">--diff</span></code> to apply
+<li><p>After verifying the diff, run the playbook without <code class="docutils literal notranslate"><span class="pre">--check</span></code> to apply
 the change.</p>
-<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>  ansible-playbook \
-    --ask-become-pass \
-    -i inventory.cfg \
-    -e @../secrets.yaml \
-    playbook.yaml
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>./install.bash
+</pre></div>
+</div>
+</li>
+<li><p>If the Data Library team has made changes to the maprooms that you want to integrate,
+run with <code class="docutils literal notranslate"><span class="pre">--build</span></code> to pull the new changes.</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>./install.bash --build
 </pre></div>
 </div>
 </li>
 <li><p>Review, commit, and push your changes to your git host.</p>
-<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>  git diff
-  git commit -a -m &quot;Description of the changes you made&quot;
-  git push
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>git diff
+git commit -a -m &quot;Description of the changes you made&quot;
+git push
 </pre></div>
 </div>
 </li>
@@ -95,8 +151,8 @@ of your dlconfig repository:</p>
 push your changes.</p>
 </section>
 <section id="adding-user-accounts">
-<h2>Adding user accounts<a class="headerlink" href="#adding-user-accounts" title="Link to this heading">¶</a></h2>
-<p>As described in <a class="reference internal" href="overview.html#groups"><span class="std std-ref">User groups</span></a>, users with accounts on the Data Library server
+<h2>Adding user accounts<a class="headerlink" href="#adding-user-accounts" title="Link to this heading"></a></h2>
+<p>As described in <a class="reference internal" href="overview.html#user-groups"><span class="std std-ref">User groups</span></a>, users with accounts on the Data Library server
 can be divided in two groups: administrators and authors.</p>
 <p>Administrator accounts should be created “by hand”, <em>i.e.</em> outside of ansible’s
 control. Remember to add administrators to the <code class="docutils literal notranslate"><span class="pre">wheel</span></code> group so they will have
@@ -109,7 +165,7 @@ not set the user’s password, so you should do that by hand after running the
 playbook. Remember to commit and push your playbook changes.</p>
 </section>
 <section id="debugging-tips">
-<span id="debugging"></span><h2>Debugging tips<a class="headerlink" href="#debugging-tips" title="Link to this heading">¶</a></h2>
+<h2>Debugging tips<a class="headerlink" href="#debugging-tips" title="Link to this heading"></a></h2>
 <ul>
 <li><p>To see what services are running under docker, use <code class="docutils literal notranslate"><span class="pre">sudo</span> <span class="pre">docker</span> <span class="pre">ps</span></code>.</p></li>
 <li><p>To start and stop services, cd to <code class="docutils literal notranslate"><span class="pre">/usr/local/datalib</span></code> and then
@@ -152,62 +208,31 @@ sometimes needed to grant it by hand.)</p></li>
 </section>
 
 
-            <div class="clearer"></div>
+           </div>
           </div>
-        </div>
-      </div>
-      <div class="sphinxsidebar" role="navigation" aria-label="Main">
-        <div class="sphinxsidebarwrapper">
-  <div>
-    <h3><a href="../index.html">Table of Contents</a></h3>
-    <p class="caption" role="heading"><span class="caption-text">Content:</span></p>
-<ul class="current">
-<li class="toctree-l1"><a class="reference internal" href="../user/index.html">User Guide</a></li>
-<li class="toctree-l1 current"><a class="reference internal" href="index.html">System Administrator Guide</a><ul class="current">
-<li class="toctree-l2"><a class="reference internal" href="overview.html">Overview</a></li>
-<li class="toctree-l2"><a class="reference internal" href="hwrequirements.html">Server Requirements</a></li>
-<li class="toctree-l2"><a class="reference internal" href="prerequisites.html">Prerequisites</a></li>
-<li class="toctree-l2"><a class="reference internal" href="git.html">Configuring Git</a></li>
-<li class="toctree-l2"><a class="reference internal" href="installation.html">Installation</a></li>
-<li class="toctree-l2 current"><a class="current reference internal" href="#">Maintenance</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="#configuration-updates-using-ansible">Configuration updates using ansible</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#adding-user-accounts">Adding user accounts</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#debugging-tips">Debugging tips</a></li>
-</ul>
-</li>
-</ul>
-</li>
-</ul>
+          <footer>
 
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2025, IRI.</p>
   </div>
-<search id="searchbox" style="display: none" role="search">
-  <h3 id="searchlabel">Quick search</h3>
-    <div class="searchformwrapper">
-    <form class="search" action="../search.html" method="get">
-      <input type="text" name="q" aria-labelledby="searchlabel" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false"/>
-      <input type="submit" value="Go" />
-    </form>
-    </div>
-</search>
-<script>document.getElementById('searchbox').style.display = "block"</script>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
         </div>
       </div>
-      <div class="clearer"></div>
-    </div>
-    <div class="related" role="navigation" aria-label="Related">
-      <h3>Navigation</h3>
-      <ul>
-        <li class="right" style="margin-right: 10px">
-          <a href="installation.html" title="Installation"
-             >previous</a></li>
-        <li class="nav-item nav-item-0"><a href="../index.html">IRI Data Library  documentation</a> &#187;</li>
-          <li class="nav-item nav-item-1"><a href="index.html" >System Administrator Guide</a> &#187;</li>
-        <li class="nav-item nav-item-this"><a href="">Maintenance</a></li> 
-      </ul>
-    </div>
-    <div class="footer" role="contentinfo">
-    &#169; Copyright 2025, IRI.
-      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 8.2.3.
-    </div>
-  </body>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
 </html>

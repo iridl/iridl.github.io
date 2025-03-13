@@ -1,61 +1,113 @@
+
+
 <!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
-<html lang="en" data-content_root="../">
-  <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-VGXWMJJGTJ"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'G-VGXWMJJGTJ');
+    </script>
+    
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Configuring git &mdash; IRI Data Library  documentation</title>
+      <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=b86133f3" />
+      <link rel="stylesheet" type="text/css" href="../_static/css/theme.css?v=e59714d7" />
+      <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=76b2166b" />
 
-    <title>Configuring Git &#8212; IRI Data Library  documentation</title>
-    <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=03e43079" />
-    <link rel="stylesheet" type="text/css" href="../_static/classic.css?v=2bf1fcf8" />
-    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=76b2166b" />
-    
-    <script src="../_static/documentation_options.js?v=5929fcd5"></script>
-    <script src="../_static/doctools.js?v=9bcbadda"></script>
-    <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
-    <script src="../_static/clipboard.min.js?v=a7894cd8"></script>
-    <script src="../_static/copybutton.js?v=f281be69"></script>
-    
+  
     <link rel="canonical" href="https://dldocs.iri.columbia.edu/admin/git.html" />
+      <script src="../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="../_static/documentation_options.js?v=5929fcd5"></script>
+      <script src="../_static/doctools.js?v=9bcbadda"></script>
+      <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+      <script src="../_static/clipboard.min.js?v=a7894cd8"></script>
+      <script src="../_static/copybutton.js?v=f281be69"></script>
+    <script src="../_static/js/theme.js"></script>
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="Installation" href="installation.html" />
-    <link rel="prev" title="Prerequisites" href="prerequisites.html" /> 
-  </head><body>
-    <div class="related" role="navigation" aria-label="Related">
-      <h3>Navigation</h3>
-      <ul>
-        <li class="right" style="margin-right: 10px">
-          <a href="installation.html" title="Installation"
-             accesskey="N">next</a></li>
-        <li class="right" >
-          <a href="prerequisites.html" title="Prerequisites"
-             accesskey="P">previous</a> |</li>
-        <li class="nav-item nav-item-0"><a href="../index.html">IRI Data Library  documentation</a> &#187;</li>
-          <li class="nav-item nav-item-1"><a href="index.html" accesskey="U">System Administrator Guide</a> &#187;</li>
-        <li class="nav-item nav-item-this"><a href="">Configuring Git</a></li> 
-      </ul>
-    </div>  
+    <link rel="next" title="Data Library Installation" href="installation.html" />
+    <link rel="prev" title="Overview" href="overview.html" /> 
+</head>
 
-    <div class="document">
-      <div class="documentwrapper">
-        <div class="bodywrapper">
-          <div class="body" role="main">
-            
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../index.html" class="icon icon-home">
+            IRI Data Library
+              <img src="../_static/iri_icon_white.svg" class="logo" alt="Logo"/>
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Content:</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../user/index.html">User Guide</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="index.html">System Administrator Guide</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="overview.html">Overview</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">Configuring git</a></li>
+<li class="toctree-l2"><a class="reference internal" href="installation.html">Data Library Installation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="maintenance.html">Maintenance</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../server/index.html">Server Installation</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">IRI Data Library</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content style-external-links">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="index.html">System Administrator Guide</a></li>
+      <li class="breadcrumb-item active">Configuring git</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../_sources/admin/git.md.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
   <section id="configuring-git">
-<h1>Configuring Git<a class="headerlink" href="#configuring-git" title="Link to this heading">¶</a></h1>
-<p>We currently use <a class="reference external" href="https://bitbucket.org">bitbucket.org</a> as our cloud git repository.</p>
-<p>The person installing and maintaining the Data Library should have or <a class="reference external" href="https://id.atlassian.com/signup?application=bitbucket&amp;amp;continue=https%3A%2F%2Fbitbucket.org%2Faccount%2Fsignin%2F%3Fnext%3D%252F%26redirectCount%3D1">create an account</a> with <a class="reference external" href="https://bitbucket.org">https://bitbucket.org</a>.</p>
-<p>Once you have an account inform the <a class="reference external" href="mailto:help&#37;&#52;&#48;iri&#46;coplumbia&#46;edu">Data Library staff</a> to grant you access to the repositories.</p>
-<section id="configure-dl-account">
-<h2>Configure DL Account<a class="headerlink" href="#configure-dl-account" title="Link to this heading">¶</a></h2>
+<h1>Configuring git<a class="headerlink" href="#configuring-git" title="Link to this heading"></a></h1>
+<p>We currently use <a class="reference external" href="https://bitbucket.org">bitbucket.org</a> as our git cloud repository.</p>
+<p>The person installing and maintaining the Data Library should already have an account or should <a class="reference external" href="https://id.atlassian.com/signup?application=bitbucket&amp;amp;continue=https%3A%2F%2Fbitbucket.org%2Faccount%2Fsignin%2F%3Fnext%3D%252F%26redirectCount%3D1">create an account</a> with <a class="reference external" href="https://bitbucket.org">https://bitbucket.org</a>.
+Each person maintaining the Data Library should have their own account and follow these instructions individually.</p>
+<p>Once you have an account, inform the <a class="reference external" href="mailto:help&#37;&#52;&#48;iri&#46;columbia&#46;edu">Data Library staff</a> to grant you access to the repositories.</p>
+<section id="configure-your-dl-account">
+<h2>Configure your DL Account<a class="headerlink" href="#configure-your-dl-account" title="Link to this heading"></a></h2>
 <ul>
 <li><p>Create a new SSH Key on the Data Library Server</p>
 <div class="highlight-none notranslate"><div class="highlight"><pre><span></span>ssh-keygen -t ed25519 -b 4096 -f ~/.ssh/id_bitbucket
 </pre></div>
 </div>
-<p><em>This will create an ssh key for use with bitbucket in ~/.ssh/id_bitbucket. Set a good passphrase different
-from your password. You will need to use this passphrase every time you need to commit changes to the bitbucket repository,
-so be sure to save it somewhere.</em></p>
+<p><em>This will create an ssh key in ~/.ssh/id_bitbucket. Set a passphrase for your key that you will use to communicate with bitbucket.
+It can be the same as your bitbucket or login password.</em></p>
 </li>
 <li><p>Add the key to your ~/.ssh/config file</p>
 <div class="highlight-none notranslate"><div class="highlight"><pre><span></span>vi ~/.ssh/config
@@ -71,7 +123,7 @@ so be sure to save it somewhere.</em></p>
 </ul>
 </section>
 <section id="configure-bitbucket">
-<h2>Configure Bitbucket<a class="headerlink" href="#configure-bitbucket" title="Link to this heading">¶</a></h2>
+<h2>Configure Bitbucket<a class="headerlink" href="#configure-bitbucket" title="Link to this heading"></a></h2>
 <ul>
 <li><p>Provide the details to Bitbucket.org</p>
 <ul>
@@ -103,67 +155,86 @@ if it fails, check that you copied the contents properly.  It should look someth
 </li>
 </ul>
 </section>
+<section id="deployment-keys">
+<h2>Deployment Keys<a class="headerlink" href="#deployment-keys" title="Link to this heading"></a></h2>
+<p>In addition to your bitbucket account, you will need to grant access to ansible to access the maproom and catalog
+repositories. There are two keys in <code class="docutils literal notranslate"><span class="pre">secrets.yaml</span></code> that need to be defined, but they can both use the same key:</p>
+<ol class="arabic simple">
+<li><p>bitbucket_private_key for the dlentries and classic maprooms.</p></li>
+<li><p>python_maproom_private_key for the python maprooms.</p></li>
+</ol>
+<p>To create a personal deployment key:</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>ssh-keygen -t ed25519 -b 4096 -f ~/.ssh/datalibrary_private_key
+</pre></div>
+</div>
+<p>Leave the passphrase blank.</p>
+<section id="add-the-access-or-deploy-key-to-bitbucket-or-github">
+<h3>Add the Access or Deploy Key to Bitbucket or Github<a class="headerlink" href="#add-the-access-or-deploy-key-to-bitbucket-or-github" title="Link to this heading"></a></h3>
+<p>In the following, the <em>xxx</em> is your repository code.  For example: <em>kmd</em>, <em>nimet</em>, <em>madagascar</em>, etc.</p>
+<p>Install this key into each repository you need ansible to access.  For example,</p>
+<ul class="simple">
+<li><p>dlentries_xxx</p></li>
+<li><p>maproom_xxx</p></li>
+<li><p>python_maproom_xxx (this one is optional and depends on if you have a python maproom)</p></li>
+</ul>
+<p>You should know where these repositories are, but you can also find them in your playbook.yaml file.</p>
+<p>For each repository, add your access key (bitbucket) or deploy key (github)</p>
+<section id="bitbucket">
+<h4>Bitbucket<a class="headerlink" href="#bitbucket" title="Link to this heading"></a></h4>
+<p>Go to the repository page and go to repository settings on the left tab.</p>
+<ul class="simple">
+<li><p>Select Access keys on the left menu, and select Add key.</p>
+<ul>
+<li><p>For the Label, enter a descriptive name for this, such as dlentries key for <em>YourName</em></p></li>
+<li><p>Copy the contents of ~/.ssh/datalibrary_private_key.pub to the Key value</p></li>
+<li><p>Select Add SSH Key</p></li>
+</ul>
+</li>
+</ul>
+</section>
+<section id="github">
+<h4>Github<a class="headerlink" href="#github" title="Link to this heading"></a></h4>
+<p>Go the Settings tab on the top menu</p>
+<ul class="simple">
+<li><p>Select Deploy keys from the left menu and select Add Deploy Key</p>
+<ul>
+<li><p>For the Title, enter a descriptive name for this, such as dlentries key for <em>YourName</em></p></li>
+<li><p>Copy the contents of ~/.ssh/datalibrary_private_key.pub to the Key value</p></li>
+<li><p><em><strong>Do not select Allow Write Access</strong></em></p></li>
+</ul>
+</li>
+</ul>
+</section>
+</section>
+</section>
 </section>
 
 
-            <div class="clearer"></div>
+           </div>
           </div>
-        </div>
-      </div>
-      <div class="sphinxsidebar" role="navigation" aria-label="Main">
-        <div class="sphinxsidebarwrapper">
-  <div>
-    <h3><a href="../index.html">Table of Contents</a></h3>
-    <p class="caption" role="heading"><span class="caption-text">Content:</span></p>
-<ul class="current">
-<li class="toctree-l1"><a class="reference internal" href="../user/index.html">User Guide</a></li>
-<li class="toctree-l1 current"><a class="reference internal" href="index.html">System Administrator Guide</a><ul class="current">
-<li class="toctree-l2"><a class="reference internal" href="overview.html">Overview</a></li>
-<li class="toctree-l2"><a class="reference internal" href="hwrequirements.html">Server Requirements</a></li>
-<li class="toctree-l2"><a class="reference internal" href="prerequisites.html">Prerequisites</a></li>
-<li class="toctree-l2 current"><a class="current reference internal" href="#">Configuring Git</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="#configure-dl-account">Configure DL Account</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#configure-bitbucket">Configure Bitbucket</a></li>
-</ul>
-</li>
-<li class="toctree-l2"><a class="reference internal" href="installation.html">Installation</a></li>
-<li class="toctree-l2"><a class="reference internal" href="maintenance.html">Maintenance</a></li>
-</ul>
-</li>
-</ul>
+          <footer>
 
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2025, IRI.</p>
   </div>
-<search id="searchbox" style="display: none" role="search">
-  <h3 id="searchlabel">Quick search</h3>
-    <div class="searchformwrapper">
-    <form class="search" action="../search.html" method="get">
-      <input type="text" name="q" aria-labelledby="searchlabel" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false"/>
-      <input type="submit" value="Go" />
-    </form>
-    </div>
-</search>
-<script>document.getElementById('searchbox').style.display = "block"</script>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
         </div>
       </div>
-      <div class="clearer"></div>
-    </div>
-    <div class="related" role="navigation" aria-label="Related">
-      <h3>Navigation</h3>
-      <ul>
-        <li class="right" style="margin-right: 10px">
-          <a href="installation.html" title="Installation"
-             >next</a></li>
-        <li class="right" >
-          <a href="prerequisites.html" title="Prerequisites"
-             >previous</a> |</li>
-        <li class="nav-item nav-item-0"><a href="../index.html">IRI Data Library  documentation</a> &#187;</li>
-          <li class="nav-item nav-item-1"><a href="index.html" >System Administrator Guide</a> &#187;</li>
-        <li class="nav-item nav-item-this"><a href="">Configuring Git</a></li> 
-      </ul>
-    </div>
-    <div class="footer" role="contentinfo">
-    &#169; Copyright 2025, IRI.
-      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 8.2.3.
-    </div>
-  </body>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
 </html>

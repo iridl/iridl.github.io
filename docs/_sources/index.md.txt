@@ -4,9 +4,10 @@ The [IRI Data Library](http://iridl.ldeo.columbia.edu) is a data repository and 
 
 ```{toctree}
 ---
-maxdepth: 2
+maxdepth: 3
 caption: "Content:"
 ---
 user/index
 admin/index
+server/index
 ```

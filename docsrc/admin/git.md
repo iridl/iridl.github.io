@@ -1,20 +1,20 @@
-# Configuring Git
+# Configuring git
 
-We currently use [bitbucket.org](https://bitbucket.org) as our cloud git repository.
+We currently use [bitbucket.org](https://bitbucket.org) as our git cloud repository.
 
-The person installing and maintaining the Data Library should have or [create an account](https://id.atlassian.com/signup?application=bitbucket&continue=https%3A%2F%2Fbitbucket.org%2Faccount%2Fsignin%2F%3Fnext%3D%252F%26redirectCount%3D1) with [https://bitbucket.org](https://bitbucket.org).
+The person installing and maintaining the Data Library should already have an account or should [create an account](https://id.atlassian.com/signup?application=bitbucket&continue=https%3A%2F%2Fbitbucket.org%2Faccount%2Fsignin%2F%3Fnext%3D%252F%26redirectCount%3D1) with [https://bitbucket.org](https://bitbucket.org).
+Each person maintaining the Data Library should have their own account and follow these instructions individually.
 
-Once you have an account inform the [Data Library staff](mailto:help@iri.coplumbia.edu) to grant you access to the repositories.
+Once you have an account, inform the [Data Library staff](mailto:help@iri.columbia.edu) to grant you access to the repositories.
 
-## Configure DL Account
+## Configure your DL Account
 
 * Create a new SSH Key on the Data Library Server
 
       ssh-keygen -t ed25519 -b 4096 -f ~/.ssh/id_bitbucket
 
-  _This will create an ssh key for use with bitbucket in ~/.ssh/id_bitbucket. Set a good passphrase different
-  from your password. You will need to use this passphrase every time you need to commit changes to the bitbucket repository,
-  so be sure to save it somewhere._
+  _This will create an ssh key in ~/.ssh/id_bitbucket. Set a passphrase for your key that you will use to communicate with bitbucket.
+  It can be the same as your bitbucket or login password._
 
 * Add the key to your ~/.ssh/config file
 
@@ -50,3 +50,47 @@ Once you have an account inform the [Data Library staff](mailto:help@iri.coplumb
         authenticated via ssh key
 
         You can use git to connect to Bitbucket. Shell access is disabled
+
+## Deployment Keys
+
+In addition to your bitbucket account, you will need to grant access to ansible to access the maproom and catalog 
+repositories. There are two keys in `secrets.yaml` that need to be defined, but they can both use the same key:
+
+1. bitbucket_private_key for the dlentries and classic maprooms.
+2. python_maproom_private_key for the python maprooms.
+
+To create a personal deployment key:
+
+    ssh-keygen -t ed25519 -b 4096 -f ~/.ssh/datalibrary_private_key
+
+Leave the passphrase blank.
+
+### Add the Access or Deploy Key to Bitbucket or Github
+In the following, the _xxx_ is your repository code.  For example: _kmd_, _nimet_, _madagascar_, etc.
+
+Install this key into each repository you need ansible to access.  For example,
+* dlentries_xxx
+* maproom_xxx
+* python_maproom_xxx (this one is optional and depends on if you have a python maproom)
+
+You should know where these repositories are, but you can also find them in your playbook.yaml file.
+
+For each repository, add your access key (bitbucket) or deploy key (github)
+
+#### Bitbucket
+
+Go to the repository page and go to repository settings on the left tab.
+
+  * Select Access keys on the left menu, and select Add key.
+    * For the Label, enter a descriptive name for this, such as dlentries key for _YourName_
+    * Copy the contents of ~/.ssh/datalibrary_private_key.pub to the Key value
+    * Select Add SSH Key
+
+#### Github
+
+Go the Settings tab on the top menu
+
+  * Select Deploy keys from the left menu and select Add Deploy Key
+    * For the Title, enter a descriptive name for this, such as dlentries key for _YourName_
+    * Copy the contents of ~/.ssh/datalibrary_private_key.pub to the Key value
+    * ***Do not select Allow Write Access***
