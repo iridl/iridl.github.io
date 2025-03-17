@@ -2,3 +2,4 @@ sphinx
 myst-parser
 sphinxcontrib-googleanalytics
 sphinx_copybutton
+sphinx-rtd-theme
