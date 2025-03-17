@@ -116,19 +116,19 @@ git pull --ff-only
 <li><p>Make your changes in <code class="docutils literal notranslate"><span class="pre">playbook.yaml</span></code>.</p></li>
 <li><p>Run the playbook in “check mode” to verify that ansible will make the change
 you intended:</p>
-<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>./install.bash --check
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>./run_ansible --check
 </pre></div>
 </div>
 </li>
 <li><p>After verifying the diff, run the playbook without <code class="docutils literal notranslate"><span class="pre">--check</span></code> to apply
 the change.</p>
-<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>./install.bash
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>./run_ansible
 </pre></div>
 </div>
 </li>
 <li><p>If the Data Library team has made changes to the maprooms that you want to integrate,
 run with <code class="docutils literal notranslate"><span class="pre">--build</span></code> to pull the new changes.</p>
-<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>./install.bash --build
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>./run_ansible --build
 </pre></div>
 </div>
 </li>

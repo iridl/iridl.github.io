@@ -24,17 +24,17 @@ To make a configuration change,
 - Run the playbook in "check mode" to verify that ansible will make the change
   you intended:
 
-      ./install.bash --check
+      ./run_ansible --check
 
 - After verifying the diff, run the playbook without `--check` to apply
   the change.
 
-      ./install.bash
+      ./run_ansible
 
 - If the Data Library team has made changes to the maprooms that you want to integrate, 
   run with `--build` to pull the new changes.
 
-      ./install.bash --build
+      ./run_ansible --build
 
 - Review, commit, and push your changes to your git host.
 

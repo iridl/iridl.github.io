@@ -79,7 +79,7 @@ perform this.
 
 From the root directory of the configuration repository, run the following command:
 
-    ./install.bash --build
+    ./run_ansible --build
 
 It will prompt you for a password, which will be the password of the user you are logged in as.
 
