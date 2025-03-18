@@ -26,6 +26,7 @@ this is installed in /opt/datalib_venv3.12
 
 * Inside this new git repository, install the IRIDL ansible collection and dependencies:
 
+      source /opt/datalib_venv3.12/bin/activate
       ansible-galaxy collection install -p . \
           git+https://github.com/iridl/iridl-ansible.git
 
