@@ -41,12 +41,12 @@ these instructions, which will completely erase the drive you are installing on.
 Once the server boots up after the installation, you can install the requirements necessary for 
 installing the Data Library Software. You must have **sudo** privileges on your account.
 
-#### Disable SELinux:
+#### Disable SELinux
 
       sudo sed -i s/SELINUX=enforcing/SELINUX=permissive/ /etc/selinux/config 
       sudo setenforce permissive
 
-#### Install python3.12, git and ansible:
+#### Install python3.12, git and ansible
 
       sudo dnf install -y git python3.12
       sudo python3.12 -m venv /opt/datalib_venv3.12

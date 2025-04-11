@@ -19,6 +19,7 @@
       <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=b86133f3" />
       <link rel="stylesheet" type="text/css" href="../_static/css/theme.css?v=e59714d7" />
       <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=76b2166b" />
+      <link rel="stylesheet" type="text/css" href="../_static/custom.css" />
 
   
     <link rel="canonical" href="https://dldocs.iri.columbia.edu/server/upgrade.html" />
@@ -86,17 +87,17 @@
              
   <section id="upgrade">
 <h1>Upgrade<a class="headerlink" href="#upgrade" title="Link to this heading"></a></h1>
-<p>This is an overview on the upgrade process to CentOS Stream 9.  There is no recommended way to upgrade from
-a previous version of CentOS to CentOS Stream 9.  You must install a fresh installation of CentOS 9 Stream and install
+<p>This is an overview on the upgrade process to CentOS Stream 9. There is no recommended way to upgrade from
+a previous version of CentOS to CentOS Stream 9. You must install a fresh installation of CentOS 9 Stream and install
 the packages and software you will need.</p>
 <p>If you have been using your current Data Library server for other purposes, which is not recommended, you should try to
-make an inventory of the purposes you use this server for.  This will help you determine what needs to be installed when
+make an inventory of the purposes you use this server for. This will help you determine what needs to be installed when
 you install CentOS Stream 9.</p>
 <section id="create-inventory">
 <h2>Create Inventory<a class="headerlink" href="#create-inventory" title="Link to this heading"></a></h2>
-<p>These instructions can help you get an inventory of what is running on your current server.  This assumes you have a
-typical linux server.  Become root first.  Either login as root, or use sudo to become root.</p>
-<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>sudo su - root
+<p>These instructions can help you get an inventory of what is running on your current server. This assumes you have a
+typical linux server. Become root first. Either login as root, or use sudo to become root.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>sudo su - root
 rpm -qa | sort | tee rpm_inventory.txt
 ls -l /usr/local /usr/local/bin | tee local_inventory.txt
 ls -l /opt | tee opt_inventory.txt
@@ -121,22 +122,23 @@ disk_inventory.txt user_inventory.txt -C /etc passwd group postfix aliases yum.r
 </div>
 <p>Inventory files:</p>
 <ul class="simple">
-<li><p>rpm_inventory will be a complete list of all the packages you currently have installed, with their current release version.</p></li>
+<li><p>rpm_inventory will be a complete list of all the packages you currently have installed, with their current release
+version.</p></li>
 <li><p>local_inventory will be an inventory of additional software you have installed on the server</p></li>
 <li><p>opt_inventory will be another inventory of additional software you have installed on the server</p></li>
 <li><p>crontab_inventory will be a list of all the cronjobs running on the server</p></li>
 <li><p>disk_inventory will tell you what partitions you currently have mounted and how much space is remaining on each disk.
-This is important to determine how to format your hard drive[s] in preparation for the new installation. Take particular
+This is important to determine how to format your hard drive[s] in preparation for the new installation. Take
+particular
 note of how much space your home drive is using.</p></li>
 <li><p>user_inventory will give you a list of users and how much disk space each is using.</p></li>
 </ul>
 <p>The tarfile <em>inventory.tar</em> will include all these files as well as a backup of your password and group files so you
 can recreate their accounts with the correct user ids and place them in the same groups as before. It will also retain
 your host email configuration, if your host is configured for email.</p>
-<p>Find out where your Data Library data is stored.  It is usually somewhere like /localdisk, /local, /data/, etc.  This is
-where you keep all the data that you serve from your data library.  You will want to make sure it is completely backed up
-to an external drive before continuing.  Ideally, on 2 separate external drives.</p>
-<p>Once you know</p>
+<p>Find out where your Data Library data is stored. It is usually somewhere like /localdisk, /local, /data/, etc. This is
+where you keep all the data that you serve from your data library. You will want to make sure it is completely backed up
+to an external drive before continuing. Ideally, on 2 separate external drives.</p>
 </section>
 </section>
 

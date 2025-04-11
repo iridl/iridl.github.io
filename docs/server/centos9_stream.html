@@ -19,6 +19,7 @@
       <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=b86133f3" />
       <link rel="stylesheet" type="text/css" href="../_static/css/theme.css?v=e59714d7" />
       <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=76b2166b" />
+      <link rel="stylesheet" type="text/css" href="../_static/custom.css" />
 
   
     <link rel="canonical" href="https://dldocs.iri.columbia.edu/server/centos9_stream.html" />
@@ -140,14 +141,14 @@ perform commands as root using <code class="docutils literal notranslate"><span 
 <p>Once the server boots up after the installation, you can install the requirements necessary for
 installing the Data Library Software. You must have <strong>sudo</strong> privileges on your account.</p>
 <section id="disable-selinux">
-<h4>Disable SELinux:<a class="headerlink" href="#disable-selinux" title="Link to this heading"></a></h4>
+<h4>Disable SELinux<a class="headerlink" href="#disable-selinux" title="Link to this heading"></a></h4>
 <div class="highlight-none notranslate"><div class="highlight"><pre><span></span>  sudo sed -i s/SELINUX=enforcing/SELINUX=permissive/ /etc/selinux/config 
   sudo setenforce permissive
 </pre></div>
 </div>
 </section>
 <section id="install-python3-12-git-and-ansible">
-<h4>Install python3.12, git and ansible:<a class="headerlink" href="#install-python3-12-git-and-ansible" title="Link to this heading"></a></h4>
+<h4>Install python3.12, git and ansible<a class="headerlink" href="#install-python3-12-git-and-ansible" title="Link to this heading"></a></h4>
 <div class="highlight-none notranslate"><div class="highlight"><pre><span></span>  sudo dnf install -y git python3.12
   sudo python3.12 -m venv /opt/datalib_venv3.12
   sudo /opt/datalib_venv3.12/bin/pip install --upgrade pip

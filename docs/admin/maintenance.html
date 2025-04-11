@@ -19,6 +19,7 @@
       <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=b86133f3" />
       <link rel="stylesheet" type="text/css" href="../_static/css/theme.css?v=e59714d7" />
       <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=76b2166b" />
+      <link rel="stylesheet" type="text/css" href="../_static/custom.css" />
 
   
     <link rel="canonical" href="https://dldocs.iri.columbia.edu/admin/maintenance.html" />
@@ -97,45 +98,47 @@
 <h1>Maintenance<a class="headerlink" href="#maintenance" title="Link to this heading"></a></h1>
 <section id="configuration-updates-using-ansible">
 <span id="ansible-update"></span><h2>Configuration updates using ansible<a class="headerlink" href="#configuration-updates-using-ansible" title="Link to this heading"></a></h2>
-<p>The <a class="reference internal" href="installation.html"><span class="doc">Data Library Installation</span></a> section explains how to create an ansible playbook and
-use it for the initial installation of the Data Library software. We also recommend that you use continue using ansible
+<p>The <a class="reference internal" href="installation.html"><span class="doc">Data Library Installation</span></a> section explains how to
+create an ansible playbook and use it for the initial installation of the
+Data Library software. We also recommend that you use continue using ansible
 to manage configuration changes and software updates over time.</p>
-<p>You must activate the correct python virtual environment in order to use the correct ansible playbook. To always use
-this version of python, you can add this line to the end of your ~/.bash_profile file.</p>
-<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>source /opt/datalib_venv3.12/bin/activate
+<p>You must activate the correct python virtual environment in order to use the
+correct ansible playbook. To always use this version of python, you can add
+this line to the end of your ~/.bash_profile file.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">source</span> <span class="o">/</span><span class="n">opt</span><span class="o">/</span><span class="n">datalib_venv3</span><span class="mf">.12</span><span class="o">/</span><span class="nb">bin</span><span class="o">/</span><span class="n">activate</span>
 </pre></div>
 </div>
 <p>To make a configuration change,</p>
 <ul>
 <li><p>Make sure your local copy of the dlconfig repository is up to date:</p>
-<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>cd dlconfig
-git pull --ff-only
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">cd</span> <span class="n">dlconfig</span>
+<span class="n">git</span> <span class="n">pull</span> <span class="o">--</span><span class="n">ff</span><span class="o">-</span><span class="n">only</span>
 </pre></div>
 </div>
 </li>
 <li><p>Make your changes in <code class="docutils literal notranslate"><span class="pre">playbook.yaml</span></code>.</p></li>
 <li><p>Run the playbook in “check mode” to verify that ansible will make the change
 you intended:</p>
-<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>./run_ansible --check
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">./</span><span class="n">run_ansible</span> <span class="o">--</span><span class="n">check</span>
 </pre></div>
 </div>
 </li>
 <li><p>After verifying the diff, run the playbook without <code class="docutils literal notranslate"><span class="pre">--check</span></code> to apply
 the change.</p>
-<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>./run_ansible
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">./</span><span class="n">run_ansible</span>
 </pre></div>
 </div>
 </li>
-<li><p>If the Data Library team has made changes to the maprooms that you want to integrate,
-run with <code class="docutils literal notranslate"><span class="pre">--build</span></code> to pull the new changes.</p>
-<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>./run_ansible --build
+<li><p>If the Data Library team has made changes to the maprooms that you want to
+integrate, run with <code class="docutils literal notranslate"><span class="pre">--build</span></code> to pull the new changes.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">./</span><span class="n">run_ansible</span> <span class="o">--</span><span class="n">build</span>
 </pre></div>
 </div>
 </li>
 <li><p>Review, commit, and push your changes to your git host.</p>
-<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>git diff
-git commit -a -m &quot;Description of the changes you made&quot;
-git push
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">git</span> <span class="n">diff</span>
+<span class="n">git</span> <span class="n">commit</span> <span class="o">-</span><span class="n">a</span> <span class="o">-</span><span class="n">m</span> <span class="s2">&quot;Description of the changes you made&quot;</span>
+<span class="n">git</span> <span class="n">push</span>
 </pre></div>
 </div>
 </li>
@@ -144,16 +147,15 @@ git push
 release notes for any backwards-compatibility warnings and manual migration
 steps. Then use <code class="docutils literal notranslate"><span class="pre">ansible-galaxy</span></code> to update the <code class="docutils literal notranslate"><span class="pre">ansible_collections</span></code> directory
 of your dlconfig repository:</p>
-<div class="highlight-none notranslate"><div class="highlight"><pre><span></span> ansible-galaxy collection install iridl.iridl:==x.y.z
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">ansible</span><span class="o">-</span><span class="n">galaxy</span> <span class="n">collection</span> <span class="n">install</span> <span class="n">iridl</span><span class="o">.</span><span class="n">iridl</span><span class="o">:==</span><span class="n">x</span><span class="o">.</span><span class="n">y</span><span class="o">.</span><span class="n">z</span>
 </pre></div>
 </div>
-<p>where <code class="docutils literal notranslate"><span class="pre">x.y.z</span></code> is the new Data Library version number. Remember to commit and
-push your changes.</p>
+<p>where <code class="docutils literal notranslate"><span class="pre">x.y.z</span></code> is the new Data Library version number.</p>
 </section>
 <section id="adding-user-accounts">
 <h2>Adding user accounts<a class="headerlink" href="#adding-user-accounts" title="Link to this heading"></a></h2>
-<p>As described in <a class="reference internal" href="overview.html#user-groups"><span class="std std-ref">User groups</span></a>, users with accounts on the Data Library server
-can be divided in two groups: administrators and authors.</p>
+<p>As described in <a class="reference internal" href="overview.html#user-groups"><span class="std std-ref">User groups</span></a>, users with accounts on the Data Library
+server can be divided in two groups: administrators and authors.</p>
 <p>Administrator accounts should be created “by hand”, <em>i.e.</em> outside of ansible’s
 control. Remember to add administrators to the <code class="docutils literal notranslate"><span class="pre">wheel</span></code> group so they will have
 sudo privileges.</p>
@@ -167,17 +169,22 @@ playbook. Remember to commit and push your playbook changes.</p>
 <section id="debugging-tips">
 <h2>Debugging tips<a class="headerlink" href="#debugging-tips" title="Link to this heading"></a></h2>
 <ul>
-<li><p>To see what services are running under docker, use <code class="docutils literal notranslate"><span class="pre">sudo</span> <span class="pre">docker</span> <span class="pre">ps</span></code>.</p></li>
-<li><p>To start and stop services, cd to <code class="docutils literal notranslate"><span class="pre">/usr/local/datalib</span></code> and then
-use <code class="docutils literal notranslate"><span class="pre">docker-compose</span></code>, <em>e.g.</em></p>
-<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>  cd /usr/local/datalib
-  sudo docker-compose up -d maproom
+<li><p>To see what services are running under docker, use</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">sudo</span> <span class="n">docker</span> <span class="n">ps</span>
+</pre></div>
+</div>
+</li>
+<li><p>To start and stop services, for example</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">cd</span> <span class="o">/</span><span class="n">usr</span><span class="o">/</span><span class="n">local</span><span class="o">/</span><span class="n">datalib</span>
+<span class="n">sudo</span> <span class="n">docker</span> <span class="n">compose</span> <span class="n">start</span> <span class="n">squid</span>
+<span class="n">sudo</span> <span class="n">docker</span> <span class="n">compose</span> <span class="n">restart</span> <span class="n">squid</span>
+<span class="n">sudo</span> <span class="n">docker</span> <span class="n">compose</span> <span class="n">up</span> <span class="o">-</span><span class="n">d</span> <span class="n">maproom</span>
 </pre></div>
 </div>
 </li>
 <li><p>Most services output logs to stdout, which is captured by the docker daemon
 and routed to journald. You can read the logs by using <code class="docutils literal notranslate"><span class="pre">journalctl</span></code>, <em>e.g.</em></p>
-<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>  sudo journalctl CONTAINER_NAME=datalib_maproom_1 --since=&#39;1 hour ago&#39;
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">sudo</span> <span class="n">journalctl</span> <span class="n">CONTAINER_NAME</span><span class="o">=</span><span class="n">datalib_maproom_1</span> <span class="o">--</span><span class="n">since</span><span class="o">=</span><span class="s1">&#39;1 hour ago&#39;</span>
 </pre></div>
 </div>
 </li>
@@ -185,7 +192,7 @@ and routed to journald. You can read the logs by using <code class="docutils lit
 contains a line for each request served. The error log is piped to journalctl,
 while the access log is written to a docker volume. To read the access log,
 use <code class="docutils literal notranslate"><span class="pre">docker</span> <span class="pre">exec</span></code> to run a command in the squid container, <em>e.g.</em></p>
-<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>  sudo docker exec -it datalib_squid_1 tail -n 100 /var/log/squid/access.log
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">sudo</span> <span class="n">docker</span> <span class="n">exec</span> <span class="o">-</span><span class="n">it</span> <span class="n">datalib_squid_1</span> <span class="n">tail</span> <span class="o">-</span><span class="n">n</span> <span class="mi">100</span> <span class="o">/</span><span class="n">var</span><span class="o">/</span><span class="n">log</span><span class="o">/</span><span class="n">squid</span><span class="o">/</span><span class="n">access</span><span class="o">.</span><span class="n">log</span>
 </pre></div>
 </div>
 </li>
@@ -194,13 +201,13 @@ browser window and remove the .gif at the end. Sometimes this will get you an
 informative error message instead of just an empty response.</p></li>
 <li><p>If there’s an error message about a specific file or database table, look into
 that as described below. If no specific file or table is mentioned, identify
-the datasets that are used in the query, and read the catalog entries (
-dlentries) for those datasets to identify the files and/or tables that they
+the datasets that are used in the query, and read the catalog entries
+(dlentries) for those datasets to identify the files and/or tables that they
 use.</p></li>
 <li><p>To check on a database table, exec into the postgres container and use psql.
 If the table doesn’t exist, either run the sql script that creates it, or add
 it to the sql scripts if it’s missing. If the table exists, check that the
-readonlyaccess role has select permission for it. (Our install process is
+<strong>readonlyaccess</strong> role has select permission for it. (Our install process is
 supposed to grant that permission, but in rehearsing the installation we have
 sometimes needed to grant it by hand.)</p></li>
 </ul>

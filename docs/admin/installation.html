@@ -19,6 +19,7 @@
       <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=b86133f3" />
       <link rel="stylesheet" type="text/css" href="../_static/css/theme.css?v=e59714d7" />
       <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=76b2166b" />
+      <link rel="stylesheet" type="text/css" href="../_static/custom.css" />
 
   
     <link rel="canonical" href="https://dldocs.iri.columbia.edu/admin/installation.html" />
@@ -95,72 +96,82 @@
              
   <section id="data-library-installation">
 <h1>Data Library Installation<a class="headerlink" href="#data-library-installation" title="Link to this heading"></a></h1>
-<p>This section provides instructions for installing the Data Library software on a server configure with CentOS Stream 9.</p>
+<p>This section provides instructions for installing the Data Library software on a
+server configured with CentOS Stream 9.</p>
 <div class="admonition seealso">
 <p class="admonition-title">See also</p>
-<p>To install CentOS Stream 9 on the server, please reference <a class="reference internal" href="../server/index.html"><span class="doc">the server pages</span></a>.</p>
+<p>To install CentOS Stream 9 on the server, please reference <a class="reference internal" href="../server/index.html"><span class="doc">the Server  Installation pages</span></a>.</p>
 </div>
-<p>Installation of the Data Library software is automated using <a class="reference external" href="https://docs.ansible.com/ansible_community.html">ansible</a>,
-a configuration management tool which uses python3.12.  A virtual environment for
-this is installed in /opt/datalib_venv3.12</p>
-<section id="configure-your-data-library-repository">
-<h2>Configure your Data Library repository<a class="headerlink" href="#configure-your-data-library-repository" title="Link to this heading"></a></h2>
+<p>Installation of the Data Library software is automated using
+<a class="reference external" href="https://docs.ansible.com/ansible_community.html">ansible</a>, a configuration
+management tool which uses python3.12. A virtual python environment for this
+should already be installed in <em>/opt/datalib_venv3.12</em>, if the server
+installation process was followed.
+See <a class="reference internal" href="../server/centos9_stream.html#install-python3-12-git-and-ansible"><span class="std std-ref">Install python3.12, git and ansible</span></a>.</p>
+<section id="configure-the-data-library">
+<h2>Configure the Data Library<a class="headerlink" href="#configure-the-data-library" title="Link to this heading"></a></h2>
 <div class="admonition seealso">
 <p class="admonition-title">See also</p>
 <p>See <a class="reference internal" href="git.html#configuring-git"><span class="std std-ref">Configuring git</span></a> to set up your account to work with git.</p>
 </div>
 <ul>
-<li><p>Create a configuration repository for your account. This will be used to hold and store all your data library
-customizations.
-These will be put into git and shared with any other team members responsible for the DL installations and updates.</p>
-<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>mkdir dlconfig
-cd dlconfig
-git init
+<li><p>Create a configuration repository for your account. This will be used to hold
+and store all your data library customizations. These will be put into git
+and shared with any other team members responsible for the DL installations
+and updates.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">mkdir</span> <span class="n">dlconfig</span>
+<span class="n">cd</span> <span class="n">dlconfig</span>
+<span class="n">git</span> <span class="n">init</span>
 </pre></div>
 </div>
 </li>
-<li><p>Inside this new git repository, install the IRIDL ansible collection and dependencies:</p>
-<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>source /opt/datalib_venv3.12/bin/activate
-ansible-galaxy collection install -p . \
-    git+https://github.com/iridl/iridl-ansible.git
+<li><p>Inside this new git repository, install the IRIDL ansible collection and
+dependencies.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">source</span> <span class="o">/</span><span class="n">opt</span><span class="o">/</span><span class="n">datalib_venv3</span><span class="mf">.12</span><span class="o">/</span><span class="nb">bin</span><span class="o">/</span><span class="n">activate</span>
+<span class="n">ansible</span><span class="o">-</span><span class="n">galaxy</span> <span class="n">collection</span> <span class="n">install</span> <span class="o">-</span><span class="n">p</span> <span class="o">.</span> \
+    <span class="n">git</span><span class="o">+</span><span class="n">https</span><span class="p">:</span><span class="o">//</span><span class="n">github</span><span class="o">.</span><span class="n">com</span><span class="o">/</span><span class="n">iridl</span><span class="o">/</span><span class="n">iridl</span><span class="o">-</span><span class="n">ansible</span><span class="o">.</span><span class="n">git</span>
 </pre></div>
 </div>
 </li>
-<li><p>The previous command should have downloaded the collection to a subdirectory called <code class="docutils literal notranslate"><span class="pre">ansible_collections</span></code>. Add that
-directory to your git repository, and commit the changes.</p>
-<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>git add ansible_collections
-git commit -m &quot;add iridl ansible collection&quot;
+<li><p>The previous command should have downloaded the collection to a subdirectory
+called <code class="docutils literal notranslate"><span class="pre">ansible_collections</span></code>. Add that directory to your git repository,
+and commit the changes.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">git</span> <span class="n">add</span> <span class="n">ansible_collections</span>
+<span class="n">git</span> <span class="n">commit</span> <span class="o">-</span><span class="n">m</span> <span class="s2">&quot;add iridl ansible collection&quot;</span>
 </pre></div>
 </div>
 </li>
-<li><p>Copy template configuration files from the collection to the top level of the repository:</p>
-<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>cp ansible_collections/iridl/iridl/example/* .
+<li><p>Copy template configuration files from the collection to the top level of the
+repository:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">cp</span> <span class="n">ansible_collections</span><span class="o">/</span><span class="n">iridl</span><span class="o">/</span><span class="n">iridl</span><span class="o">/</span><span class="n">example</span><span class="o">/*</span> <span class="o">.</span>
 </pre></div>
 </div>
 </li>
-<li><p>Modify <code class="docutils literal notranslate"><span class="pre">playbook.yaml</span></code> and <code class="docutils literal notranslate"><span class="pre">secrets.yaml</span></code> to customize them to the specifics of your site. The files you copied
-contain example configuration values that should be replaced with real email addresses, usernames, <em>etc.</em> The
-files include comments that explain the purpose of each configuration option. If you are not ready to set up your real
-Data Library server but merely want to practice the installation process,  <em>e.g.</em> in a virtual machine, you can use
-the example files without modification.</p></li>
-</ul>
+<li><p>Modify <code class="docutils literal notranslate"><span class="pre">playbook.yaml</span></code> and <code class="docutils literal notranslate"><span class="pre">secrets.yaml</span></code> to customize them to the specifics
+of your site. The files you copied contain example configuration values that
+should be replaced with real email addresses, usernames, <em>etc.</em> The files
+include comments that explain the purpose of each configuration option. If you
+are not ready to set up your real Data Library server but merely want to
+practice the installation process, <em>e.g.</em> in a virtual machine, you can use
+the example files without modification.</p>
 <div class="admonition seealso">
 <p class="admonition-title">See also</p>
 <p>The secrets.yaml file contains the deploy keys (or access keys) to access the repositories defined in your playbook.yaml
 file.  These are needed because Ansible runs as root, so it needs it’s own access to the repositories.  For that reason,
 we want to make sure it only has read access.  See <a class="reference internal" href="git.html#deployment-keys"><span class="std std-ref">Deployment Keys</span></a></p>
 </div>
-<ul>
-<li><p>Move <code class="docutils literal notranslate"><span class="pre">secrets.yaml</span></code> out of the git repository. For security reasons, unencrypted secrets should not be committed to
+</li>
+<li><p>Move <code class="docutils literal notranslate"><span class="pre">secrets.yaml</span></code> out of the git repository. For security reasons,
+unencrypted secrets should not be committed to
 version control.</p>
-<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>mv secrets.yaml ..
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">mv</span> <span class="n">secrets</span><span class="o">.</span><span class="n">yaml</span> <span class="o">..</span>
 </pre></div>
 </div>
 </li>
-<li><p>Commit your customizations and push them to your git server for safe keeping; back up <code class="docutils literal notranslate"><span class="pre">secrets.yaml</span></code> by other means,
-such as copying it to another machine.</p>
-<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>git add inventories.cfg playbook.yaml
-git commit -m &quot;add inventoriess and playbook&quot;
+<li><p>Commit your customizations and push them to your git server for safe keeping;
+back up <code class="docutils literal notranslate"><span class="pre">secrets.yaml</span></code> by other means, such as copying it to another machine.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">git</span> <span class="n">add</span> <span class="n">inventories</span><span class="o">.</span><span class="n">cfg</span> <span class="n">playbook</span><span class="o">.</span><span class="n">yaml</span>
+<span class="n">git</span> <span class="n">commit</span> <span class="o">-</span><span class="n">m</span> <span class="s2">&quot;add inventoriess and playbook&quot;</span>
 </pre></div>
 </div>
 </li>
@@ -168,48 +179,74 @@ git commit -m &quot;add inventoriess and playbook&quot;
 <div class="admonition note">
 <p class="admonition-title">Note</p>
 <ul class="simple">
-<li><p>Never edit the contents of the <code class="docutils literal notranslate"><span class="pre">ansible_collections</span></code> directory. All customization should be made in the configuration
-files that you copied from the template. In the future when it comes time to upgrade to a newer version of the DL
-software, you will run the <code class="docutils literal notranslate"><span class="pre">ansible-galaxy</span></code> command again and commit the new version to your configuration repository.</p></li>
-<li><p>Don’t upgrade without checking the release notes first, because in some cases an upgrade may require manual migration
-steps. (At this writing, there are no upgrade release notes because this is the playbook’s initial release.)</p></li>
+<li><p>Never edit the contents of the <code class="docutils literal notranslate"><span class="pre">ansible_collections</span></code> directory. All
+customization should be made in the configuration files that you copied
+from the template. In the future when it comes time to upgrade to a newer
+version of the DL software, you will run the <code class="docutils literal notranslate"><span class="pre">ansible-galaxy</span></code> command
+again and commit the new version to your configuration repository.</p></li>
+<li><p>Don’t upgrade without checking the release notes first, because in some
+cases an upgrade may require manual migration steps. (At this writing,
+there are no upgrade release notes because this is the playbook’s initial
+release.)</p></li>
 </ul>
 </div>
 </section>
 <section id="run-the-ansible-playbook">
 <h2>Run the ansible playbook<a class="headerlink" href="#run-the-ansible-playbook" title="Link to this heading"></a></h2>
-<p>Now we are ready to run the playbook, which will download, configure, and install the Data Library software using the
-parameters you defined in the configuration files.  We have created a convenience script, <code class="docutils literal notranslate"><span class="pre">install.bash</span></code>, to
-perform this.</p>
-<p>From the root directory of the configuration repository, run the following command:</p>
-<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>./run_ansible --build
+<p>Now you are ready to run the playbook, which will download, configure, and
+install the Data Library software using the parameters you defined in the
+configuration files. We have created a convenience script, <code class="docutils literal notranslate"><span class="pre">run-ansible</span></code>,
+for this purpose.</p>
+<p>From the root directory of the configuration repository, run the following
+command</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">./</span><span class="n">run_ansible</span> <span class="o">--</span><span class="n">build</span>
 </pre></div>
 </div>
-<p>It will prompt you for a password, which will be the password of the user you are logged in as.</p>
-<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>BECOME password:
+<p>It will prompt you for a password, which will be the password of the user you
+are logged in as, assuming you have sudo privileges.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">BECOME</span> <span class="n">password</span><span class="p">:</span>
 </pre></div>
 </div>
-<p>Each step of the installation will be printed to the terminal. At a site with a fast connection to the internet, the
-playbook generally finishes within ten minutes, but if bandwidth is limited it may take a few hours, as the
-installation process involves downloading several GB of software packages and container images.</p>
-<p>You should now be able to visit your Data Library server in a browser, but the maprooms are not yet functional because
-the data that underlies them has yet to be installed.</p>
+<p>Each step of the installation will be printed to the terminal. At a site with a
+fast connection to the internet, the playbook generally finishes within ten
+minutes, but if bandwidth is limited it may take a few hours, as the
+installation process involves downloading several GB of software packages and
+container images.</p>
+<p>You should now be able to visit your Data Library server in a browser, but the
+maprooms are not yet functional because the data that underlies them has yet
+to be installed.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<ul class="simple">
+<li><p>Any flag you can pass to ansible-playbook can be passed to the run-ansible
+script.</p></li>
+</ul>
+</div>
+<p><strong>For example</strong></p>
+<p>If there are errors or failures, you can pass <em>-vvv</em> to the run-ansible
+command to get more information about why it is failing.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">./</span><span class="n">run</span><span class="o">-</span><span class="n">ansible</span> <span class="o">-</span><span class="n">vvv</span>
+</pre></div>
+</div>
+<p>If you want to run it in <em>check</em> mode, pass the flag <em>–check</em> to run in
+test mode without changing the Data Library.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">./</span><span class="n">run</span><span class="o">-</span><span class="n">ansible</span> <span class="o">--</span><span class="n">check</span>
+</pre></div>
+</div>
 </section>
 <section id="install-datasets">
 <h2>Install datasets<a class="headerlink" href="#install-datasets" title="Link to this heading"></a></h2>
 <p>Among other things, the ansible playbook has created structures (directories,
-groups, a database, and permissions) to
-support the installation of datasets. You can now install your data as described
-in <a class="reference internal" href="../user/index.html#installing-data"><span class="std std-ref">Installing data</span></a>. A member of
-the IRI staff will typically be involved in this process, as it may involve
-copying large amounts of data from an IRI
-server to yours.</p>
+groups, a database, and permissions) to support the installation of datasets.
+You can now install your data as described in <a class="reference internal" href="../user/index.html#installing-data"><span class="std std-ref">Installing data</span></a>. A
+member of the IRI staff will typically be involved in this process, as it
+may involve copying large amounts of data from an IRI server to yours.</p>
 </section>
 <section id="use-your-new-data-library">
 <h2>Use your new Data Library<a class="headerlink" href="#use-your-new-data-library" title="Link to this heading"></a></h2>
 <p>You should now be able to visit your Data Library server in a browser. For next
-steps, see the <a class="reference internal" href="maintenance.html"><span class="doc">Maintenance</span></a> page
-of the current guide, and the <a class="reference internal" href="../user/index.html"><span class="doc">User Guide</span></a>.</p>
+steps, see the <a class="reference internal" href="maintenance.html"><span class="doc">Maintenance</span></a> page of the current guide, and the
+<a class="reference internal" href="../user/index.html"><span class="doc">User Guide</span></a>.</p>
 </section>
 </section>
 
