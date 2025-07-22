@@ -1,0 +1,224 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-VGXWMJJGTJ"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'G-VGXWMJJGTJ');
+    </script>
+    
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Data Library Upgrade Installation &mdash; IRI Data Library  documentation</title>
+      <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=b86133f3" />
+      <link rel="stylesheet" type="text/css" href="../_static/css/theme.css?v=e59714d7" />
+      <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=76b2166b" />
+      <link rel="stylesheet" type="text/css" href="../_static/custom.css" />
+
+  
+    <link rel="canonical" href="https://dldocs.iri.columbia.edu/admin/installation_upgrade.html" />
+      <script src="../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="../_static/documentation_options.js?v=5929fcd5"></script>
+      <script src="../_static/doctools.js?v=9bcbadda"></script>
+      <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+      <script src="../_static/clipboard.min.js?v=a7894cd8"></script>
+      <script src="../_static/copybutton.js?v=f281be69"></script>
+    <script src="../_static/js/theme.js"></script>
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Maintenance" href="maintenance.html" />
+    <link rel="prev" title="Data Library New Installation" href="installation.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../index.html" class="icon icon-home">
+            IRI Data Library
+              <img src="../_static/iri_icon_white.svg" class="logo" alt="Logo"/>
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Content:</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../server/index.html">Server Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../user/index.html">User Guide</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="index.html">System Administrator Guide</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="overview.html">Overview</a></li>
+<li class="toctree-l2"><a class="reference internal" href="git.html">Configuring git</a></li>
+<li class="toctree-l2"><a class="reference internal" href="installation.html">Data Library New Installation</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">Data Library Upgrade Installation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="maintenance.html">Maintenance</a></li>
+</ul>
+</li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">IRI Data Library</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content style-external-links">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="index.html">System Administrator Guide</a></li>
+      <li class="breadcrumb-item active">Data Library Upgrade Installation</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../_sources/admin/installation_upgrade.md.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="data-library-upgrade-installation">
+<h1>Data Library Upgrade Installation<a class="headerlink" href="#data-library-upgrade-installation" title="Link to this heading"></a></h1>
+<p>This section provides instructions for upgrading Data Library software previously installed on a
+CentOS Stream 7 server to a server configured with CentOS Stream 9.  Make sure your current dlconfig repository
+is pushed to the server and your secrets.yaml file is saved.  It is important to back up the
+entire account as well as all your data files and catalogs  (typically in the /data directory)  before upgrading your
+server.</p>
+<div class="admonition seealso">
+<p class="admonition-title">See also</p>
+<p>To install CentOS Stream 9 on the server, please reference <a class="reference internal" href="../server/index.html"><span class="doc">the Server  Installation pages</span></a>.</p>
+</div>
+<p>Installation of the Data Library software is automated using
+<a class="reference external" href="https://docs.ansible.com/ansible_community.html">ansible</a>, a configuration
+management tool which uses python3.12. A virtual python environment for this
+should already be installed in <em>/opt/datalib_venv3.12</em>, if the server
+installation process was followed.
+See <a class="reference internal" href="../server/centos9_stream.html#install-python3-12-git-and-ansible"><span class="std std-ref">Install python3.12, git and ansible</span></a>.</p>
+<section id="configure-the-upgraded-data-library">
+<h2>Configure the upgraded Data Library<a class="headerlink" href="#configure-the-upgraded-data-library" title="Link to this heading"></a></h2>
+<div class="admonition seealso">
+<p class="admonition-title">See also</p>
+<p>See <a class="reference internal" href="git.html#configuring-git"><span class="std std-ref">Configuring git</span></a> to set up your account to work with git.</p>
+</div>
+<section id="clone-your-old-data-library-configuration">
+<h3>Clone your old Data Library configuration<a class="headerlink" href="#clone-your-old-data-library-configuration" title="Link to this heading"></a></h3>
+<p>You should already have a DL configuration in bitbucket or github.  Download that configuration
+here. The following is an example, as your repository name will be different.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">git</span> <span class="n">clone</span> <span class="n">git</span><span class="nd">@bitbucket</span><span class="o">.</span><span class="n">org</span><span class="p">:</span><span class="n">iridl</span><span class="o">/</span><span class="n">dlconfig_myconfig</span><span class="o">.</span><span class="n">git</span> <span class="n">dlconfig</span>
+<span class="n">cd</span> <span class="n">dlconfig</span>
+</pre></div>
+</div>
+</section>
+<section id="upgrade-the-ansible-collections">
+<h3>Upgrade the ansible_collections<a class="headerlink" href="#upgrade-the-ansible-collections" title="Link to this heading"></a></h3>
+<p>Since you are installing a new version of the ansible galaxy collection, delete the old one before installing the new.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">git</span> <span class="n">rm</span> <span class="o">-</span><span class="n">rf</span> <span class="n">ansible_collections</span>
+<span class="n">git</span> <span class="n">commit</span> <span class="o">-</span><span class="n">m</span> <span class="s2">&quot;removing old ansible_collections to upgrade CentOS Stream&quot;</span>
+
+<span class="n">source</span> <span class="o">/</span><span class="n">opt</span><span class="o">/</span><span class="n">datalib_venv3</span><span class="mf">.12</span><span class="o">/</span><span class="nb">bin</span><span class="o">/</span><span class="n">activate</span>
+<span class="n">ansible</span><span class="o">-</span><span class="n">galaxy</span> <span class="n">collection</span> <span class="n">install</span> <span class="o">-</span><span class="n">p</span> <span class="o">.</span> \
+    <span class="n">git</span><span class="o">+</span><span class="n">https</span><span class="p">:</span><span class="o">//</span><span class="n">github</span><span class="o">.</span><span class="n">com</span><span class="o">/</span><span class="n">iridl</span><span class="o">/</span><span class="n">iridl</span><span class="o">-</span><span class="n">ansible</span><span class="o">.</span><span class="n">git</span>
+</pre></div>
+</div>
+<ul>
+<li><p>The previous commands should have downloaded the collection to a subdirectory
+called <code class="docutils literal notranslate"><span class="pre">ansible_collections</span></code>. Add that directory to your git repository,
+and commit the changes.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">git</span> <span class="n">add</span> <span class="n">ansible_collections</span>
+<span class="n">git</span> <span class="n">commit</span> <span class="o">-</span><span class="n">m</span> <span class="s2">&quot;add new CentOS Stream iridl ansible collection&quot;</span>
+</pre></div>
+</div>
+</li>
+<li><p>Copy template configuration files from the collection to the top level of the
+repository.  The -b flag will make a backup of your current files:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">cp</span> <span class="o">-</span><span class="n">b</span> <span class="n">ansible_collections</span><span class="o">/</span><span class="n">iridl</span><span class="o">/</span><span class="n">iridl</span><span class="o">/</span><span class="n">example</span><span class="o">/*</span> <span class="o">.</span>
+</pre></div>
+</div>
+</li>
+<li><p>Restore your original playbook.yaml and secrets.yaml files.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">mv</span> <span class="n">playbook</span><span class="o">.</span><span class="n">yaml</span><span class="o">~</span> <span class="n">playbook</span><span class="o">.</span><span class="n">yaml</span>
+<span class="n">rm</span> <span class="o">-</span><span class="n">f</span> <span class="n">secrets</span><span class="o">.</span><span class="n">yaml</span>
+</pre></div>
+</div>
+<p>Copy your original secrets.yaml file (which is not in the git repository) to the directory above dlconfig.</p>
+<div class="admonition seealso">
+<p class="admonition-title">See also</p>
+<p>The secrets.yaml file contains the deploy keys (or access keys) to access the repositories defined in your playbook.yaml
+file.  These are needed because Ansible runs as root, so it needs it’s own access to the repositories.  For that reason,
+we want to make sure it only has read access.  See <a class="reference internal" href="git.html#deployment-keys"><span class="std std-ref">Deployment Keys</span></a></p>
+</div>
+</li>
+<li><p>Commit any new customizations and push them to your git server for safe keeping;
+back up <code class="docutils literal notranslate"><span class="pre">secrets.yaml</span></code> by other means, such as copying it to another machine.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">git</span> <span class="n">commit</span> <span class="o">-</span><span class="n">m</span> <span class="s2">&quot;updates for new version of CentOS&quot;</span>
+<span class="n">git</span> <span class="n">push</span>
+</pre></div>
+</div>
+</li>
+</ul>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<ul class="simple">
+<li><p>Never edit the contents of the <code class="docutils literal notranslate"><span class="pre">ansible_collections</span></code> directory. All
+customization should be made in the configuration files that you copied
+from the template. In the future when it comes time to upgrade to a newer
+version of the DL software, you will run the <code class="docutils literal notranslate"><span class="pre">ansible-galaxy</span></code> command
+again and commit the new version to your configuration repository.</p></li>
+<li><p>Don’t upgrade without checking the release notes first, because in some
+cases an upgrade may require manual migration steps. (At this writing,
+there are no upgrade release notes because this is the playbook’s initial
+release.)</p></li>
+</ul>
+</div>
+<p>From here, you can continue with the New Installation section, <a class="reference internal" href="installation.html#run-the-ansible-playbook"><span class="std std-ref">Run the ansible playbook</span></a></p>
+</section>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2025, IRI.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>
