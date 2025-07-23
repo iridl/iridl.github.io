@@ -8,5 +8,6 @@ Data Library software.
 overview
 git
 installation
+installation_upgrade
 maintenance
 ```

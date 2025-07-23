@@ -15,14 +15,14 @@
     </script>
     
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Install CentOS9 Stream &mdash; IRI Data Library  documentation</title>
+  <title>Install CentOS Stream 9 or CentOS Stream 10 &mdash; IRI Data Library  documentation</title>
       <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=b86133f3" />
       <link rel="stylesheet" type="text/css" href="../_static/css/theme.css?v=e59714d7" />
       <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=76b2166b" />
       <link rel="stylesheet" type="text/css" href="../_static/custom.css" />
 
   
-    <link rel="canonical" href="https://dldocs.iri.columbia.edu/server/centos9_stream.html" />
+    <link rel="canonical" href="https://dldocs.iri.columbia.edu/server/centos_stream.html" />
       <script src="../_static/jquery.js?v=5d32c60e"></script>
       <script src="../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
       <script src="../_static/documentation_options.js?v=5929fcd5"></script>
@@ -32,6 +32,7 @@
       <script src="../_static/copybutton.js?v=f281be69"></script>
     <script src="../_static/js/theme.js"></script>
     <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="User Guide" href="../user/index.html" />
     <link rel="prev" title="Server Requirements" href="hwrequirements.html" /> 
 </head>
 
@@ -57,13 +58,13 @@
         </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
               <p class="caption" role="heading"><span class="caption-text">Content:</span></p>
 <ul class="current">
-<li class="toctree-l1"><a class="reference internal" href="../user/index.html">User Guide</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../admin/index.html">System Administrator Guide</a></li>
 <li class="toctree-l1 current"><a class="reference internal" href="index.html">Server Installation</a><ul class="current">
 <li class="toctree-l2"><a class="reference internal" href="hwrequirements.html">Server Requirements</a></li>
-<li class="toctree-l2 current"><a class="current reference internal" href="#">Install CentOS9 Stream</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">Install CentOS Stream 9 or CentOS Stream 10</a></li>
 </ul>
 </li>
+<li class="toctree-l1"><a class="reference internal" href="../user/index.html">User Guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../admin/index.html">System Administrator Guide</a></li>
 </ul>
 
         </div>
@@ -81,9 +82,8 @@
   <ul class="wy-breadcrumbs">
       <li><a href="../index.html" class="icon icon-home" aria-label="Home"></a></li>
           <li class="breadcrumb-item"><a href="index.html">Server Installation</a></li>
-      <li class="breadcrumb-item active">Install CentOS9 Stream</li>
+      <li class="breadcrumb-item active">Install CentOS Stream 9 or CentOS Stream 10</li>
       <li class="wy-breadcrumbs-aside">
-            <a href="../_sources/server/centos9_stream.md.txt" rel="nofollow"> View page source</a>
       </li>
   </ul>
   <hr/>
@@ -91,17 +91,17 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
              
-  <section id="install-centos9-stream">
-<span id="install-centos9"></span><h1>Install CentOS9 Stream<a class="headerlink" href="#install-centos9-stream" title="Link to this heading"></a></h1>
-<p>This section provides instructions for installing the CentOS9 Stream for use by the Data Library. If you are
+  <section id="install-centos-stream-9-or-centos-stream-10">
+<span id="install-centos9"></span><h1>Install CentOS Stream 9 or CentOS Stream 10<a class="headerlink" href="#install-centos-stream-9-or-centos-stream-10" title="Link to this heading"></a></h1>
+<p>This section provides instructions for installing the CentOS Stream 9 for use by the Data Library. If you are
 from an older server, make sure you have a full backup of your current system before following
 these instructions, which will completely erase the drive you are installing on.</p>
 <section id="prepare-the-server">
 <h2>Prepare the server<a class="headerlink" href="#prepare-the-server" title="Link to this heading"></a></h2>
-<section id="install-the-centos9-stream-operating-system">
-<h3>Install the CentOS9 Stream Operating System<a class="headerlink" href="#install-the-centos9-stream-operating-system" title="Link to this heading"></a></h3>
+<section id="install-the-operating-system">
+<h3>Install the  Operating System<a class="headerlink" href="#install-the-operating-system" title="Link to this heading"></a></h3>
 <ul class="simple">
-<li><p>Install CentOS 9 Stream from https://www.centos.org/download.  Select the tab for 9, then download
+<li><p>Install CentOS Stream from https://www.centos.org/download.  Select the tab for 9 or 10, then download
 the <a class="reference external" href="https://mirrors.centos.org/mirrorlist?path=/9-stream/BaseOS/x86_64/iso/CentOS-Stream-9-latest-x86_64-dvd1.iso&amp;amp;redirect=1&amp;amp;protocol=https">x86_64 Architecture ISO</a>. We currently only support x86_64.</p>
 <ul>
 <li><p>To create a bootable CD of the Installation ISO,
@@ -140,6 +140,13 @@ perform commands as root using <code class="docutils literal notranslate"><span 
 <h3>Post Operating System Installation<a class="headerlink" href="#post-operating-system-installation" title="Link to this heading"></a></h3>
 <p>Once the server boots up after the installation, you can install the requirements necessary for
 installing the Data Library Software. You must have <strong>sudo</strong> privileges on your account.</p>
+<section id="update-packages">
+<h4>Update Packages<a class="headerlink" href="#update-packages" title="Link to this heading"></a></h4>
+<p>You should install the latest updates to the Operating System before continuing.</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>  sudo dnf -y update
+</pre></div>
+</div>
+</section>
 <section id="disable-selinux">
 <h4>Disable SELinux<a class="headerlink" href="#disable-selinux" title="Link to this heading"></a></h4>
 <div class="highlight-none notranslate"><div class="highlight"><pre><span></span>  sudo sed -i s/SELINUX=enforcing/SELINUX=permissive/ /etc/selinux/config 
@@ -156,15 +163,9 @@ installing the Data Library Software. You must have <strong>sudo</strong> privil
 </pre></div>
 </div>
 </section>
-<section id="update-the-server">
-<h4>Update the server<a class="headerlink" href="#update-the-server" title="Link to this heading"></a></h4>
-<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>  sudo dnf update -y
-</pre></div>
-</div>
-</section>
 <section id="reboot">
 <h4>Reboot<a class="headerlink" href="#reboot" title="Link to this heading"></a></h4>
-<p>If any changes were installed, reboot now.</p>
+<p>If any changes were installed during the package updates, reboot now.</p>
 <div class="highlight-none notranslate"><div class="highlight"><pre><span></span>  sudo shutdown -r now
 </pre></div>
 </div>
@@ -185,10 +186,11 @@ installing the Data Library Software. You must have <strong>sudo</strong> privil
     <p>&#169; Copyright 2025, IRI.</p>
   </div>
 
-  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
-    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
-    provided by <a href="https://readthedocs.org">Read the Docs</a>.
-   
+  
+
+<div>For support or more information, contact <a href='mailto:help@iri.columbia.edu'>help@iri.columbia.edu</a></div>
+
+
 
 </footer>
         </div>

@@ -32,7 +32,7 @@
       <script src="../_static/copybutton.js?v=f281be69"></script>
     <script src="../_static/js/theme.js"></script>
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="Install CentOS9 Stream" href="centos9_stream.html" />
+    <link rel="next" title="Install CentOS Stream 9 or CentOS Stream 10" href="centos_stream.html" />
     <link rel="prev" title="Server Installation" href="index.html" /> 
 </head>
 
@@ -58,13 +58,13 @@
         </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
               <p class="caption" role="heading"><span class="caption-text">Content:</span></p>
 <ul class="current">
-<li class="toctree-l1"><a class="reference internal" href="../user/index.html">User Guide</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../admin/index.html">System Administrator Guide</a></li>
 <li class="toctree-l1 current"><a class="reference internal" href="index.html">Server Installation</a><ul class="current">
 <li class="toctree-l2 current"><a class="current reference internal" href="#">Server Requirements</a></li>
-<li class="toctree-l2"><a class="reference internal" href="centos9_stream.html">Install CentOS9 Stream</a></li>
+<li class="toctree-l2"><a class="reference internal" href="centos_stream.html">Install CentOS Stream 9 or CentOS Stream 10</a></li>
 </ul>
 </li>
+<li class="toctree-l1"><a class="reference internal" href="../user/index.html">User Guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../admin/index.html">System Administrator Guide</a></li>
 </ul>
 
         </div>
@@ -84,7 +84,6 @@
           <li class="breadcrumb-item"><a href="index.html">Server Installation</a></li>
       <li class="breadcrumb-item active">Server Requirements</li>
       <li class="wy-breadcrumbs-aside">
-            <a href="../_sources/server/hwrequirements.md.txt" rel="nofollow"> View page source</a>
       </li>
   </ul>
   <hr/>
@@ -103,7 +102,7 @@ are general recommendations.</p>
 <p>If you have questions about the server you intend to use, please contact IRIDL
 Help <a class="reference external" href="mailto:help&#37;&#52;&#48;iri&#46;columbia&#46;edu">help<span>&#64;</span>iri<span>&#46;</span>columbia<span>&#46;</span>edu</a> to review your server configuration. While using
 SSD disks for your operating system is a good idea, it’s not necessary. You will
-be installing the CentOS Stream 9 operating system, so don’t pay for an
+be installing the CentOS Stream operating system, so don’t pay for an
 operating system if you can avoid it.</p>
 <p>Typical costs for servers with the appropriate specifications range from $3,000
 to $5,000 in the United States. Plus an additional cost for the UPS.</p>
@@ -113,6 +112,10 @@ to $5,000 in the United States. Plus an additional cost for the UPS.</p>
 as Intel Xeon or AMD Epyc, with a minimum of 8 cores. For a more powerful
 server, we’d recommend a dual cpu server. The CPU must be intel-compatible,
 we do not support other architectures.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>CentOS Stream 10 requires an AMD/Intel 64-bit x86_64_v3 CPU or higher.</p>
+</div>
 </section>
 <section id="ram">
 <h2>RAM<a class="headerlink" href="#ram" title="Link to this heading"></a></h2>
@@ -137,13 +140,12 @@ single disk failure. Mirroring is not considered a backup, so you should add an
 external disk as a regular backup. The amount of disk space you may need is
 unique to your installation. We suggest getting disks that are about twice the
 size you think you need.</p>
+<section id="backups">
+<h3>Backups<a class="headerlink" href="#backups" title="Link to this heading"></a></h3>
+<p>It is important to have regular backups in place even if you are using mirrored disk drives.
+You should back up your data and homes directories to an external disk regularly.  If you do
+this regularly, you can ensure that your system will be quickly recoverable in case of disaster.</p>
 </section>
-<section id="networking">
-<h2>Networking<a class="headerlink" href="#networking" title="Link to this heading"></a></h2>
-<p>You should use the highest network speed you have access to. If you have a 10Gb
-network, you should try to place your server on this network, with a 10Gb
-network card on your server. But this is entirely optional. Whatever network you
-have access to will work.</p>
 </section>
 <section id="graphics">
 <h2>Graphics<a class="headerlink" href="#graphics" title="Link to this heading"></a></h2>
@@ -193,10 +195,11 @@ will depend on your server.</p>
     <p>&#169; Copyright 2025, IRI.</p>
   </div>
 
-  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
-    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
-    provided by <a href="https://readthedocs.org">Read the Docs</a>.
-   
+  
+
+<div>For support or more information, contact <a href='mailto:help@iri.columbia.edu'>help@iri.columbia.edu</a></div>
+
+
 
 </footer>
         </div>

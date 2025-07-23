@@ -58,15 +58,16 @@
         </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
               <p class="caption" role="heading"><span class="caption-text">Content:</span></p>
 <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../server/index.html">Server Installation</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../user/index.html">User Guide</a></li>
 <li class="toctree-l1 current"><a class="reference internal" href="index.html">System Administrator Guide</a><ul class="current">
 <li class="toctree-l2 current"><a class="current reference internal" href="#">Overview</a></li>
 <li class="toctree-l2"><a class="reference internal" href="git.html">Configuring git</a></li>
-<li class="toctree-l2"><a class="reference internal" href="installation.html">Data Library Installation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="installation.html">Data Library New Installation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="installation_upgrade.html">Data Library Upgrade Installation</a></li>
 <li class="toctree-l2"><a class="reference internal" href="maintenance.html">Maintenance</a></li>
 </ul>
 </li>
-<li class="toctree-l1"><a class="reference internal" href="../server/index.html">Server Installation</a></li>
 </ul>
 
         </div>
@@ -86,7 +87,6 @@
           <li class="breadcrumb-item"><a href="index.html">System Administrator Guide</a></li>
       <li class="breadcrumb-item active">Overview</li>
       <li class="wy-breadcrumbs-aside">
-            <a href="../_sources/admin/overview.md.txt" rel="nofollow"> View page source</a>
       </li>
   </ul>
   <hr/>
@@ -132,11 +132,17 @@ ansible documentation.</p>
 <section id="infrastructure">
 <h2>Infrastructure<a class="headerlink" href="#infrastructure" title="Link to this heading"></a></h2>
 <p>The Data Library ansible playbook currently targets [CentOS Stream 9]
-(https://www.centos.org/stream9/). IRI does not test or support the software on
-other platforms. There are instructions for installing CentOS Stream 9
-in the <a class="reference internal" href="../server/centos9_stream.html"><span class="doc"> Server Installation Section</span></a></p>
-<p><em>CentOS7 is beyond its end of life and is no longer recommended to install. New
-installations must be made with CentOS Stream 9</em>.</p>
+(https://www.centos.org/stream9/) and [CentOS Stream 10]
+(https://www.centos.org/centos10/). IRI does not test or support the software on
+other platforms. There are instructions for installing the Operating System
+in the <a class="reference internal" href="../server/centos_stream.html"><span class="doc"> Server Installation Section</span></a></p>
+<p>_CentOS7 is beyond its end of life and is no longer recommended to install. New
+installations must be made with CentOS Stream 9 or CentOS Stream 10. Please read the documentation
+for each Operating System to see which is more appropriate for you.</p>
+<ul class="simple">
+<li><p>CentOS Stream 10 will not work on older architectures (AMD/Intel 64-bit x86_64_v2 or below).</p></li>
+<li><p>CentOS Stream 9 end-of-life is May 31, 2027_</p></li>
+</ul>
 <p>The Data Library services runs under Docker, using docker compose. Most services
 log to stdout, which the Docker daemon forwards to journald. Use the linux
 command
@@ -264,7 +270,7 @@ the <code class="docutils literal notranslate"><span class="pre">docker</span> <
 configuration files directly. The configuration
 is managed by ansible, so changes should be made by modifying the ansible
 configuration and then applying it
-using <code class="docutils literal notranslate"><span class="pre">install.sh</span></code>. This process will be explained in more detail in the <a class="reference internal" href="installation.html#data-library-installation"><span class="std std-ref">Data Library Installation</span></a> section.</p>
+using <code class="docutils literal notranslate"><span class="pre">install.sh</span></code>. This process will be explained in more detail in the <a class="reference internal" href="installation.html#data-library-new-installation"><span class="std std-ref">Data Library New Installation</span></a> section.</p>
 </div>
 <p>In the typical configuration, <code class="docutils literal notranslate"><span class="pre">/data</span></code> is a mount point for a large storage
 volume that is distinct from the root volume.In addition to <code class="docutils literal notranslate"><span class="pre">/data/datalib</span></code>,
@@ -285,10 +291,11 @@ containers, such as container images and volumes, are stored in that directory.<
     <p>&#169; Copyright 2025, IRI.</p>
   </div>
 
-  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
-    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
-    provided by <a href="https://readthedocs.org">Read the Docs</a>.
-   
+  
+
+<div>For support or more information, contact <a href='mailto:help@iri.columbia.edu'>help@iri.columbia.edu</a></div>
+
+
 
 </footer>
         </div>

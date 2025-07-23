@@ -1,10 +1,10 @@
-# Data Library Installation
+# Data Library New Installation
 
-This section provides instructions for installing the Data Library software on a
-server configured with CentOS Stream 9.
+This section provides instructions for installing a new Data Library software on a
+server configured with CentOS Stream 9 or 10.
 
 ```{seealso}
-To install CentOS Stream 9 on the server, please reference {doc}`the Server 
+To install CentOS Stream 9 or 10 on the server, please reference {doc}`the Server 
 Installation pages <../server/index>`.
 ```
 
@@ -77,8 +77,8 @@ See {ref}`Install python3.12, git and ansible`.
 * Commit your customizations and push them to your git server for safe keeping;
   back up `secrets.yaml` by other means, such as copying it to another machine.
   ```
-  git add inventories.cfg playbook.yaml
-  git commit -m "add inventoriess and playbook"
+  git add inventory.cfg playbook.yaml
+  git commit -m "add inventory and playbook"
   ```
 
 ```{note}

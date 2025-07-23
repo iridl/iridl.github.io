@@ -35,12 +35,16 @@ ansible documentation.
 ## Infrastructure
 
 The Data Library ansible playbook currently targets [CentOS Stream 9]
-(https://www.centos.org/stream9/). IRI does not test or support the software on
-other platforms. There are instructions for installing CentOS Stream 9
-in the {doc}` Server Installation Section <../server/centos9_stream>`
+(https://www.centos.org/stream9/) and [CentOS Stream 10]
+(https://www.centos.org/centos10/). IRI does not test or support the software on
+other platforms. There are instructions for installing the Operating System
+in the {doc}` Server Installation Section <../server/centos_stream>`
 
 _CentOS7 is beyond its end of life and is no longer recommended to install. New
-installations must be made with CentOS Stream 9_.
+installations must be made with CentOS Stream 9 or CentOS Stream 10. Please read the documentation
+for each Operating System to see which is more appropriate for you.  
+* CentOS Stream 10 will not work on older architectures (AMD/Intel 64-bit x86_64_v2 or below).
+* CentOS Stream 9 end-of-life is May 31, 2027_
 
 The Data Library services runs under Docker, using docker compose. Most services
 log to stdout, which the Docker daemon forwards to journald. Use the linux 
@@ -180,7 +184,7 @@ Administrators should not edit most
 configuration files directly. The configuration
 is managed by ansible, so changes should be made by modifying the ansible
 configuration and then applying it
-using `install.sh`. This process will be explained in more detail in the {ref}`Data Library Installation` section.
+using `install.sh`. This process will be explained in more detail in the {ref}`Data Library New Installation` section.
 ```
 
 In the typical configuration, `/data` is a mount point for a large storage

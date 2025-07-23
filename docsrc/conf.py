@@ -50,7 +50,12 @@ exclude_patterns = []
 # The theme to use for HTML and HTML Help pages.  See the documentation for
 # a list of builtin themes.
 #
-# html_theme = 'classic'
+html_show_sphinx = False
+html_show_sourcelink = False
+html_use_index = False
+html_baseurl = 'https://dldocs.iri.columbia.edu'
+html_logo = '_static/iri_icon_white.svg'
+
 html_theme = 'sphinx_rtd_theme'
 html_theme_options = {
     'titles_only': True,
@@ -71,11 +76,3 @@ html_sidebars = {
         'searchbox.html',
     ],
 }
-
-# Suppress index link in navbar, since the index is empty and thus
-# useless. Enable if/when we start adding index entries.
-html_use_index = False
-
-# Used by sphinx.ext.githubpages to generate docs/CNAME
-html_baseurl = 'https://dldocs.iri.columbia.edu'
-html_logo = '_static/iri_icon_white.svg'

@@ -4,7 +4,7 @@
 
 ## Configuration updates using ansible
 
-The {doc}`Data Library Installation <installation>` section explains how to
+The {doc}`Data Library New Installation <installation>` section explains how to
 create an ansible playbook and use it for the initial installation of the 
 Data Library software. We also recommend that you use continue using ansible
 to manage configuration changes and software updates over time.
@@ -66,7 +66,7 @@ where `x.y.z` is the new Data Library version number.
 As described in {ref}`User groups`, users with accounts on the Data Library
 server can be divided in two groups: administrators and authors.
 
-Administrator accounts should be created "by hand", *i.e.* outside of ansible's
+Administrator accounts should be created "by hand", *i.e.* outside ansible's
 control. Remember to add administrators to the `wheel` group so they will have
 sudo privileges.
 

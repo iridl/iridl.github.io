@@ -87,7 +87,6 @@
           <li class="breadcrumb-item"><a href="index.html">System Administrator Guide</a></li>
       <li class="breadcrumb-item active">Data Library Upgrade Installation</li>
       <li class="wy-breadcrumbs-aside">
-            <a href="../_sources/admin/installation_upgrade.md.txt" rel="nofollow"> View page source</a>
       </li>
   </ul>
   <hr/>
@@ -98,20 +97,20 @@
   <section id="data-library-upgrade-installation">
 <h1>Data Library Upgrade Installation<a class="headerlink" href="#data-library-upgrade-installation" title="Link to this heading"></a></h1>
 <p>This section provides instructions for upgrading Data Library software previously installed on a
-CentOS Stream 7 server to a server configured with CentOS Stream 9.  Make sure your current dlconfig repository
-is pushed to the server and your secrets.yaml file is saved.  It is important to back up the
-entire account as well as all your data files and catalogs  (typically in the /data directory)  before upgrading your
-server.</p>
+CentOS Stream 7 server to a server configured with CentOS Stream 9 or 10.  Make sure your current
+dlconfig repository is pushed to the server and your secrets.yaml file is saved.  It is important to
+back up the entire account as well as all your data files and catalogs  (typically in the /data directory)
+before upgrading your server.</p>
 <div class="admonition seealso">
 <p class="admonition-title">See also</p>
-<p>To install CentOS Stream 9 on the server, please reference <a class="reference internal" href="../server/index.html"><span class="doc">the Server  Installation pages</span></a>.</p>
+<p>To install CentOS Stream 9 or 10 on the server, please reference <a class="reference internal" href="../server/index.html"><span class="doc">the Server  Installation pages</span></a>.</p>
 </div>
 <p>Installation of the Data Library software is automated using
 <a class="reference external" href="https://docs.ansible.com/ansible_community.html">ansible</a>, a configuration
 management tool which uses python3.12. A virtual python environment for this
 should already be installed in <em>/opt/datalib_venv3.12</em>, if the server
 installation process was followed.
-See <a class="reference internal" href="../server/centos9_stream.html#install-python3-12-git-and-ansible"><span class="std std-ref">Install python3.12, git and ansible</span></a>.</p>
+See <a class="reference internal" href="../server/centos_stream.html#install-python3-12-git-and-ansible"><span class="std std-ref">Install python3.12, git and ansible</span></a>.</p>
 <section id="configure-the-upgraded-data-library">
 <h2>Configure the upgraded Data Library<a class="headerlink" href="#configure-the-upgraded-data-library" title="Link to this heading"></a></h2>
 <div class="admonition seealso">
@@ -204,10 +203,11 @@ release.)</p></li>
     <p>&#169; Copyright 2025, IRI.</p>
   </div>
 
-  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
-    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
-    provided by <a href="https://readthedocs.org">Read the Docs</a>.
-   
+  
+
+<div>For support or more information, contact <a href='mailto:help@iri.columbia.edu'>help@iri.columbia.edu</a></div>
+
+
 
 </footer>
         </div>

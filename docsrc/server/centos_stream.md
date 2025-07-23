@@ -1,20 +1,16 @@
 (install_centos9)=
 
-# Install CentOS9 Stream
+# Install CentOS Stream 9 or CentOS Stream 10
 
-This section provides instructions for installing the CentOS9 Stream for use by the Data Library. If you are 
+This section provides instructions for installing the CentOS Stream 9 for use by the Data Library. If you are 
 from an older server, make sure you have a full backup of your current system before following
 these instructions, which will completely erase the drive you are installing on. 
 
-% ```{seealso}
-% For help in upgrading from CentOS7, see the instructions in the {ref}`Upgrading Section <upgrade>`
-% ```
-
 ## Prepare the server
 
-### Install the CentOS9 Stream Operating System
+### Install the  Operating System
 
-* Install CentOS 9 Stream from https://www.centos.org/download.  Select the tab for 9, then download
+* Install CentOS Stream from https://www.centos.org/download.  Select the tab for 9 or 10, then download
   the [x86_64 Architecture ISO](https://mirrors.centos.org/mirrorlist?path=/9-stream/BaseOS/x86_64/iso/CentOS-Stream-9-latest-x86_64-dvd1.iso&redirect=1&protocol=https). We currently only support x86_64.
     * To create a bootable CD of the Installation ISO,
       follow [these instructions](https://docs.centos.org/en-US/centos/install-guide/Making_Media/).
@@ -41,6 +37,12 @@ these instructions, which will completely erase the drive you are installing on.
 Once the server boots up after the installation, you can install the requirements necessary for 
 installing the Data Library Software. You must have **sudo** privileges on your account.
 
+#### Update Packages
+
+You should install the latest updates to the Operating System before continuing.
+
+      sudo dnf -y update
+
 #### Disable SELinux
 
       sudo sed -i s/SELINUX=enforcing/SELINUX=permissive/ /etc/selinux/config 
@@ -53,13 +55,9 @@ installing the Data Library Software. You must have **sudo** privileges on your 
       sudo /opt/datalib_venv3.12/bin/pip install --upgrade pip
       sudo /opt/datalib_venv3.12/bin/pip install ansible==11.3.0 requests==2.32.3
 
-#### Update the server
-
-      sudo dnf update -y
-
 #### Reboot
 
-  If any changes were installed, reboot now.
+  If any changes were installed during the package updates, reboot now.
 
       sudo shutdown -r now
 

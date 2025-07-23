@@ -10,7 +10,7 @@ are general recommendations.
 If you have questions about the server you intend to use, please contact IRIDL
 Help <help@iri.columbia.edu> to review your server configuration. While using
 SSD disks for your operating system is a good idea, it's not necessary. You will
-be installing the CentOS Stream 9 operating system, so don't pay for an
+be installing the CentOS Stream operating system, so don't pay for an
 operating system if you can avoid it.
 
 Typical costs for servers with the appropriate specifications range from \$3,000
@@ -22,6 +22,10 @@ For a minimal server, the basic requirements include a high performance CPU such
 as Intel Xeon or AMD Epyc, with a minimum of 8 cores. For a more powerful
 server, we'd recommend a dual cpu server. The CPU must be intel-compatible, 
 we do not support other architectures.
+
+```{note}
+CentOS Stream 10 requires an AMD/Intel 64-bit x86_64_v3 CPU or higher.
+```
 
 ## RAM
 
@@ -48,12 +52,11 @@ external disk as a regular backup. The amount of disk space you may need is
 unique to your installation. We suggest getting disks that are about twice the
 size you think you need.
 
-## Networking
+### Backups
 
-You should use the highest network speed you have access to. If you have a 10Gb
-network, you should try to place your server on this network, with a 10Gb
-network card on your server. But this is entirely optional. Whatever network you
-have access to will work.
+It is important to have regular backups in place even if you are using mirrored disk drives.
+You should back up your data and homes directories to an external disk regularly.  If you do
+this regularly, you can ensure that your system will be quickly recoverable in case of disaster.
 
 ## Graphics
 
