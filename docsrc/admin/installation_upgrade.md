@@ -3,8 +3,16 @@
 This section provides instructions for upgrading Data Library software previously installed on a 
 CentOS Stream 7 server to a server configured with CentOS Stream 10.  Make sure your current 
 dlconfig repository is pushed to the server and your secrets.yaml file is saved.  It is important to 
-back up the entire account as well as all your data files and catalogs  (typically in the /data directory)
-before upgrading your server.
+back up the entire system as well as all your data files  (typically in the /data directory)
+before upgrading your server.  
+
+## Backups
+
+Make sure you back up the following:
+
+* home directories
+* /data
+* postgres database
 
 ```{seealso}
 To install CentOS Stream 10 on the server, please reference {doc}`the Server 
