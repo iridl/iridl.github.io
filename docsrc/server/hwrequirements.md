@@ -23,10 +23,6 @@ as Intel Xeon or AMD Epyc, with a minimum of 8 cores. For a more powerful
 server, we'd recommend a dual cpu server. The CPU must be intel-compatible, 
 we do not support other architectures.
 
-```{note}
-CentOS Stream 10 requires an AMD/Intel 64-bit x86_64_v3 CPU or higher.
-```
-
 ## RAM
 
 The ability of the Data Library to process large datasets depends on the amount

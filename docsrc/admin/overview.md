@@ -34,22 +34,20 @@ ansible documentation.
 
 ## Infrastructure
 
-The Data Library ansible playbook currently targets [CentOS Stream 9]
-(https://www.centos.org/stream9/) and [CentOS Stream 10]
+The Data Library ansible playbook currently targets [CentOS Stream 10]
 (https://www.centos.org/centos10/). IRI does not test or support the software on
 other platforms. There are instructions for installing the Operating System
 in the {doc}` Server Installation Section <../server/centos_stream>`
 
-_CentOS7 is beyond its end of life and is no longer recommended to install. New
-installations must be made with CentOS Stream 9 or CentOS Stream 10. Please read the documentation
+CentOS7 is beyond its end of life and is no longer recommended to install. New
+installations must be made with CentOS Stream 10. Please read the documentation
 for each Operating System to see which is more appropriate for you.  
 * CentOS Stream 10 will not work on older architectures (AMD/Intel 64-bit x86_64_v2 or below).
-* CentOS Stream 9 end-of-life is May 31, 2027_
 
 The Data Library services runs under Docker, using docker compose. Most services
 log to stdout, which the Docker daemon forwards to journald. Use the linux 
 command 
-_[journalctl](https://man7.org/linux/man-pages/man1/journalctl.1.html)_ to view 
+[journalctl](https://man7.org/linux/man-pages/man1/journalctl.1.html) to view 
 the log files.
 
 (ansible)=
@@ -91,19 +89,19 @@ manage the server's configuration.
 
 The Data Library system is composed of four containerized services.
 
-- **squid** is configured as both forward and reverse proxy. This is the only
+* `squid` is configured as both forward and reverse proxy. This is the only
   service that is directly reachable from
   the public network interface (the others listen only on a docker virtual
   network). Docker forwards the host's port 80
   to squid, which then forwards each request to one of the three other services
   depending on the URL path.
-- **ingrid** is a web application for browsing, analyzing, and visualizing
+* `ingrid` is a web application for browsing, analyzing, and visualizing
   climate data in a browser.
-- **PostgreSQL** is used by ingrid to store relational data. It is used with the
+* `PostgreSQL` is used by ingrid to store relational data. It is used with the
   PostGIS plugin to store GIS shapes,
   particularly boundaries of administrative regions (countries, states, cities,
   *etc.*) and bodies of water.
-- **Apache _httpd_** serves web applications called *maprooms*. Whereas ingrid
+* `Apache httpd` serves web applications called `maprooms`. Whereas ingrid
   is a general-purpose tool that lets the
   user perform arbitrary calculations, each maproom is tailored to a particular
   dataset and a particular application.
@@ -116,12 +114,12 @@ other URLs are routed to ingrid.
 
 Two kinds of users will need accounts (unix logins) on a Data Library server:
 
-- **Administrators** are responsible for system configuration, software updates,
+* `Administrators` are responsible for system configuration, software updates,
   backups, and user support. They are
   members of the `wheel` group and thus have permission to assume root
   privileges using `sudo`.
 
-- **Authors** are responsible for adding and extending datasets to the Data
+* `Authors` are responsible for adding and extending datasets to the Data
   Library, and for creating maprooms. By virtue of being members of the 
   `datag` group, they have permission to add data files to the directory read by 
   ingrid, and to execute SQL queries that modify ingrid's database. They don't 
@@ -142,8 +140,8 @@ Administrators are not.
 
 ## Important file and directory paths
 
-Ingrid datasets are defined in a *data catalog*, which is developed in a git
-repository traditionally named `dlentries` or `dlentries_countryname`, e.g. 
+Ingrid datasets are defined in a `data catalog`, which is developed in a git
+repository traditionally named `dlentries` or `dlentries_countryname`, *e.g.* 
 `dlentries_madagascar`. Authors cannot edit ingrid's copy of the data 
 catalog directly; to make changes, they edit the catalog in another location,
 push their changes to their git host, and then run

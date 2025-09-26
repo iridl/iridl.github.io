@@ -11,40 +11,46 @@ to manage configuration changes and software updates over time.
 
 You must activate the correct python virtual environment in order to use the
 correct ansible playbook. To always use this version of python, you can add 
-this line to the end of your ~/.bash_profile file.
+this line to the end of your `~/.bash_profile` file.
+
 ```
 source /opt/datalib_venv3.12/bin/activate
 ```
 
 To make a configuration change,
 
-- Make sure your local copy of the dlconfig repository is up to date:
+* Make sure your local copy of the `dlconfig` repository is up to date:
+
   ```
   cd dlconfig
   git pull --ff-only
   ```
 
-- Make your changes in `playbook.yaml`.
+* Make your changes in `playbook.yaml`.
 
-- Run the playbook in "check mode" to verify that ansible will make the change
+* Run the playbook in `check mode` to verify that ansible will make the change
   you intended:
+
   ```
   ./run_ansible --check
   ```
 
-- After verifying the diff, run the playbook without `--check` to apply
+* After verifying the diff, run the playbook without `--check` to apply
   the change.
+
   ```
   ./run_ansible
   ```
 
-- If the Data Library team has made changes to the maprooms that you want to
+* If the Data Library team has made changes to the maprooms that you want to
   integrate, run with `--build` to pull the new changes.
+
   ```
   ./run_ansible --build
   ```
 
-- Review, commit, and push your changes to your git host.
+* Review, commit, and push your changes to your git host.
+
   ```
   git diff
   git commit -a -m "Description of the changes you made"
@@ -54,9 +60,10 @@ To make a configuration change,
 To update to a new version of the Data Library software, first consult the
 release notes for any backwards-compatibility warnings and manual migration
 steps. Then use `ansible-galaxy` to update the `ansible_collections` directory
-of your dlconfig repository:
+of your `dlconfig` repository:
+
 ```
-ansible-galaxy collection install iridl.iridl:==x.y.z
+ansible-galaxy collection install iridl.iridl
 ```
 
 where `x.y.z` is the new Data Library version number.
@@ -79,12 +86,14 @@ playbook. Remember to commit and push your playbook changes.
 
 ## Debugging tips
 
-- To see what services are running under docker, use
+* To see what services are running under docker, use
+
   ```
   sudo docker ps
   ```
 
-- To start and stop services, for example
+* To start and stop services, for example
+
   ```
   cd /usr/local/datalib
   sudo docker compose start squid
@@ -92,33 +101,35 @@ playbook. Remember to commit and push your playbook changes.
   sudo docker compose up -d maproom
   ```
 
-- Most services output logs to stdout, which is captured by the docker daemon
+* Most services output logs to stdout, which is captured by the docker daemon
   and routed to journald. You can read the logs by using `journalctl`, *e.g.*
+
   ```
   sudo journalctl CONTAINER_NAME=datalib_maproom_1 --since='1 hour ago'
   ```
 
-- squid produces two separate logs: the error log and the access log. The latter
+* squid produces two separate logs: the error log and the access log. The latter
   contains a line for each request served. The error log is piped to journalctl,
   while the access log is written to a docker volume. To read the access log,
   use `docker exec` to run a command in the squid container, *e.g.*
+
   ```
   sudo docker exec -it datalib_squid_1 tail -n 100 /var/log/squid/access.log
   ```
 
-- If an embedded image in a maproom is broken/empty, copy the image URL to a new
+* If an embedded image in a maproom is broken/empty, copy the image URL to a new
   browser window and remove the .gif at the end. Sometimes this will get you an
   informative error message instead of just an empty response.
 
-- If there’s an error message about a specific file or database table, look into
+* If there’s an error message about a specific file or database table, look into
   that as described below. If no specific file or table is mentioned, identify
   the datasets that are used in the query, and read the catalog entries
   (dlentries) for those datasets to identify the files and/or tables that they
   use.
 
-- To check on a database table, exec into the postgres container and use psql.
+* To check on a database table, exec into the postgres container and use psql.
   If the table doesn’t exist, either run the sql script that creates it, or add
   it to the sql scripts if it’s missing. If the table exists, check that the
-  **readonlyaccess** role has select permission for it. (Our install process is
+  `readonlyaccess` role has select permission for it. (Our install process is
   supposed to grant that permission, but in rehearsing the installation we have
   sometimes needed to grant it by hand.)

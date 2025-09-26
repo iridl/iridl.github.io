@@ -20,6 +20,7 @@ Once you have an account, inform the [Data Library staff](mailto:help@iri.columb
   with bitbucket. It can be the same as your bitbucket or login password._
 
 * Add the key to your ~/.ssh/config file by adding these lines to the file.
+
     ```
     Host bitbucket.org
     AddKeysToAgent yes
@@ -30,27 +31,30 @@ Once you have an account, inform the [Data Library staff](mailto:help@iri.columb
 
 * Provide the details to Bitbucket.org
     * Login to your bitbucket.org account
-    * Select the **Settings** gear icon in the upper right of the browser window
-      and select **Personal Bitbucket Settings**.
-    * Under **Security**, select **SSH Keys**
-    * Select **Add Key**
+    * Select the `Settings` gear icon in the upper right of the browser window
+      and select `Personal Bitbucket Settings`.
+    * Under `Security`, select `SSH Keys`
+    * Select `Add Key`
     * In the Add SSH key dialog, provide a Label to help you identify which key
       you are adding. For example, you could use
       the account name of the user on the server you're setting the key up for.
-    * Copy the contents of ~/.ssh/id_bitbucket.pub to the **Key** field of the *
-      *Add SSH key** dialog.
-    * Select **Add Key**  
+    * Copy the contents of ~/.ssh/id_bitbucket.pub to the `Key` field of the 
+      `Add SSH key` dialog.
+    * Select `Add Key`  
       if it fails, check that you copied the contents properly. It should look
       something like:
+  
         ```
         ssh-ed25529 LLoWYaPswHzVqQ7L7B07LzIJbntgmHqrE40t17nGXL71QX9IoFGKYoF5pJKUMvR+DZotTm user@example.com
         ```
 * Make sure the key works. On the Data Library server,
+
     ```
     ssh -T git@bitbucket.org
     ```
 
   It should return:
+
     ```
     authenticated via ssh key
 
@@ -65,7 +69,7 @@ repositories. There are two keys in `secrets.yaml` that need to be defined, but 
 1. bitbucket_private_key for the dlentries and classic maprooms.
 2. python_maproom_private_key for the python maprooms.
 
-To create a personal deployment key:
+To create a deployment key:
 
 ```
 ssh-keygen -t ed25519 -b 4096 -f ~/.ssh/datalibrary_private_key
@@ -73,16 +77,15 @@ ssh-keygen -t ed25519 -b 4096 -f ~/.ssh/datalibrary_private_key
 
 Leave the passphrase blank.
 
-### Add the Access or Deploy Key to Bitbucket or Github
+### Add the Access or Deploy Key to Bitbucket
 
-In the following, the _xxx_ is your repository code. For example: _kmd_, _nimet_, _madagascar_, etc.
+In the following, the `xxx` is your repository code. For example: `kmd`, `nimet`, `madagascar`, *etc*.
 
 Install this key into each repository you need ansible to access. For example,
 
-* dlentries_xxx
-* maproom_xxx
-* python_maproom_xxx (this one is optional and depends on if you have a python
-  maproom)
+* dlentries`_xxx`
+* maproom`_xxx`
+* python_maproom`_xxx` (this one is optional and depends on if you have a python maproom)
 
 You should know where these repositories are, but you can also find them in your playbook.yaml file.
 
@@ -94,15 +97,6 @@ Go to the repository page and go to repository settings on the left tab.
 
 * Select Access keys on the left menu, and select Add key.
     * For the Label, enter a descriptive name for this, such as dlentries key
-      for _YourName_
+      for `YourName`
     * Copy the contents of ~/.ssh/datalibrary_private_key.pub to the Key value
     * Select Add SSH Key
-
-#### Github
-
-Go the Settings tab on the top menu
-
-* Select Deploy keys from the left menu and select Add Deploy Key
-    * For the Title, enter a descriptive name for this, such as dlentries key for _YourName_
-    * Copy the contents of ~/.ssh/datalibrary_private_key.pub to the Key value
-    * ***Do not select Allow Write Access***

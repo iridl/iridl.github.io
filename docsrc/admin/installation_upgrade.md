@@ -1,20 +1,20 @@
 # Data Library Upgrade Installation
 
 This section provides instructions for upgrading Data Library software previously installed on a 
-CentOS Stream 7 server to a server configured with CentOS Stream 9 or 10.  Make sure your current 
+CentOS Stream 7 server to a server configured with CentOS Stream 10.  Make sure your current 
 dlconfig repository is pushed to the server and your secrets.yaml file is saved.  It is important to 
 back up the entire account as well as all your data files and catalogs  (typically in the /data directory)
 before upgrading your server.
 
 ```{seealso}
-To install CentOS Stream 9 or 10 on the server, please reference {doc}`the Server 
+To install CentOS Stream 10 on the server, please reference {doc}`the Server 
 Installation pages <../server/index>`.
 ```
 
 Installation of the Data Library software is automated using 
 [ansible](https://docs.ansible.com/ansible_community.html), a configuration
 management tool which uses python3.12. A virtual python environment for this
-should already be installed in _/opt/datalib_venv3.12_, if the server 
+should already be installed in `/opt/datalib_venv3.12`, if the server 
 installation process was followed. 
 See {ref}`Install python3.12, git and ansible`.
 
@@ -28,6 +28,7 @@ See {ref}`Install python3.12, git and ansible`.
 
 You should already have a DL configuration in bitbucket or github.  Download that configuration
 here. The following is an example, as your repository name will be different.
+
   ```
   git clone git@bitbucket.org:iridl/dlconfig_myconfig.git dlconfig
   cd dlconfig
@@ -36,6 +37,7 @@ here. The following is an example, as your repository name will be different.
 ### Upgrade the ansible_collections
 
 Since you are installing a new version of the ansible galaxy collection, delete the old one before installing the new.
+
   ```
   git rm -rf ansible_collections
   git commit -m "removing old ansible_collections to upgrade CentOS Stream"
@@ -48,24 +50,27 @@ Since you are installing a new version of the ansible galaxy collection, delete 
 * The previous commands should have downloaded the collection to a subdirectory
   called `ansible_collections`. Add that directory to your git repository, 
   and commit the changes.
+
   ```
   git add ansible_collections
   git commit -m "add new CentOS Stream iridl ansible collection"
   ```
 
 * Copy template configuration files from the collection to the top level of the
-  repository.  The -b flag will make a backup of your current files:
+  repository.  The `-b` flag will make a backup of your current files:
+
   ```
   cp -b ansible_collections/iridl/iridl/example/* .
   ```
 
-* Restore your original playbook.yaml and secrets.yaml files.
+* Restore your original `playbook.yaml` and `secrets.yaml` files.
+
   ```
   mv playbook.yaml~ playbook.yaml
   rm -f secrets.yaml
   ```
 
-  Copy your original secrets.yaml file (which is not in the git repository) to the directory above dlconfig.
+  Copy your original `secrets.yaml` file (which is not in the git repository) to the directory above `dlconfig`.
 
   ```{seealso}
   The secrets.yaml file contains the deploy keys (or access keys) to access the repositories defined in your playbook.yaml
@@ -75,6 +80,7 @@ Since you are installing a new version of the ansible galaxy collection, delete 
 
 * Commit any new customizations and push them to your git server for safe keeping;
   back up `secrets.yaml` by other means, such as copying it to another machine.
+* 
   ```
   git commit -m "updates for new version of CentOS"
   git push
