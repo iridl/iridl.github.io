@@ -9,9 +9,10 @@ create an ansible playbook and use it for the initial installation of the
 Data Library software. We also recommend that you use continue using ansible
 to manage configuration changes and software updates over time.
 
-You must activate the correct python virtual environment in order to use the
-correct ansible playbook. To always use this version of python, you can add 
-this line to the end of your `~/.bash_profile` file.
+You must activate the correct python virtual environment in order to
+use the correct ansible playbook. To always use this version of
+python, you may want to add this line to the end of your
+`~/.bash_profile` file:
 
 ```
 source /opt/datalib_venv3.12/bin/activate
@@ -25,11 +26,11 @@ To make a configuration change,
   cd dlconfig
   git pull --ff-only
   ```
+  and read the output to be sure that the command succeeded. If there are conflicts, resolve them and pull again before proceeding.
 
 * Make your changes in `playbook.yaml`.
 
-* Run the playbook in `check mode` to verify that ansible will make the change
-  you intended:
+* Run the playbook in _check mode_ to verify that the changes that ansible is about to make are the ones you intended:
 
   ```
   ./run_ansible --check
@@ -42,8 +43,7 @@ To make a configuration change,
   ./run_ansible
   ```
 
-* If the Data Library team has made changes to the maprooms that you want to
-  integrate, run with `--build` to pull the new changes.
+* If there have been changes to classic maprooms, run with `--build` to pull the new changes. (Rebuilding classic maprooms is skipped by default, because it is time-consuming.)
 
   ```
   ./run_ansible --build
@@ -57,16 +57,19 @@ To make a configuration change,
   git push
   ```
 
-To update to a new version of the Data Library software, first consult the
-release notes for any backwards-compatibility warnings and manual migration
-steps. Then use `ansible-galaxy` to update the `ansible_collections` directory
-of your `dlconfig` repository:
+To update to a new version of the Data Library software, first check
+[https://github.com/iridl/iridl-ansible](https://github.com/iridl/iridl-ansible)
+for any backwards-compatibility warnings or manual migration
+steps. Then use `ansible-galaxy` to update the `ansible_collections`
+directory of your `dlconfig` repository:
 
 ```
-ansible-galaxy collection install iridl.iridl
+git rm -rf ansible_collections
+ansible-galaxy collection install -p . \
+  git+https://github.com/iridl/iridl-ansible.git
+git add ansible_collections
+git commit -m "Update iridl ansible collection"
 ```
-
-where `x.y.z` is the new Data Library version number.
 
 ## Adding user accounts
 
@@ -118,7 +121,7 @@ playbook. Remember to commit and push your playbook changes.
   ```
 
 * If an embedded image in a maproom is broken/empty, copy the image URL to a new
-  browser window and remove the .gif at the end. Sometimes this will get you an
+  browser window and remove the `.gif` at the end. Sometimes this will get you an
   informative error message instead of just an empty response.
 
 * If there’s an error message about a specific file or database table, look into
@@ -127,9 +130,7 @@ playbook. Remember to commit and push your playbook changes.
   (dlentries) for those datasets to identify the files and/or tables that they
   use.
 
-* To check on a database table, exec into the postgres container and use psql.
+* To check on a database table, exec into the postgres container and use `psql`.
   If the table doesn’t exist, either run the sql script that creates it, or add
   it to the sql scripts if it’s missing. If the table exists, check that the
-  `readonlyaccess` role has select permission for it. (Our install process is
-  supposed to grant that permission, but in rehearsing the installation we have
-  sometimes needed to grant it by hand.)
+  `readonlyaccess` role has select permission for it.

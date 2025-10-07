@@ -62,12 +62,11 @@ See {ref}`Install python3.12, git and ansible`.
   should be replaced with real email addresses, usernames, *etc*. The files
   include comments that explain the purpose of each configuration option. If you
   are not ready to set up your real Data Library server but merely want to 
-  practice the installation process, `e.g.` in a virtual machine, you can use
+  practice the installation process, _e.g._ in a virtual machine, you can use
   the example files without modification.
 
   ```{seealso}
-  The secrets.yaml file contains the deployment keys (or access keys) to access the repositories defined in your playbook.yaml
-  file. See {ref}`Deployment Keys`
+  The example ssh key in `secrets.yaml` should be replaced with the deployment access key you created in {ref}`Access key for deployment`.
   ```
 
 * Move `secrets.yaml` out of the git repository. For security reasons,
@@ -86,7 +85,7 @@ See {ref}`Install python3.12, git and ansible`.
   ```
 
 ```{note}
-  * Never edit the contents of the `ansible_collections` directory. All 
+  Never edit the contents of the `ansible_collections` directory. All 
   customization should be made in the configuration files that you copied 
   from the template. In the future when it comes time to upgrade to a newer 
   version of the DL software, you will run the `ansible-galaxy` command 
@@ -104,7 +103,7 @@ From the root directory of the configuration repository, run the following
 command
 
 ```
-./run_ansible --build
+./run-ansible --build
 ```
 
 It will prompt you for a password, which will be the password of the user you
@@ -124,15 +123,10 @@ You should now be able to visit your Data Library server in a browser, but the
 maprooms are not yet functional because the data that underlies them has yet 
 to be installed.
 
-```{note}
-* Any flag you can pass to ansible-playbook can be passed to the run-ansible 
-script. 
-```
-
-`For example`
-
-If there are errors or failures, you can pass `-vvv` to the run-ansible 
-command to get more information about why it is failing.
+Any flag you can pass to `ansible-playbook` can also be passed to the
+`run-ansible` script. For example, if there are errors or failures,
+you can pass `-vvv` to the run-ansible command to get more information
+about why it is failing.
 
 ```
 ./run-ansible -vvv
@@ -147,7 +141,7 @@ test mode without changing the Data Library.
 
 ## Install datasets
 
-Among other things, the ansible playbook has created structures (directories,
+Among other things, the ansible playbook creates structures (directories,
 groups, a database, and permissions) to support the installation of datasets.
 You can now install your data as described in {ref}`installing-data`. A 
 member of the IRI staff will typically be involved in this process, as it 

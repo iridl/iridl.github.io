@@ -1,12 +1,12 @@
-(install_centos9)=
+(install_centos)=
 
 # Install CentOS Stream
-
-We recommend CentOS Stream 10.  If your CPU doesn't support CentOS Stream 10, CentOS Stream 9 will also work.  
 
 This section provides instructions for installing the Linux CentOS Stream Operating System for use by the Data Library. 
 If you are upgrading from an older server, make sure you have a full backup of your current system before following
 these instructions, which will completely erase the drive you are installing on.
+
+We recommend CentOS Stream 10.  If your CPU isn't supported by CentOS Stream 10, CentOS Stream 9 will also work. CentOS7 is beyond its end of life and is no longer recommended to install.
 
 ```{note}
 CentOS Stream 10 requires an AMD/Intel 64-bit x86_64_v3 CPU or higher.  Typically, any CPU less than 10 years old
@@ -19,17 +19,18 @@ Then search for that CPU in a search engine to find the specifications for that 
 ### Install the  Operating System
 
 * Install CentOS Stream from https://www.centos.org/download.  Select the tab for 10, then download
-  the [x86_64 Architecture ISO](https://mirrors.centos.org/mirrorlist?path=/9-stream/BaseOS/x86_64/iso/CentOS-Stream-9-latest-x86_64-dvd1.iso&redirect=1&protocol=https). We currently only support x86_64.
+  the x86\_64 Architecture ISO. We currently only support x86\_64.
     * To create a bootable CD of the Installation ISO,
       follow [these instructions](https://docs.centos.org/en-US/centos/install-guide/Making_Media/).
-    * `Installation Notes`
-        * Select `Server with GUI` as your Software Selection to make it easier to maintain.
+    * Installation Notes
+        * Select *Server with GUI* as your Software Selection to make it easier to maintain.
         * When configuring your disk partitions (Installation Destination), Select Customize Storage Configuration.
             * Use LVM when creating the filesystems. This is the default.
                 * Don't modify /boot or /boot/efi
             * Increase root partition to 100GB
-            * Create a /data partition large enough to hold all your data now
-              and in the future.
+            * Create a /data partition large enough to hold all your
+              data now and in the future. Many users put /data on a
+              separate disk (or disk array) from the operating system.
             * Create a /home partition large enough to house your users' data.
             * Leave 10% of the disk unallocated. This will allow you to create
               snapshots or increase the size of partitions later if necessary.

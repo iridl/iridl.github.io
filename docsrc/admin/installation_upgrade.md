@@ -1,18 +1,17 @@
 # Data Library Upgrade Installation
 
 This section provides instructions for upgrading Data Library software previously installed on a 
-CentOS Stream 7 server to a server configured with CentOS Stream 10.  Make sure your current 
+CentOS Stream 7 server to a server configured with CentOS Stream 9 or 10.  Make sure your current 
 dlconfig repository is pushed to the server and your secrets.yaml file is saved.  It is important to 
-back up the entire system as well as all your data files  (typically in the /data directory)
-before upgrading your server.  
+back up the entire system before upgrading your server.
 
-## Backups
+## Make a backup
 
 Make sure you back up the following:
 
-* home directories
-* /data
-* postgres database
+* `/home`
+* `/data`
+* a dump of the postgres database
 
 ```{seealso}
 To install CentOS Stream 10 on the server, please reference {doc}`the Server 
@@ -21,10 +20,7 @@ Installation pages <../server/index>`.
 
 Installation of the Data Library software is automated using 
 [ansible](https://docs.ansible.com/ansible_community.html), a configuration
-management tool which uses python3.12. A virtual python environment for this
-should already be installed in `/opt/datalib_venv3.12`, if the server 
-installation process was followed. 
-See {ref}`Install python3.12, git and ansible`.
+management tool which uses python3.12. If you followed the OS installation process described in {ref}`Install python3.12, git and ansible`, python and ansible should already be installed in `/opt/datalib_venv3.12`.
 
 ## Configure the upgraded Data Library
 
@@ -34,7 +30,7 @@ See {ref}`Install python3.12, git and ansible`.
 
 ### Clone your old Data Library configuration
 
-You should already have a DL configuration in bitbucket or github.  Download that configuration
+You should already have a DL configuration in bitbucket.  Download that configuration
 here. The following is an example, as your repository name will be different.
 
   ```
@@ -75,15 +71,14 @@ Since you are installing a new version of the ansible galaxy collection, delete 
 
   ```
   mv playbook.yaml~ playbook.yaml
-  rm -f secrets.yaml
+  rm secrets.yaml
   ```
 
   Copy your original `secrets.yaml` file (which is not in the git repository) to the directory above `dlconfig`.
 
   ```{seealso}
-  The secrets.yaml file contains the deploy keys (or access keys) to access the repositories defined in your playbook.yaml
-  file.  These are needed because Ansible runs as root, so it needs it's own access to the repositories.  For that reason,
-  we want to make sure it only has read access.  See {ref}`Deployment Keys`
+  The `secrets.yaml` file contains the deployment access key to access the repositories defined in your playbook.yaml
+  file.  Ansible installs the key in a place that is accessible to content authors so they can deploy content updates. See {ref}`Access key for deployment`.
   ```
 
 * Commit any new customizations and push them to your git server for safe keeping;
@@ -101,10 +96,9 @@ Since you are installing a new version of the ansible galaxy collection, delete 
   version of the DL software, you will run the `ansible-galaxy` command 
   again and commit the new version to your configuration repository.
 
-  * Don't upgrade without checking the release notes first, because in some
+  * Don't upgrade without checking https://github.com/iridl/iridl-ansible for release notes first, because in some
   cases an upgrade may require manual migration steps. (At this writing, 
-  there are no upgrade release notes because this is the playbook's initial 
-  release.)
+  there are no upgrade release notes.)
 ```
 
-From here, you can continue with the New Installation section, {ref}`Run the ansible playbook`
+From here, you can continue with the New Installation section, starting with {ref}`Run the ansible playbook`.
