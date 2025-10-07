@@ -33,7 +33,7 @@
     <script src="../_static/js/theme.js"></script>
     <link rel="search" title="Search" href="../search.html" />
     <link rel="next" title="System Administrator Guide" href="../admin/index.html" />
-    <link rel="prev" title="Install CentOS Stream 9 or CentOS Stream 10" href="../server/centos_stream.html" /> 
+    <link rel="prev" title="Install CentOS Stream" href="../server/centos_stream.html" /> 
 </head>
 
 <body class="wy-body-for-nav"> 
@@ -90,24 +90,35 @@
 <h1>User Guide<a class="headerlink" href="#user-guide" title="Link to this heading"></a></h1>
 <section id="installing-data">
 <span id="id1"></span><h2>Installing data<a class="headerlink" href="#installing-data" title="Link to this heading"></a></h2>
-<p>A Data Library dataset is made up of a set of files and/or database tables containing the data, and a <em>catalog entry</em>, which is a set of instructions for reading the data and transforming it into the Data Library’s internal representation. Training materials covering how to create these resources will be provided separately; in the current document, we will assume that the resources have already been created, and explain how to install them on a Data Library server.</p>
+<p>A Data Library dataset is made up of a set of files and/or database tables containing the data, and a <code class="docutils literal notranslate"><span class="pre">catalog</span> <span class="pre">entry</span></code>,
+which is a set of instructions for reading the data and transforming it into the Data Library’s internal representation.
+Training materials covering how to create these resources will be provided separately; in the current document, we will
+assume that the resources have already been created, and explain how to install them on a Data Library server.</p>
 <section id="data-files">
 <h3>Data files<a class="headerlink" href="#data-files" title="Link to this heading"></a></h3>
-<p>Data files (<em>e.g.</em> NetCDF, GRIB, or GeoTIFF files) should be installed in <code class="docutils literal notranslate"><span class="pre">/data/datalib/data</span></code>. All members of the group <code class="docutils literal notranslate"><span class="pre">datag</span></code> have permission to create and modify files this directory.</p>
-<p>Any files and directories that are <em>created</em> under <code class="docutils literal notranslate"><span class="pre">/data/datalib/data</span></code> will also be writable by anyone in the <code class="docutils literal notranslate"><span class="pre">datag</span></code> group, but files created elsewhere, <em>e.g.</em> in a user’s home directory, and then <em>moved</em> into <code class="docutils literal notranslate"><span class="pre">/data/datalib/data</span></code> may not be modifiable by other users, which can cause problems if the dataset needs to be updated when the owner is unavailable. The easiest way to avoid this problem is to transfer files directly into <code class="docutils literal notranslate"><span class="pre">/data/datalib/data</span></code> when loading them onto the machine. If you have already created a directory <code class="docutils literal notranslate"><span class="pre">/data/datalib/data/mydir</span></code> with the wrong permissions, you can correct them with the following commands:</p>
-<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>chgrp -R datag /data/datalib/data/mydir
-find /data/datalib/data/mydir -type d -exec chmod g+s {} \;
+<p>Data files (<em>e.g.</em> NetCDF, GRIB, or GeoTIFF files) should be installed in <code class="docutils literal notranslate"><span class="pre">/data/datalib/data</span></code>. All members of the group
+<code class="docutils literal notranslate"><span class="pre">datag</span></code> have permission to create and modify files this directory.</p>
+<p>Any files and directories that are <code class="docutils literal notranslate"><span class="pre">created</span></code> under <code class="docutils literal notranslate"><span class="pre">/data/datalib/data</span></code> will also be writable by anyone in the <code class="docutils literal notranslate"><span class="pre">datag</span></code>
+group, but files created elsewhere, <em>e.g.</em> in a user’s home directory, and then <code class="docutils literal notranslate"><span class="pre">moved</span></code> into <code class="docutils literal notranslate"><span class="pre">/data/datalib/data</span></code> may
+not be modifiable by other users, which can cause problems if the dataset needs to be updated when the owner is
+unavailable. The easiest way to avoid this problem is to transfer files directly into <code class="docutils literal notranslate"><span class="pre">/data/datalib/data</span></code> when loading
+them onto the machine. If you have already created a directory <code class="docutils literal notranslate"><span class="pre">/data/datalib/data/mydir</span></code> with the wrong permissions,
+you can correct them with the following commands:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">chgrp</span> <span class="o">-</span><span class="n">R</span> <span class="n">datag</span> <span class="o">/</span><span class="n">data</span><span class="o">/</span><span class="n">datalib</span><span class="o">/</span><span class="n">data</span><span class="o">/</span><span class="n">mydir</span>
+<span class="n">find</span> <span class="o">/</span><span class="n">data</span><span class="o">/</span><span class="n">datalib</span><span class="o">/</span><span class="n">data</span><span class="o">/</span><span class="n">mydir</span> <span class="o">-</span><span class="nb">type</span> <span class="n">d</span> <span class="o">-</span><span class="n">exec</span> <span class="n">chmod</span> <span class="n">g</span><span class="o">+</span><span class="n">s</span> <span class="p">{}</span> \<span class="p">;</span>
 </pre></div>
 </div>
 </section>
 <section id="database-tables">
 <h3>Database tables<a class="headerlink" href="#database-tables" title="Link to this heading"></a></h3>
-<p>The following command opens a <code class="docutils literal notranslate"><span class="pre">psql</span></code> session to the PostgreSQL database, allowing you to enter SQL queries interactively:</p>
-<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>sudo /usr/local/bin/sql_interactive
+<p>The following command opens a <code class="docutils literal notranslate"><span class="pre">psql</span></code> session to the PostgreSQL database, allowing you to enter SQL queries
+interactively:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">sudo</span> <span class="o">/</span><span class="n">usr</span><span class="o">/</span><span class="n">local</span><span class="o">/</span><span class="nb">bin</span><span class="o">/</span><span class="n">sql_interactive</span>
 </pre></div>
 </div>
-<p>All members of the <code class="docutils literal notranslate"><span class="pre">datag</span></code> group can run this command, even if they don’t have permission to use <code class="docutils literal notranslate"><span class="pre">sudo</span></code> more generally. If the SQL statements you want to run are in <code class="docutils literal notranslate"><span class="pre">~/myfile.sql</span></code>, you can use the following command:</p>
-<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>sudo /usr/local/bin/sql_interactive &lt; ~/myfile.sql
+<p>All members of the <code class="docutils literal notranslate"><span class="pre">datag</span></code> group can run this command, even if they don’t have permission to use <code class="docutils literal notranslate"><span class="pre">sudo</span></code> more generally.
+If the SQL statements you want to run are in <code class="docutils literal notranslate"><span class="pre">~/myfile.sql</span></code>, you can use the following command:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">sudo</span> <span class="o">/</span><span class="n">usr</span><span class="o">/</span><span class="n">local</span><span class="o">/</span><span class="nb">bin</span><span class="o">/</span><span class="n">sql_interactive</span> <span class="o">&lt;</span> <span class="o">~/</span><span class="n">myfile</span><span class="o">.</span><span class="n">sql</span>
 </pre></div>
 </div>
 </section>
@@ -117,31 +128,38 @@ find /data/datalib/data/mydir -type d -exec chmod g+s {} \;
 </section>
 <section id="catalog-entries">
 <h2>Catalog entries<a class="headerlink" href="#catalog-entries" title="Link to this heading"></a></h2>
-<p>The main data catalog is located in <code class="docutils literal notranslate"><span class="pre">/usr/local/datalib/dlentries</span></code>. This copy of the catalog is read-only for non-admin users. The procedure for creating or modifying catalog entries is to push the changes to your git host and then run the <code class="docutils literal notranslate"><span class="pre">update_datalib</span></code> script as described in <a class="reference internal" href="#update-script"><span class="std std-ref">Installing updates</span></a> below.</p>
+<p>The main data catalog is located in <code class="docutils literal notranslate"><span class="pre">/usr/local/datalib/dlentries</span></code>. This copy of the catalog is read-only for non-admin
+users. The procedure for creating or modifying catalog entries is to push the changes to your git host and then run the
+<code class="docutils literal notranslate"><span class="pre">update_datalib</span></code> script as described in <a class="reference internal" href="#update-script"><span class="std std-ref">Installing updates</span></a> below.</p>
 <p>Each user also has his/her own personal data catalog at</p>
-<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>/data/datalib/home/&lt;username&gt;/DataCatalog
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">/</span><span class="n">data</span><span class="o">/</span><span class="n">datalib</span><span class="o">/</span><span class="n">home</span><span class="o">/&lt;</span><span class="n">username</span><span class="o">&gt;/</span><span class="n">DataCatalog</span>
 </pre></div>
 </div>
 <p>You can create and edit <code class="docutils literal notranslate"><span class="pre">index.tex</span></code> files in this directory and then test them by visiting</p>
-<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>http://&lt;servername&gt;/home/.&lt;username&gt;/
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">http</span><span class="p">:</span><span class="o">//&lt;</span><span class="n">servername</span><span class="o">&gt;/</span><span class="n">home</span><span class="o">/.&lt;</span><span class="n">username</span><span class="o">&gt;/</span>
 </pre></div>
 </div>
-<p>in a browser, in order to validate your changes before pushing them to your git host. Your personal data catalog can reference files in either <code class="docutils literal notranslate"><span class="pre">/data/datalib/data</span></code> or <code class="docutils literal notranslate"><span class="pre">/data/datalib/home/&lt;username&gt;</span></code>.</p>
+<p>in a browser, in order to validate your changes before pushing them to your git host. Your personal data catalog can
+reference files in either <code class="docutils literal notranslate"><span class="pre">/data/datalib/data</span></code> or <code class="docutils literal notranslate"><span class="pre">/data/datalib/home/&lt;username&gt;</span></code>.</p>
 </section>
 <section id="maprooms">
 <h2>Maprooms<a class="headerlink" href="#maprooms" title="Link to this heading"></a></h2>
-<p>The maproom HTML pages are located in <code class="docutils literal notranslate"><span class="pre">/usr/local/datalib/maproom</span></code>. As for the main data catalog, these files are read-only; all changes must be made via git. Unlike for data catalog development, maproom development typically takes place on a developer’s own computer rather than on the server. This process is documented elsewhere.</p>
+<p>The maproom HTML pages are located in <code class="docutils literal notranslate"><span class="pre">/usr/local/datalib/maproom</span></code>. As for the main data catalog, these files are
+read-only; all changes must be made via git. Unlike for data catalog development, maproom development typically takes
+place on a developer’s own computer rather than on the server. This process is documented elsewhere.</p>
 </section>
 <section id="installing-updates">
 <span id="update-script"></span><h2>Installing updates<a class="headerlink" href="#installing-updates" title="Link to this heading"></a></h2>
-<p>When you have created or modified a maproom or a dataset and you want to install your changes on the server, perform these steps:</p>
+<p>When you have created or modified a maproom or a dataset, and you want to install your changes on the server, perform
+these steps:</p>
 <ul>
 <li><p>Commit your changes and push them to your git host.</p></li>
 <li><p>On the server, run the following command:</p>
-<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>  sudo /usr/local/bin/update_datalib
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">sudo</span> <span class="o">/</span><span class="n">usr</span><span class="o">/</span><span class="n">local</span><span class="o">/</span><span class="nb">bin</span><span class="o">/</span><span class="n">update_datalib</span>
 </pre></div>
 </div>
-<p>This command pulls the latest versions of the dlentries and maproom repositories, and builds and installs the maproom HTML files from their templates.</p>
+<p>This command pulls the latest versions of the dlentries and maproom repositories, and builds and installs the maproom
+HTML files from their templates.</p>
 </li>
 </ul>
 </section>

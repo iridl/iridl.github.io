@@ -101,23 +101,24 @@
 create an ansible playbook and use it for the initial installation of the
 Data Library software. We also recommend that you use continue using ansible
 to manage configuration changes and software updates over time.</p>
-<p>You must activate the correct python virtual environment in order to use the
-correct ansible playbook. To always use this version of python, you can add
-this line to the end of your ~/.bash_profile file.</p>
+<p>You must activate the correct python virtual environment in order to
+use the correct ansible playbook. To always use this version of
+python, you may want to add this line to the end of your
+<code class="docutils literal notranslate"><span class="pre">~/.bash_profile</span></code> file:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">source</span> <span class="o">/</span><span class="n">opt</span><span class="o">/</span><span class="n">datalib_venv3</span><span class="mf">.12</span><span class="o">/</span><span class="nb">bin</span><span class="o">/</span><span class="n">activate</span>
 </pre></div>
 </div>
 <p>To make a configuration change,</p>
 <ul>
-<li><p>Make sure your local copy of the dlconfig repository is up to date:</p>
+<li><p>Make sure your local copy of the <code class="docutils literal notranslate"><span class="pre">dlconfig</span></code> repository is up to date:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">cd</span> <span class="n">dlconfig</span>
 <span class="n">git</span> <span class="n">pull</span> <span class="o">--</span><span class="n">ff</span><span class="o">-</span><span class="n">only</span>
 </pre></div>
 </div>
+<p>and read the output to be sure that the command succeeded. If there are conflicts, resolve them and pull again before proceeding.</p>
 </li>
 <li><p>Make your changes in <code class="docutils literal notranslate"><span class="pre">playbook.yaml</span></code>.</p></li>
-<li><p>Run the playbook in “check mode” to verify that ansible will make the change
-you intended:</p>
+<li><p>Run the playbook in <em>check mode</em> to verify that the changes that ansible is about to make are the ones you intended:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">./</span><span class="n">run_ansible</span> <span class="o">--</span><span class="n">check</span>
 </pre></div>
 </div>
@@ -128,8 +129,7 @@ the change.</p>
 </pre></div>
 </div>
 </li>
-<li><p>If the Data Library team has made changes to the maprooms that you want to
-integrate, run with <code class="docutils literal notranslate"><span class="pre">--build</span></code> to pull the new changes.</p>
+<li><p>If there have been changes to classic maprooms, run with <code class="docutils literal notranslate"><span class="pre">--build</span></code> to pull the new changes. (Rebuilding classic maprooms is skipped by default, because it is time-consuming.)</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">./</span><span class="n">run_ansible</span> <span class="o">--</span><span class="n">build</span>
 </pre></div>
 </div>
@@ -142,14 +142,18 @@ integrate, run with <code class="docutils literal notranslate"><span class="pre"
 </div>
 </li>
 </ul>
-<p>To update to a new version of the Data Library software, first consult the
-release notes for any backwards-compatibility warnings and manual migration
-steps. Then use <code class="docutils literal notranslate"><span class="pre">ansible-galaxy</span></code> to update the <code class="docutils literal notranslate"><span class="pre">ansible_collections</span></code> directory
-of your dlconfig repository:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">ansible</span><span class="o">-</span><span class="n">galaxy</span> <span class="n">collection</span> <span class="n">install</span> <span class="n">iridl</span><span class="o">.</span><span class="n">iridl</span><span class="o">:==</span><span class="n">x</span><span class="o">.</span><span class="n">y</span><span class="o">.</span><span class="n">z</span>
+<p>To update to a new version of the Data Library software, first check
+<a class="reference external" href="https://github.com/iridl/iridl-ansible">https://github.com/iridl/iridl-ansible</a>
+for any backwards-compatibility warnings or manual migration
+steps. Then use <code class="docutils literal notranslate"><span class="pre">ansible-galaxy</span></code> to update the <code class="docutils literal notranslate"><span class="pre">ansible_collections</span></code>
+directory of your <code class="docutils literal notranslate"><span class="pre">dlconfig</span></code> repository:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">git</span> <span class="n">rm</span> <span class="o">-</span><span class="n">rf</span> <span class="n">ansible_collections</span>
+<span class="n">ansible</span><span class="o">-</span><span class="n">galaxy</span> <span class="n">collection</span> <span class="n">install</span> <span class="o">-</span><span class="n">p</span> <span class="o">.</span> \
+  <span class="n">git</span><span class="o">+</span><span class="n">https</span><span class="p">:</span><span class="o">//</span><span class="n">github</span><span class="o">.</span><span class="n">com</span><span class="o">/</span><span class="n">iridl</span><span class="o">/</span><span class="n">iridl</span><span class="o">-</span><span class="n">ansible</span><span class="o">.</span><span class="n">git</span>
+<span class="n">git</span> <span class="n">add</span> <span class="n">ansible_collections</span>
+<span class="n">git</span> <span class="n">commit</span> <span class="o">-</span><span class="n">m</span> <span class="s2">&quot;Update iridl ansible collection&quot;</span>
 </pre></div>
 </div>
-<p>where <code class="docutils literal notranslate"><span class="pre">x.y.z</span></code> is the new Data Library version number.</p>
 </section>
 <section id="adding-user-accounts">
 <h2>Adding user accounts<a class="headerlink" href="#adding-user-accounts" title="Link to this heading"></a></h2>
@@ -196,19 +200,17 @@ use <code class="docutils literal notranslate"><span class="pre">docker</span> <
 </div>
 </li>
 <li><p>If an embedded image in a maproom is broken/empty, copy the image URL to a new
-browser window and remove the .gif at the end. Sometimes this will get you an
+browser window and remove the <code class="docutils literal notranslate"><span class="pre">.gif</span></code> at the end. Sometimes this will get you an
 informative error message instead of just an empty response.</p></li>
 <li><p>If there’s an error message about a specific file or database table, look into
 that as described below. If no specific file or table is mentioned, identify
 the datasets that are used in the query, and read the catalog entries
 (dlentries) for those datasets to identify the files and/or tables that they
 use.</p></li>
-<li><p>To check on a database table, exec into the postgres container and use psql.
+<li><p>To check on a database table, exec into the postgres container and use <code class="docutils literal notranslate"><span class="pre">psql</span></code>.
 If the table doesn’t exist, either run the sql script that creates it, or add
 it to the sql scripts if it’s missing. If the table exists, check that the
-<strong>readonlyaccess</strong> role has select permission for it. (Our install process is
-supposed to grant that permission, but in rehearsing the installation we have
-sometimes needed to grant it by hand.)</p></li>
+<code class="docutils literal notranslate"><span class="pre">readonlyaccess</span></code> role has select permission for it.</p></li>
 </ul>
 </section>
 </section>
