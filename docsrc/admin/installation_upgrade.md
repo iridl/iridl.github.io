@@ -13,33 +13,34 @@ Make sure you back up the following:
 * `/data`
 * a dump of the postgres database
 
+## Install the new operating system
+
 ```{seealso}
 To install CentOS Stream 10 on the server, please reference {doc}`centos_stream`.
 ```
 
-Installation of the Data Library software is automated using 
-[ansible](https://docs.ansible.com/ansible_community.html), a configuration
-management tool which uses python3.12. If you followed the OS installation process described in {ref}`Install python3.12, git and ansible`, python and ansible should already be installed in `/opt/datalib_venv3.12`.
+## Restore from backup
+Restore `/home` and `/data` from backups, and undump the postgres database.
 
 ## Configure the upgraded Data Library
 
-  ```{seealso}
-  See {ref}`Configure git` to set up your account to work with git.
+Installation of the Data Library software is automated using 
+[ansible](https://docs.ansible.com/ansible_community.html), a configuration
+management tool which uses Python 3.12. If you followed the OS installation process described in {ref}`Install python3.12, git and ansible`, python and ansible are installed in `/opt/datalib_venv3.12`.
+
+
+### Pull the latest version of your old Data Library configuration
+
+Having restored `/home` from backup, you should have a clone of your `dlconfig` repository in your home directory. Run `git pull` in that repository to be certain that your local copy is up to date.
+
+  ```
+  cd ~/dlconfig
+  git pull
   ```
 
-### Clone your old Data Library configuration
+### Upgrade ansible collection
 
-You should already have a DL configuration in bitbucket.  Download that configuration
-here. The following is an example, as your repository name will be different.
-
-  ```
-  git clone git@bitbucket.org:iridl/dlconfig_myconfig.git dlconfig
-  cd dlconfig
-  ```
-
-### Upgrade the ansible_collections
-
-Since you are installing a new version of the ansible galaxy collection, delete the old one before installing the new.
+Delete the old version of the ansible galaxy collection, and then install the new one:
 
   ```
   git rm -rf ansible_collections
@@ -50,39 +51,26 @@ Since you are installing a new version of the ansible galaxy collection, delete 
       git+https://github.com/iridl/iridl-ansible.git
   ```
 
-* The previous commands should have downloaded the collection to a subdirectory
-  called `ansible_collections`. Add that directory to your git repository, 
-  and commit the changes.
+Copy new versions of these three configuration files from the
+collection to the top level of the repository:
 
   ```
-  git add ansible_collections
+  cp ansible_collections/iridl/iridl/example/ansible.cfg .
+  cp ansible_collections/iridl/iridl/example/inventory.cfg .
+  cp ansible_collections/iridl/iridl/example/run-ansible .
+  ```
+
+Commit the new collection and configuration files to your git
+repository, and commit the changes.
+
+  ```
+  git add ansible_collections ansible.cfg inventory.cfg run-ansible
   git commit -m "add new CentOS Stream iridl ansible collection"
   ```
 
-* Copy template configuration files from the collection to the top level of the
-  repository.  The `-b` flag will make a backup of your current files:
+Push your changes to your git server for safe keeping; back up
+`secrets.yaml` by other means, such as copying it to another machine.
 
-  ```
-  cp -b ansible_collections/iridl/iridl/example/* .
-  ```
-
-* Restore your original `playbook.yaml` and `secrets.yaml` files.
-
-  ```
-  mv playbook.yaml~ playbook.yaml
-  rm secrets.yaml
-  ```
-
-  Copy your original `secrets.yaml` file (which is not in the git repository) to the directory above `dlconfig`.
-
-  ```{seealso}
-  The `secrets.yaml` file contains the deployment access key to access the repositories defined in your playbook.yaml
-  file.  Ansible installs the key in a place that is accessible to content authors so they can deploy content updates. See {ref}`Create access key for deployment`.
-  ```
-
-* Commit any new customizations and push them to your git server for safe keeping;
-  back up `secrets.yaml` by other means, such as copying it to another machine.
-* 
   ```
   git commit -m "updates for new version of CentOS"
   git push
@@ -95,9 +83,9 @@ Since you are installing a new version of the ansible galaxy collection, delete 
   version of the DL software, you will run the `ansible-galaxy` command 
   again and commit the new version to your configuration repository.
 
-  * Don't upgrade without checking https://github.com/iridl/iridl-ansible for release notes first, because in some
+  * Before upgrading, check [https://github.com/iridl/iridl-ansible](https://github.com/iridl/iridl-ansible) for release notes, because in some
   cases an upgrade may require manual migration steps. (At this writing, 
   there are no upgrade release notes.)
 ```
 
-From here, you can continue with the New Installation section, starting with {ref}`Run the ansible playbook`.
+From here, you can continue as for a new installation, starting with {ref}`Run the ansible playbook`.
