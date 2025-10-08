@@ -11,7 +11,6 @@ Make sure you back up the following:
 
 * `/home`
 * `/data`
-* a dump of the postgres database
 
 ## Install the new operating system
 
@@ -20,7 +19,7 @@ To install CentOS Stream 10 on the server, please reference {doc}`centos_stream`
 ```
 
 ## Restore from backup
-Restore `/home` and `/data` from backups, and undump the postgres database.
+Restore `/home` and `/data` from backups.
 
 ## Configure the upgraded Data Library
 

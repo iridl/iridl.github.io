@@ -18,8 +18,7 @@ Then search for that CPU in a search engine to find the specifications for that 
 
 * Install CentOS Stream from https://www.centos.org/download.  Select the tab for 10, then download
   the x86\_64 Architecture ISO. We currently only support x86\_64.
-    * To create a bootable CD of the Installation ISO,
-      follow [these instructions](https://docs.centos.org/en-US/centos/install-guide/Making_Media/).
+    * To create a bootable USB of the Installation ISO, use [balenaEtcher](https://etcher.balena.io)
     * Installation Notes
         * Select *Server with GUI* as your Software Selection to make it easier to maintain.
         * When configuring your disk partitions (Installation Destination), Select Customize Storage Configuration.

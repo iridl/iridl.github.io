@@ -123,11 +123,9 @@ If the SQL statements you want to run are in <code class="docutils literal notra
 </section>
 <section id="dataset-and-maproom-development">
 <h2>Dataset and maproom development<a class="headerlink" href="#dataset-and-maproom-development" title="Link to this heading"></a></h2>
-</section>
 <section id="catalog-entries">
-<h2>Catalog entries<a class="headerlink" href="#catalog-entries" title="Link to this heading"></a></h2>
-<p>The main data catalog is located in <code class="docutils literal notranslate"><span class="pre">/usr/local/datalib/dlentries</span></code>. This copy of the catalog is read-only for non-admin
-users. The procedure for creating or modifying catalog entries is to push the changes to your git host and then run the
+<h3>Catalog entries<a class="headerlink" href="#catalog-entries" title="Link to this heading"></a></h3>
+<p>The main data catalog is located in <code class="docutils literal notranslate"><span class="pre">/usr/local/datalib/dlentries</span></code>. This copy of the catalog is read-only. The procedure for creating or modifying catalog entries is to push the changes to your git host and then run the
 <code class="docutils literal notranslate"><span class="pre">update_datalib</span></code> script as described in <a class="reference internal" href="#update-script"><span class="std std-ref">Installing updates</span></a> below.</p>
 <p>Each user also has his/her own personal data catalog at</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">/</span><span class="n">data</span><span class="o">/</span><span class="n">datalib</span><span class="o">/</span><span class="n">home</span><span class="o">/&lt;</span><span class="n">username</span><span class="o">&gt;/</span><span class="n">DataCatalog</span>
@@ -141,25 +139,28 @@ users. The procedure for creating or modifying catalog entries is to push the ch
 reference files in either <code class="docutils literal notranslate"><span class="pre">/data/datalib/data</span></code> or <code class="docutils literal notranslate"><span class="pre">/data/datalib/home/&lt;username&gt;</span></code>.</p>
 </section>
 <section id="maprooms">
-<h2>Maprooms<a class="headerlink" href="#maprooms" title="Link to this heading"></a></h2>
+<h3>Maprooms<a class="headerlink" href="#maprooms" title="Link to this heading"></a></h3>
 <p>The maproom HTML pages are located in <code class="docutils literal notranslate"><span class="pre">/usr/local/datalib/maproom</span></code>. As for the main data catalog, these files are
 read-only; all changes must be made via git. Unlike for data catalog development, maproom development typically takes
 place on a developer’s own computer rather than on the server. This process is documented elsewhere.</p>
 </section>
 <section id="installing-updates">
-<span id="update-script"></span><h2>Installing updates<a class="headerlink" href="#installing-updates" title="Link to this heading"></a></h2>
+<span id="update-script"></span><h3>Installing updates<a class="headerlink" href="#installing-updates" title="Link to this heading"></a></h3>
 <p>When you have created or modified a maproom or a dataset, and you want to install your changes on the server, perform
 these steps:</p>
 <ul>
 <li><p>Commit your changes and push them to your git host.</p></li>
 <li><p>On the server, run the following command:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">sudo</span> <span class="o">/</span><span class="n">usr</span><span class="o">/</span><span class="n">local</span><span class="o">/</span><span class="nb">bin</span><span class="o">/</span><span class="n">update_datalib</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">sudo</span> <span class="n">update</span><span class="o">-</span><span class="n">datalib</span> <span class="o">--</span><span class="n">build</span><span class="o">-</span><span class="n">classic</span>
 </pre></div>
 </div>
-<p>This command pulls the latest versions of the dlentries and maproom repositories, and builds and installs the maproom
-HTML files from their templates.</p>
+<p>This command pulls, builds, and installs the latest versions of the
+dlentries, maproom, and python_maproom repositories. Building the
+classic maprooms can be very time-consuming; if you haven’t changed
+those, you can skip that step by omitting <code class="docutils literal notranslate"><span class="pre">--build-classic</span></code>.</p>
 </li>
 </ul>
+</section>
 </section>
 </section>
 
