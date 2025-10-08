@@ -38,8 +38,7 @@ The Data Library ansible playbook currently targets CentOS Stream
 [9](https://www.centos.org/stream9/) or
 [10](https://www.centos.org/centos10/). IRI does not test or support
 the software on other platforms. There are instructions for installing
-the Operating System in the {doc}` Server Installation Section
-<../server/centos_stream>`.
+the Operating System in {doc}`centos_stream`.
 
 The Data Library services runs under Docker, using docker compose. Most services
 log to stdout, which the Docker daemon forwards to journald. Use the linux 

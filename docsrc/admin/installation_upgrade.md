@@ -14,8 +14,7 @@ Make sure you back up the following:
 * a dump of the postgres database
 
 ```{seealso}
-To install CentOS Stream 10 on the server, please reference {doc}`the Server 
-Installation pages <../server/index>`.
+To install CentOS Stream 10 on the server, please reference {doc}`centos_stream`.
 ```
 
 Installation of the Data Library software is automated using 
@@ -25,7 +24,7 @@ management tool which uses python3.12. If you followed the OS installation proce
 ## Configure the upgraded Data Library
 
   ```{seealso}
-  See {ref}`Configuring git` to set up your account to work with git.
+  See {ref}`Configure git` to set up your account to work with git.
   ```
 
 ### Clone your old Data Library configuration
@@ -78,7 +77,7 @@ Since you are installing a new version of the ansible galaxy collection, delete 
 
   ```{seealso}
   The `secrets.yaml` file contains the deployment access key to access the repositories defined in your playbook.yaml
-  file.  Ansible installs the key in a place that is accessible to content authors so they can deploy content updates. See {ref}`Access key for deployment`.
+  file.  Ansible installs the key in a place that is accessible to content authors so they can deploy content updates. See {ref}`Create access key for deployment`.
   ```
 
 * Commit any new customizations and push them to your git server for safe keeping;

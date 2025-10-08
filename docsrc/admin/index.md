@@ -6,7 +6,8 @@ Data Library software.
 ```{toctree}
 
 overview
-git
+hwrequirements
+centos_stream
 installation
 installation_upgrade
 maintenance

@@ -11,7 +11,6 @@ institutions around the world. It is freely available under the MIT license.
 maxdepth: 3
 caption: "Content:"
 ---
-server/index
-user/index
 admin/index
+user/index
 ```
