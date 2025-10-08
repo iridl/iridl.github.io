@@ -77,5 +77,3 @@ Reboot the server before continuing.
 ```
 sudo shutdown -r now
 ```
-
-Now you can {doc}`Install <../admin/installation>` the Data Library

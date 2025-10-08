@@ -58,16 +58,16 @@
         </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
               <p class="caption" role="heading"><span class="caption-text">Content:</span></p>
 <ul class="current">
-<li class="toctree-l1"><a class="reference internal" href="../server/index.html">Server Installation</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../user/index.html">User Guide</a></li>
 <li class="toctree-l1 current"><a class="reference internal" href="index.html">System Administrator Guide</a><ul class="current">
 <li class="toctree-l2"><a class="reference internal" href="overview.html">Overview</a></li>
-<li class="toctree-l2"><a class="reference internal" href="git.html">Configuring git</a></li>
+<li class="toctree-l2"><a class="reference internal" href="hwrequirements.html">Server Requirements</a></li>
+<li class="toctree-l2"><a class="reference internal" href="centos_stream.html">Install CentOS Stream</a></li>
 <li class="toctree-l2"><a class="reference internal" href="installation.html">Data Library New Installation</a></li>
 <li class="toctree-l2 current"><a class="current reference internal" href="#">Data Library Upgrade Installation</a></li>
 <li class="toctree-l2"><a class="reference internal" href="maintenance.html">Maintenance</a></li>
 </ul>
 </li>
+<li class="toctree-l1"><a class="reference internal" href="../user/index.html">User Guide</a></li>
 </ul>
 
         </div>
@@ -110,17 +110,17 @@ back up the entire system before upgrading your server.</p>
 </ul>
 <div class="admonition seealso">
 <p class="admonition-title">See also</p>
-<p>To install CentOS Stream 10 on the server, please reference <a class="reference internal" href="../server/index.html"><span class="doc">the Server  Installation pages</span></a>.</p>
+<p>To install CentOS Stream 10 on the server, please reference <a class="reference internal" href="centos_stream.html"><span class="doc">Install CentOS Stream</span></a>.</p>
 </div>
 <p>Installation of the Data Library software is automated using
 <a class="reference external" href="https://docs.ansible.com/ansible_community.html">ansible</a>, a configuration
-management tool which uses python3.12. If you followed the OS installation process described in <a class="reference internal" href="../server/centos_stream.html#install-python3-12-git-and-ansible"><span class="std std-ref">Install python3.12, git and ansible</span></a>, python and ansible should already be installed in <code class="docutils literal notranslate"><span class="pre">/opt/datalib_venv3.12</span></code>.</p>
+management tool which uses python3.12. If you followed the OS installation process described in <a class="reference internal" href="centos_stream.html#install-python3-12-git-and-ansible"><span class="std std-ref">Install python3.12, git and ansible</span></a>, python and ansible should already be installed in <code class="docutils literal notranslate"><span class="pre">/opt/datalib_venv3.12</span></code>.</p>
 </section>
 <section id="configure-the-upgraded-data-library">
 <h2>Configure the upgraded Data Library<a class="headerlink" href="#configure-the-upgraded-data-library" title="Link to this heading"></a></h2>
 <div class="admonition seealso">
 <p class="admonition-title">See also</p>
-<p>See <a class="reference internal" href="git.html#configuring-git"><span class="std std-ref">Configuring git</span></a> to set up your account to work with git.</p>
+<p>See <a class="reference internal" href="installation.html#configure-git"><span class="std std-ref">Configure git</span></a> to set up your account to work with git.</p>
 </div>
 <section id="clone-your-old-data-library-configuration">
 <h3>Clone your old Data Library configuration<a class="headerlink" href="#clone-your-old-data-library-configuration" title="Link to this heading"></a></h3>
@@ -166,7 +166,7 @@ repository.  The <code class="docutils literal notranslate"><span class="pre">-b
 <div class="admonition seealso">
 <p class="admonition-title">See also</p>
 <p>The <code class="docutils literal notranslate"><span class="pre">secrets.yaml</span></code> file contains the deployment access key to access the repositories defined in your playbook.yaml
-file.  Ansible installs the key in a place that is accessible to content authors so they can deploy content updates. See <a class="reference internal" href="git.html#access-key-for-deployment"><span class="std std-ref">Access key for deployment</span></a>.</p>
+file.  Ansible installs the key in a place that is accessible to content authors so they can deploy content updates. See <a class="reference internal" href="installation.html#create-access-key-for-deployment"><span class="std std-ref">Create access key for deployment</span></a>.</p>
 </div>
 </li>
 <li><p>Commit any new customizations and push them to your git server for safe keeping;

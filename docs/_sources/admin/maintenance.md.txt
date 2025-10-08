@@ -4,7 +4,7 @@
 
 ## Configuration updates using ansible
 
-The {doc}`Data Library New Installation <installation>` section explains how to
+The {doc}`installation` section explains how to
 create an ansible playbook and use it for the initial installation of the 
 Data Library software. We also recommend that you use continue using ansible
 to manage configuration changes and software updates over time.

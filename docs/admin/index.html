@@ -33,7 +33,7 @@
     <script src="../_static/js/theme.js"></script>
     <link rel="search" title="Search" href="../search.html" />
     <link rel="next" title="Overview" href="overview.html" />
-    <link rel="prev" title="User Guide" href="../user/index.html" /> 
+    <link rel="prev" title="IRI Data Library Documentation" href="../index.html" /> 
 </head>
 
 <body class="wy-body-for-nav"> 
@@ -58,16 +58,16 @@
         </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
               <p class="caption" role="heading"><span class="caption-text">Content:</span></p>
 <ul class="current">
-<li class="toctree-l1"><a class="reference internal" href="../server/index.html">Server Installation</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../user/index.html">User Guide</a></li>
 <li class="toctree-l1 current"><a class="current reference internal" href="#">System Administrator Guide</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="overview.html">Overview</a></li>
-<li class="toctree-l2"><a class="reference internal" href="git.html">Configuring git</a></li>
+<li class="toctree-l2"><a class="reference internal" href="hwrequirements.html">Server Requirements</a></li>
+<li class="toctree-l2"><a class="reference internal" href="centos_stream.html">Install CentOS Stream</a></li>
 <li class="toctree-l2"><a class="reference internal" href="installation.html">Data Library New Installation</a></li>
 <li class="toctree-l2"><a class="reference internal" href="installation_upgrade.html">Data Library Upgrade Installation</a></li>
 <li class="toctree-l2"><a class="reference internal" href="maintenance.html">Maintenance</a></li>
 </ul>
 </li>
+<li class="toctree-l1"><a class="reference internal" href="../user/index.html">User Guide</a></li>
 </ul>
 
         </div>
@@ -108,16 +108,41 @@ Data Library software.</p>
 <li class="toctree-l2"><a class="reference internal" href="overview.html#important-file-and-directory-paths">Important file and directory paths</a></li>
 </ul>
 </li>
-<li class="toctree-l1"><a class="reference internal" href="git.html">Configuring git</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="git.html#create-the-administrator-s-personal-key-pair">Create the administrator’s personal key pair</a></li>
-<li class="toctree-l2"><a class="reference internal" href="git.html#add-the-administrator-s-public-key-to-bitbucket">Add the administrator’s public key to Bitbucket</a></li>
-<li class="toctree-l2"><a class="reference internal" href="git.html#access-key-for-deployment">Access key for deployment</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="git.html#add-the-access-key-to-bitbucket">Add the access key to Bitbucket</a></li>
+<li class="toctree-l1"><a class="reference internal" href="hwrequirements.html">Server Requirements</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="hwrequirements.html#cpu">CPU</a></li>
+<li class="toctree-l2"><a class="reference internal" href="hwrequirements.html#ram">RAM</a></li>
+<li class="toctree-l2"><a class="reference internal" href="hwrequirements.html#storage">Storage</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="hwrequirements.html#backups">Backups</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="hwrequirements.html#graphics">Graphics</a></li>
+<li class="toctree-l2"><a class="reference internal" href="hwrequirements.html#ups">UPS</a></li>
+<li class="toctree-l2"><a class="reference internal" href="hwrequirements.html#basic-requirements">Basic Requirements</a></li>
+<li class="toctree-l2"><a class="reference internal" href="hwrequirements.html#high-end-requirements">High-End Requirements</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="centos_stream.html">Install CentOS Stream</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="centos_stream.html#prepare-the-server">Prepare the server</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="centos_stream.html#install-the-operating-system">Install the  Operating System</a></li>
+<li class="toctree-l3"><a class="reference internal" href="centos_stream.html#post-operating-system-installation">Post Operating System Installation</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="centos_stream.html#update-packages">Update Packages</a></li>
+<li class="toctree-l4"><a class="reference internal" href="centos_stream.html#disable-selinux">Disable SELinux</a></li>
+<li class="toctree-l4"><a class="reference internal" href="centos_stream.html#install-python3-12-git-and-ansible">Install python3.12, git and ansible</a></li>
+<li class="toctree-l4"><a class="reference internal" href="centos_stream.html#reboot">Reboot</a></li>
+</ul>
+</li>
 </ul>
 </li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="installation.html">Data Library New Installation</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="installation.html#configure-git">Configure git</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="installation.html#create-the-administrator-s-personal-key-pair">Create the administrator’s personal key pair</a></li>
+<li class="toctree-l3"><a class="reference internal" href="installation.html#add-the-administrator-s-public-key-to-bitbucket">Add the administrator’s public key to Bitbucket</a></li>
+<li class="toctree-l3"><a class="reference internal" href="installation.html#create-access-key-for-deployment">Create access key for deployment</a></li>
+<li class="toctree-l3"><a class="reference internal" href="installation.html#add-deployment-access-key-to-bitbucket">Add deployment access key to Bitbucket</a></li>
+</ul>
+</li>
 <li class="toctree-l2"><a class="reference internal" href="installation.html#configure-the-data-library">Configure the Data Library</a></li>
 <li class="toctree-l2"><a class="reference internal" href="installation.html#run-the-ansible-playbook">Run the ansible playbook</a></li>
 <li class="toctree-l2"><a class="reference internal" href="installation.html#install-datasets">Install datasets</a></li>
