@@ -1,11 +1,11 @@
 # Data Library New Installation
 
-This section provides instructions for installing a new Data Library software on a
-server configured with CentOS Stream 9 or 10.
+This section provides instructions for installing a new instance of
+the Data Library software on a server configured with CentOS Stream 9
+or 10.
 
 ```{seealso}
-To install CentOS Stream on the server, please reference {doc}`the Server 
-Installation pages <centos_stream>`.
+To install CentOS Stream on the server, please reference {doc}`centos_stream`.
 ```
 
 Installation of the Data Library software is automated using 
