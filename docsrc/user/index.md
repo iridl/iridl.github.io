@@ -46,8 +46,7 @@ sudo /usr/local/bin/sql_interactive < ~/myfile.sql
 
 ### Catalog entries
 
-The main data catalog is located in `/usr/local/datalib/dlentries`. This copy of the catalog is read-only for non-admin
-users. The procedure for creating or modifying catalog entries is to push the changes to your git host and then run the
+The main data catalog is located in `/usr/local/datalib/dlentries`. This copy of the catalog is read-only. The procedure for creating or modifying catalog entries is to push the changes to your git host and then run the
 `update_datalib` script as described in [](update-script) below.
 
 Each user also has his/her own personal data catalog at
@@ -83,8 +82,10 @@ these steps:
 * On the server, run the following command:
 
     ```
-    sudo /usr/local/bin/update_datalib
+    sudo update-datalib --build-classic
     ```
 
-  This command pulls the latest versions of the dlentries and maproom repositories, and builds and installs the maproom
-  HTML files from their templates.
+  This command pulls, builds, and installs the latest versions of the
+  dlentries, maproom, and python_maproom repositories. Building the
+  classic maprooms can be very time-consuming; if you haven't changed
+  those, you can skip that step by omitting `--build-classic`.
