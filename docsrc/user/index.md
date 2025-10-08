@@ -44,7 +44,7 @@ sudo /usr/local/bin/sql_interactive < ~/myfile.sql
 
 ## Dataset and maproom development
 
-## Catalog entries
+### Catalog entries
 
 The main data catalog is located in `/usr/local/datalib/dlentries`. This copy of the catalog is read-only for non-admin
 users. The procedure for creating or modifying catalog entries is to push the changes to your git host and then run the
@@ -65,7 +65,7 @@ http://<servername>/home/.<username>/
 in a browser, in order to validate your changes before pushing them to your git host. Your personal data catalog can
 reference files in either `/data/datalib/data` or `/data/datalib/home/<username>`.
 
-## Maprooms
+### Maprooms
 
 The maproom HTML pages are located in `/usr/local/datalib/maproom`. As for the main data catalog, these files are
 read-only; all changes must be made via git. Unlike for data catalog development, maproom development typically takes
@@ -73,7 +73,7 @@ place on a developer's own computer rather than on the server. This process is d
 
 (update-script)=
 
-## Installing updates
+### Installing updates
 
 When you have created or modified a maproom or a dataset, and you want to install your changes on the server, perform
 these steps:
