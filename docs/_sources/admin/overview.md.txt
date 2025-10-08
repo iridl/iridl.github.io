@@ -1,29 +1,59 @@
-(overview)=
-
 # Overview
 
-This section gives an overview of the components of the Data Library system.
+## Prerequisites
 
-(infrastructure)=
+This is not a tutorial on linux system administration. We assume the reader is
+able to perform tasks such as:
+
+* Install a linux distribution on a server.
+* Manage storage volumes, *e.g.* configure LVM; configure RAID; format and mount
+  filesystems.
+* Manage unix users and groups, *e.g.* create a user, set a user's password, add
+  a user to a group.
+* Manage ssh keys for use with ssh and git.
+* Manage containerized services using [docker](https://docker.com).
+* Create a git repository, commit content to the repository, collaborate with
+  others by pushing, pulling and merging git branches.
+
+If you need to acquire these skills, we recommend the following resources:
+
+* [Red Hat System Administration I](https://www.redhat.com/en/services/training/rh124-red-hat-system-administration-i)
+* [Red Hat System Administration II](https://www.redhat.com/en/services/training/rh134-red-hat-system-administration-ii)
+* [Docker Overview](https://docs.docker.com/get-started/overview/)
+* [Get Started with Docker](https://docs.docker.com/guides/get-started/)
+* [Pro Git](https://git-scm.com/book/en/v2)
+* [Git User Manual](https://git-scm.com/docs/user-manual)
+
+```{note}
+You will be using [ansible](https://docs.ansible.com/ansible_community.html), a 
+configuration management tool, to install and configure the Data Library 
+software. This guide does not assume prior familiarity with ansible, but after
+working through the installation instructions we recommend you read the 
+ansible documentation.
+```
 
 ## Infrastructure
 
-The Data Library ansible playbook currently targets CentOS7 and CentOS Stream 9.
-IRI does not test or support the software on other
-platforms. CentOS7 is at its End of Life, and is no longer recommended to
-install.
+The Data Library ansible playbook currently targets CentOS Stream
+[9](https://www.centos.org/stream9/) or
+[10](https://www.centos.org/centos10/). IRI does not test or support
+the software on other platforms. There are instructions for installing
+the Operating System in {doc}`centos_stream`.
 
 The Data Library services runs under Docker, using docker compose. Most services
-log to stdout, which the Docker daemon
-forwards to journald.
+log to stdout, which the Docker daemon forwards to journald. Use the linux 
+command 
+[journalctl](https://man7.org/linux/man-pages/man1/journalctl.1.html) to view 
+the log files.
+
+(ansible)=
 
 ## Configuration management using ansible
 
 Installation and configuration of the Data Library software is automated
 using [ansible](https://docs.ansible.com/ansible_community.html), a
-configuration management tool. Automating the
-installation and configuration process has the following advantages over doing
-it by hand:
+configuration management tool. Automating the installation and configuration
+process has the following advantages over doing it by hand:
 
 * Convenience: an automated installation process makes setting up a new Data
   Library site quicker.
@@ -46,106 +76,114 @@ manage the server's configuration.
   server.
 * An ansible playbook can be run in "check mode". In this mode, the playbook
   makes no changes, but merely reports any
-  differences between the server's configuration and the desired state. Knowing
-  what changes the tool will make before
-  it makes them gives the administrator more confidence in the tool and helps
-  avoid some kinds of configuration errors.
+  differences between the server's configuration and the desired state.
+  Knowing what changes the tool will make before it makes them gives the
+  administrator more confidence in the tool and helps avoid some kinds of
+  configuration errors.
 
 ## Software components
 
-The system is composed of four containerized services.
+The Data Library system is composed of five containerized services.
 
-- **squid** is configured as both forward and reverse proxy. This is the only
+* __Squid__ is configured as both forward and reverse proxy. This is the only
   service that is directly reachable from
   the public network interface (the others listen only on a docker virtual
   network). Docker forwards the host's port 80
   to squid, which then forwards each request to one of the three other services
   depending on the URL path.
-- **ingrid** is a web application for browsing, analyzing, and visualizing
+* __Ingrid__ is a web application for browsing, analyzing, and visualizing
   climate data in a browser.
-- **PostgreSQL** is used by ingrid to store relational data. It is used with the
+* __PostgreSQL__ is used by ingrid to store relational data. It is used with the
   PostGIS plugin to store GIS shapes,
   particularly boundaries of administrative regions (countries, states, cities,
   *etc.*) and bodies of water.
-- Apache **httpd** serves web applications called *maprooms*. Whereas ingrid is
-  a general-purpose tool that lets the
+* __Apache httpd__ serves web applications called _classic maprooms_. Whereas ingrid
+  is a general-purpose tool that lets the
   user perform arbitrary calculations, each maproom is tailored to a particular
   dataset and a particular application.
   Maprooms typically embed interactive maps that are generated by ingrid.
+* __Python maprooms__ are a second generation of maprooms written in python with the xarray and dash libraries.
 
-Squid routes the root URL `/` and URLs that begin with `/maproom` to httpd; all
+Squid routes the root URL `/` and URLs that begin with `/maproom` to httpd, and urls beginning with `python_maproom` to the python maproom container. All
 other URLs are routed to ingrid.
-
-(groups)=
 
 ## User groups
 
 Two kinds of users will need accounts (unix logins) on a Data Library server:
 
-- **Administrators** are responsible for system configuration, software updates,
+* __Administrators__ are responsible for system configuration, software updates,
   backups, and user support. They are
   members of the `wheel` group and thus have permission to assume root
   privileges using `sudo`.
-- **Authors** are responsible for adding and extending datasets to the Data
-  Library, and for creating maprooms. By
-  virtue of being members of the `datag` group, they have permission to add data
-  files to the directory read by ingrid,
-  and to execute SQL queries that modify ingrid's database. They don't have
-  general `sudo` privileges, but they are
-  granted targeted permission to run certain scripts in `/usr/local/bin` as
-  root.
 
-User accounts for authors are managed by the ansible playbook, but
-administrators are not.
+* __Authors__ are responsible for adding and extending datasets to the Data
+  Library, and for creating maprooms. By virtue of being members of the 
+  `datag` group, they have permission to add data files to the directory read by 
+  ingrid, and to execute SQL queries that modify ingrid's database. They don't 
+  have general `sudo` privileges, but they are granted targeted permission 
+  to run certain scripts in `/usr/local/bin` as root.
+
+```{note}
+Each Administrator should install the ansible configuration in their home 
+directories instead of sharing a single account. This prevents the need for 
+sharing passwords and also insures it is known who made changes to the 
+configurations for accountability.
+
+User accounts for Authors are managed by the ansible playbook, but 
+Administrators are not.
+```
 
 (paths)=
 
 ## Important file and directory paths
 
-Ingrid datasets are defined in a *data catalog*, which is developed in a git
-repository traditionally named `dlentries`
-or `dlentries_countryname`, e.g. `dlentries_madagascar`. Authors cannot edit
-ingrid's copy of the data catalog directly;
-to make changes, they edit the catalog in another location, push their changes
-to their git host, and then
-run `/usr/local/bin/update_datalib` on the server, which downloads the latest
-catalog from the git host.
+Ingrid datasets are defined in a _data catalog_, which is developed in a git
+repository traditionally named `dlentries` or `dlentries_countryname`, *e.g.* 
+`dlentries_madagascar`. Authors cannot edit ingrid's copy of the data 
+catalog directly; to make changes, they edit the catalog in another location,
+push their changes to their central git repository, and then run
+
+```
+/usr/local/bin/update_datalib 
+```
+
+on the server, which downloads the latest catalog from the git host.
 
 Catalog entries refer to data files, which should be located in subdirectories
-of `/data/datalib/data`. Members of
-the `datag` group have permission to write to that directory, and ingrid has
-permission to read from it.
+of `/data/datalib/data`. Members of the `datag` group have permission to 
+write to that directory, and ingrid has permission to read from it.
 
 Each member of the `datag` group also has their own personal data catalog,
-located
-in `/data/datalib/home/<username>/DataCatalog`. Whereas authors don't have
-permission to edit the main data catalog
-except by pushing changes to the git host, each author can edit their own
-personal data catalog directly. This is useful
-for testing catalog entries during development.
+located in `/data/datalib/home/<username>/DataCatalog`. Whereas authors
+don't have permission to edit the main data catalog except by pushing changes to
+the git host, each author can edit their own personal data catalog directly.
+This is useful for testing catalog entries during development.
 
-Catalog entries in the main catalog should refer to data files located
-in `/data/datalib/data`. All members of
-the `datag` group have permission to modify the files in that directory. Catalog
-entries in personal data catalogs can
+Catalog entries in the main catalog should refer to data files located in
+`/data/datalib/data`. All members of the `datag` group have permission to modify
+the files in that directory. Catalog entries in personal data catalogs can
 refer to data files in `/data/datalib/data` or `/data/datalib/home/<username>`.
 
-Configuration files for the Data Library services are located
-under `/usr/local/datalib`. In particular, the
-docker-compose file that defines the Data Library services
-is  `/usr/local/datalib/docker-compose.yaml`, so do use
-the `docker-compose` command to manage services, an administrator should
-first `cd /usr/local/datalib` and then
-run `sudo docker-compose`. Note that administrators should not edit most
+Configuration files for the Data Library services are located under
+`/usr/local/datalib`. In particular, the docker compose file that defines 
+the Data Library services is `/usr/local/datalib/docker-compose.yaml`, so to use
+the `docker compose` command to manage services, an administrator should
+
+```
+cd /usr/local/datalib
+sudo docker-compose
+```
+
+```{note}
+Administrators should not edit most
 configuration files directly. The configuration
 is managed by ansible, so changes should be made by modifying the ansible
 configuration and then applying it
-using `ansible-playbook`. This process will be explained in more detail below.
+using `run-ansible`. This process will be explained in more detail in the {ref}`Data Library New Installation` section.
+```
 
 In the typical configuration, `/data` is a mount point for a large storage
-volume that is distinct from the root volume.
-In addition to `/data/datalib`, which was mentioned above, there
-is `/data/docker`. `/var/lib/docker` is a symbolic link
-to `/data/docker`, so data created by the Docker daemon and containers, such as
-container images and volumes, are stored
-in that directory.
+volume that is distinct from the root volume. In addition to `/data/datalib`,
+which was mentioned above, there is `/data/docker`. `/var/lib/docker` is a
+symbolic link to `/data/docker`, so data created by the Docker daemon and
+containers, such as container images and volumes, are stored in that directory.

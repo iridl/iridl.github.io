@@ -1,0 +1,213 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-VGXWMJJGTJ"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'G-VGXWMJJGTJ');
+    </script>
+    
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Install CentOS Stream &mdash; IRI Data Library  documentation</title>
+      <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=b86133f3" />
+      <link rel="stylesheet" type="text/css" href="../_static/css/theme.css?v=e59714d7" />
+      <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=76b2166b" />
+      <link rel="stylesheet" type="text/css" href="../_static/custom.css" />
+
+  
+    <link rel="canonical" href="https://dldocs.iri.columbia.edu/admin/centos_stream.html" />
+      <script src="../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="../_static/documentation_options.js?v=5929fcd5"></script>
+      <script src="../_static/doctools.js?v=9bcbadda"></script>
+      <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+      <script src="../_static/clipboard.min.js?v=a7894cd8"></script>
+      <script src="../_static/copybutton.js?v=f281be69"></script>
+    <script src="../_static/js/theme.js"></script>
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Data Library New Installation" href="installation.html" />
+    <link rel="prev" title="Server Requirements" href="hwrequirements.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../index.html" class="icon icon-home">
+            IRI Data Library
+              <img src="../_static/iri_icon_white.svg" class="logo" alt="Logo"/>
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Content:</span></p>
+<ul class="current">
+<li class="toctree-l1 current"><a class="reference internal" href="index.html">System Administrator Guide</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="overview.html">Overview</a></li>
+<li class="toctree-l2"><a class="reference internal" href="hwrequirements.html">Server Requirements</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">Install CentOS Stream</a></li>
+<li class="toctree-l2"><a class="reference internal" href="installation.html">Data Library New Installation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="installation_upgrade.html">Data Library Upgrade Installation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="maintenance.html">Maintenance</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../user/index.html">User Guide</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">IRI Data Library</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content style-external-links">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="index.html">System Administrator Guide</a></li>
+      <li class="breadcrumb-item active">Install CentOS Stream</li>
+      <li class="wy-breadcrumbs-aside">
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="install-centos-stream">
+<span id="install-centos"></span><h1>Install CentOS Stream<a class="headerlink" href="#install-centos-stream" title="Link to this heading"></a></h1>
+<p>This section provides instructions for installing the Linux CentOS Stream Operating System for use by the Data Library.
+If you are upgrading from an older server, make sure you have a full backup of your current system before following
+these instructions, which will completely erase the drive you are installing on.</p>
+<p>We recommend CentOS Stream 10.  If your CPU isn’t supported by CentOS Stream 10, CentOS Stream 9 will also work. CentOS7 is beyond its end of life and is no longer recommended to install.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>CentOS Stream 10 requires an AMD/Intel 64-bit x86_64_v3 CPU or higher.  Typically, any CPU less than 10 years old
+should support CentOS Stream 10.  To find out for sure: Linux - use the command lscpu;  Windows - use “About This Computer”.
+Then search for that CPU in a search engine to find the specifications for that CPU.</p>
+</div>
+<section id="install-the-operating-system">
+<h2>Install the  Operating System<a class="headerlink" href="#install-the-operating-system" title="Link to this heading"></a></h2>
+<ul class="simple">
+<li><p>Install CentOS Stream from https://www.centos.org/download.  Select the tab for 10, then download
+the x86_64 Architecture ISO. We currently only support x86_64.</p>
+<ul>
+<li><p>To create a bootable USB of the Installation ISO, use <a class="reference external" href="https://etcher.balena.io">balenaEtcher</a></p></li>
+<li><p>Installation Notes</p>
+<ul>
+<li><p>Select <em>Server with GUI</em> as your Software Selection to make it easier to maintain.</p></li>
+<li><p>When configuring your disk partitions (Installation Destination), Select Customize Storage Configuration.</p>
+<ul>
+<li><p>Use LVM when creating the filesystems. This is the default.</p>
+<ul>
+<li><p>Don’t modify /boot or /boot/efi</p></li>
+</ul>
+</li>
+<li><p>Increase root partition to 100GB</p></li>
+<li><p>Create a /data partition large enough to hold all your
+data now and in the future. Many users put /data on a
+separate disk (or disk array) from the operating system.</p></li>
+<li><p>Create a /home partition large enough to house your users’ data.</p></li>
+<li><p>Leave 10% of the disk unallocated. This will allow you to create
+snapshots or increase the size of partitions later if necessary.</p></li>
+</ul>
+</li>
+<li><p>Configure the Network and Hostname (and DNS) appropriately for your network.</p></li>
+<li><p>Set the appropriate Time and Date.</p></li>
+<li><p>Create a Secure Root Password</p></li>
+<li><p>Create a user account for a system administrator.<br />
+Under the Advanced configuration section, make the user a member of the <code class="docutils literal notranslate"><span class="pre">wheel</span></code> group so they will be able to
+perform commands as root using <code class="docutils literal notranslate"><span class="pre">sudo</span></code>.</p></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</section>
+<section id="post-operating-system-installation">
+<h2>Post Operating System Installation<a class="headerlink" href="#post-operating-system-installation" title="Link to this heading"></a></h2>
+<p>Once the server boots up after the installation, you can install the requirements necessary for
+installing the Data Library Software. You must have <code class="docutils literal notranslate"><span class="pre">sudo</span></code> privileges on your account.</p>
+<section id="update-packages">
+<h3>Update Packages<a class="headerlink" href="#update-packages" title="Link to this heading"></a></h3>
+<p>You should install the latest updates to the Operating System before continuing.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">sudo</span> <span class="n">dnf</span> <span class="o">-</span><span class="n">y</span> <span class="n">update</span>
+</pre></div>
+</div>
+</section>
+<section id="disable-selinux">
+<h3>Disable SELinux<a class="headerlink" href="#disable-selinux" title="Link to this heading"></a></h3>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">sudo</span> <span class="n">sed</span> <span class="o">-</span><span class="n">i</span> <span class="n">s</span><span class="o">/</span><span class="n">SELINUX</span><span class="o">=</span><span class="n">enforcing</span><span class="o">/</span><span class="n">SELINUX</span><span class="o">=</span><span class="n">permissive</span><span class="o">/</span> <span class="o">/</span><span class="n">etc</span><span class="o">/</span><span class="n">selinux</span><span class="o">/</span><span class="n">config</span> 
+<span class="n">sudo</span> <span class="n">setenforce</span> <span class="n">permissive</span>
+</pre></div>
+</div>
+</section>
+<section id="install-python3-12-git-and-ansible">
+<h3>Install python3.12, git and ansible<a class="headerlink" href="#install-python3-12-git-and-ansible" title="Link to this heading"></a></h3>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">sudo</span> <span class="n">dnf</span> <span class="n">install</span> <span class="o">-</span><span class="n">y</span> <span class="n">git</span> <span class="n">python3</span><span class="mf">.12</span>
+<span class="n">sudo</span> <span class="n">python3</span><span class="mf">.12</span> <span class="o">-</span><span class="n">m</span> <span class="n">venv</span> <span class="o">/</span><span class="n">opt</span><span class="o">/</span><span class="n">datalib_venv3</span><span class="mf">.12</span>
+<span class="n">sudo</span> <span class="o">/</span><span class="n">opt</span><span class="o">/</span><span class="n">datalib_venv3</span><span class="mf">.12</span><span class="o">/</span><span class="nb">bin</span><span class="o">/</span><span class="n">pip</span> <span class="n">install</span> <span class="o">--</span><span class="n">upgrade</span> <span class="n">pip</span>
+<span class="n">sudo</span> <span class="o">/</span><span class="n">opt</span><span class="o">/</span><span class="n">datalib_venv3</span><span class="mf">.12</span><span class="o">/</span><span class="nb">bin</span><span class="o">/</span><span class="n">pip</span> <span class="n">install</span> <span class="n">ansible</span><span class="o">==</span><span class="mf">11.3.0</span> <span class="n">requests</span><span class="o">==</span><span class="mf">2.32.3</span>
+</pre></div>
+</div>
+</section>
+<section id="reboot">
+<h3>Reboot<a class="headerlink" href="#reboot" title="Link to this heading"></a></h3>
+<p>Reboot the server before continuing.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">sudo</span> <span class="n">shutdown</span> <span class="o">-</span><span class="n">r</span> <span class="n">now</span>
+</pre></div>
+</div>
+</section>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2025, IRI.</p>
+  </div>
+
+  
+
+<div>For support or more information, contact <a href='mailto:help@iri.columbia.edu'>help@iri.columbia.edu</a></div>
+
+
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

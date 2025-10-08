@@ -1,287 +1,354 @@
+
+
 <!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
-<html lang="en" data-content_root="../">
-  <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-VGXWMJJGTJ"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'G-VGXWMJJGTJ');
+    </script>
+    
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Data Library New Installation &mdash; IRI Data Library  documentation</title>
+      <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=b86133f3" />
+      <link rel="stylesheet" type="text/css" href="../_static/css/theme.css?v=e59714d7" />
+      <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=76b2166b" />
+      <link rel="stylesheet" type="text/css" href="../_static/custom.css" />
 
-    <title>Installation &#8212; IRI Data Library  documentation</title>
-    <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=03e43079" />
-    <link rel="stylesheet" type="text/css" href="../_static/classic.css?v=2bf1fcf8" />
-    
-    <script src="../_static/documentation_options.js?v=5929fcd5"></script>
-    <script src="../_static/doctools.js?v=9bcbadda"></script>
-    <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
-    
+  
     <link rel="canonical" href="https://dldocs.iri.columbia.edu/admin/installation.html" />
+      <script src="../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="../_static/documentation_options.js?v=5929fcd5"></script>
+      <script src="../_static/doctools.js?v=9bcbadda"></script>
+      <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+      <script src="../_static/clipboard.min.js?v=a7894cd8"></script>
+      <script src="../_static/copybutton.js?v=f281be69"></script>
+    <script src="../_static/js/theme.js"></script>
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="Maintenance" href="maintenance.html" />
-    <link rel="prev" title="Overview" href="overview.html" /> 
-  </head><body>
-    <div class="related" role="navigation" aria-label="Related">
-      <h3>Navigation</h3>
-      <ul>
-        <li class="right" style="margin-right: 10px">
-          <a href="maintenance.html" title="Maintenance"
-             accesskey="N">next</a></li>
-        <li class="right" >
-          <a href="overview.html" title="Overview"
-             accesskey="P">previous</a> |</li>
-        <li class="nav-item nav-item-0"><a href="../index.html">IRI Data Library  documentation</a> &#187;</li>
-          <li class="nav-item nav-item-1"><a href="index.html" accesskey="U">System Administrator Guide</a> &#187;</li>
-        <li class="nav-item nav-item-this"><a href="">Installation</a></li> 
-      </ul>
-    </div>  
+    <link rel="next" title="Data Library Upgrade Installation" href="installation_upgrade.html" />
+    <link rel="prev" title="Install CentOS Stream" href="centos_stream.html" /> 
+</head>
 
-    <div class="document">
-      <div class="documentwrapper">
-        <div class="bodywrapper">
-          <div class="body" role="main">
-            
-  <section id="installation">
-<span id="id1"></span><h1>Installation<a class="headerlink" href="#installation" title="Link to this heading">¶</a></h1>
-<p>This section provides instructions for installing the Data Library software on a
-server.</p>
-<p>Installation of the Data Library software is automated
-using <a class="reference external" href="https://docs.ansible.com/ansible_community.html">ansible</a>,
-a configuration management tool.</p>
-<section id="prepare-the-server">
-<h2>Prepare the server<a class="headerlink" href="#prepare-the-server" title="Link to this heading">¶</a></h2>
-<p>Before running the installation script, perform the following steps to prepare
-the server:</p>
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../index.html" class="icon icon-home">
+            IRI Data Library
+              <img src="../_static/iri_icon_white.svg" class="logo" alt="Logo"/>
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Content:</span></p>
+<ul class="current">
+<li class="toctree-l1 current"><a class="reference internal" href="index.html">System Administrator Guide</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="overview.html">Overview</a></li>
+<li class="toctree-l2"><a class="reference internal" href="hwrequirements.html">Server Requirements</a></li>
+<li class="toctree-l2"><a class="reference internal" href="centos_stream.html">Install CentOS Stream</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">Data Library New Installation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="installation_upgrade.html">Data Library Upgrade Installation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="maintenance.html">Maintenance</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../user/index.html">User Guide</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">IRI Data Library</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content style-external-links">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="index.html">System Administrator Guide</a></li>
+      <li class="breadcrumb-item active">Data Library New Installation</li>
+      <li class="wy-breadcrumbs-aside">
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="data-library-new-installation">
+<h1>Data Library New Installation<a class="headerlink" href="#data-library-new-installation" title="Link to this heading"></a></h1>
+<p>This section provides instructions for installing a new instance of
+the Data Library software on a server configured with CentOS Stream 9
+or 10.</p>
+<div class="admonition seealso">
+<p class="admonition-title">See also</p>
+<p>To install CentOS Stream on the server, please reference <a class="reference internal" href="centos_stream.html"><span class="doc">Install CentOS Stream</span></a>.</p>
+</div>
+<p>Installation of the Data Library software is automated using
+<a class="reference external" href="https://docs.ansible.com/ansible_community.html">ansible</a>, a configuration
+management tool which uses python3.12. A virtual python environment for this
+should already be installed in <code class="docutils literal notranslate"><span class="pre">/opt/datalib_venv3.12</span></code>, if the server
+installation process was followed.
+See <a class="reference internal" href="centos_stream.html#install-python3-12-git-and-ansible"><span class="std std-ref">Install python3.12, git and ansible</span></a>.</p>
+<section id="configure-git">
+<h2>Configure git<a class="headerlink" href="#configure-git" title="Link to this heading"></a></h2>
+<p>We currently use <a class="reference external" href="https://bitbucket.org">bitbucket.org</a> as our git cloud repository.</p>
+<p>The person installing and maintaining the Data Library should already have an account or should <a class="reference external" href="https://id.atlassian.com/signup?application=bitbucket&amp;amp;continue=https%3A%2F%2Fbitbucket.org%2Faccount%2Fsignin%2F%3Fnext%3D%252F%26redirectCount%3D1">create an account</a>
+on <a class="reference external" href="https://bitbucket.org">https://bitbucket.org</a>. Each person maintaining the Data Library should have their own account and
+follow these instructions individually.</p>
+<p>Once you have an account, inform the <a class="reference external" href="mailto:help&#37;&#52;&#48;iri&#46;columbia&#46;edu">Data Library staff</a> to grant you access to the repositories.</p>
+<section id="create-the-administrator-s-personal-key-pair">
+<h3>Create the administrator’s personal key pair<a class="headerlink" href="#create-the-administrator-s-personal-key-pair" title="Link to this heading"></a></h3>
 <ul>
-<li><p>Install CentOS 9 Stream from https://www.centos.org/centos-stream/#download.
-Select the appropriate architecture to
-download the ISO version.</p>
+<li><p>Create a new SSH Key on the Data Library Server</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">ssh</span><span class="o">-</span><span class="n">keygen</span> <span class="o">-</span><span class="n">t</span> <span class="n">ed25519</span> <span class="o">-</span><span class="n">b</span> <span class="mi">4096</span> <span class="o">-</span><span class="n">f</span> <span class="o">~/.</span><span class="n">ssh</span><span class="o">/</span><span class="n">id_bitbucket</span>
+</pre></div>
+</div>
+<p>This will create an ssh key in <code class="docutils literal notranslate"><span class="pre">~/.ssh/id_bitbucket</span></code> that you will
+use to communicate with Bitbucket. Set a passphrase for your key. It
+can be the same as your Bitbucket or login password.</p>
+</li>
+<li><p>Add the key to your <code class="docutils literal notranslate"><span class="pre">~/.ssh/config</span></code> file by adding these lines to the file:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">Host</span> <span class="n">bitbucket</span><span class="o">.</span><span class="n">org</span>
+<span class="n">AddKeysToAgent</span> <span class="n">yes</span>
+<span class="n">IdentityFile</span> <span class="o">~/.</span><span class="n">ssh</span><span class="o">/</span><span class="n">id_bitbucket</span>
+</pre></div>
+</div>
+</li>
+</ul>
+</section>
+<section id="add-the-administrator-s-public-key-to-bitbucket">
+<h3>Add the administrator’s public key to Bitbucket<a class="headerlink" href="#add-the-administrator-s-public-key-to-bitbucket" title="Link to this heading"></a></h3>
+<ul>
+<li><p>Add your key to bitbucket.org</p>
+<ul>
+<li><p>Login to your bitbucket.org account</p></li>
+<li><p>Select the <code class="docutils literal notranslate"><span class="pre">Settings</span></code> gear icon in the upper right of the browser window
+and select <code class="docutils literal notranslate"><span class="pre">Personal</span> <span class="pre">Bitbucket</span> <span class="pre">Settings</span></code>.</p></li>
+<li><p>Under <code class="docutils literal notranslate"><span class="pre">Security</span></code>, select <code class="docutils literal notranslate"><span class="pre">SSH</span> <span class="pre">Keys</span></code></p></li>
+<li><p>Select <code class="docutils literal notranslate"><span class="pre">Add</span> <span class="pre">Key</span></code></p></li>
+<li><p>In the <code class="docutils literal notranslate"><span class="pre">Add</span> <span class="pre">SSH</span> <span class="pre">key</span></code> dialog, provide a Label to help you identify which key
+you are adding. For example, you could use
+the account name of the user on the server you’re setting the key up for.</p></li>
+<li><p>Copy the contents of <code class="docutils literal notranslate"><span class="pre">~/.ssh/id_bitbucket.pub</span></code> to the <code class="docutils literal notranslate"><span class="pre">Key</span></code> field of the
+<code class="docutils literal notranslate"><span class="pre">Add</span> <span class="pre">SSH</span> <span class="pre">key</span></code> dialog.</p></li>
+<li><p>Select <code class="docutils literal notranslate"><span class="pre">Add</span> <span class="pre">Key</span></code><br />
+if it fails, check that you copied the contents properly. It should look
+something like:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">ssh</span><span class="o">-</span><span class="n">ed25529</span> <span class="n">LLoWYaPswHzVqQ7L7B07LzIJbntgmHqrE40t17nGXL71QX9IoFGKYoF5pJKUMvR</span><span class="o">+</span><span class="n">DZotTm</span> <span class="n">user</span><span class="nd">@example</span><span class="o">.</span><span class="n">com</span>
+</pre></div>
+</div>
+</li>
+</ul>
+</li>
+<li><p>Confirm that the key works: on the Data Library server,</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">ssh</span> <span class="o">-</span><span class="n">T</span> <span class="n">git</span><span class="nd">@bitbucket</span><span class="o">.</span><span class="n">org</span>
+</pre></div>
+</div>
+<p>It should return:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">authenticated</span> <span class="n">via</span> <span class="n">ssh</span> <span class="n">key</span>
+
+<span class="n">You</span> <span class="n">can</span> <span class="n">use</span> <span class="n">git</span> <span class="n">to</span> <span class="n">connect</span> <span class="n">to</span> <span class="n">Bitbucket</span><span class="o">.</span> <span class="n">Shell</span> <span class="n">access</span> <span class="ow">is</span> <span class="n">disabled</span>
+</pre></div>
+</div>
+</li>
+</ul>
+</section>
+<section id="create-access-key-for-deployment">
+<h3>Create access key for deployment<a class="headerlink" href="#create-access-key-for-deployment" title="Link to this heading"></a></h3>
+<p>The key we configured in the previous steps will be used by you, the
+system administrator, to make changes to the system configuration
+repository. We will now create a second key pair that will be used by
+non-administrators to deploy content updates from the data catalog and maproom repositories.</p>
+<p>To create an access key:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">ssh</span><span class="o">-</span><span class="n">keygen</span> <span class="o">-</span><span class="n">t</span> <span class="n">ed25519</span> <span class="o">-</span><span class="n">b</span> <span class="mi">4096</span> <span class="o">-</span><span class="n">f</span> <span class="o">~/.</span><span class="n">ssh</span><span class="o">/</span><span class="n">datag_access_key</span>
+</pre></div>
+</div>
+<p>Leave the passphrase blank.</p>
+</section>
+<section id="add-deployment-access-key-to-bitbucket">
+<h3>Add deployment access key to Bitbucket<a class="headerlink" href="#add-deployment-access-key-to-bitbucket" title="Link to this heading"></a></h3>
+<p>In the following, the <em>_xxx</em> is your country-specific suffix. For example: <code class="docutils literal notranslate"><span class="pre">kmd</span></code>, <code class="docutils literal notranslate"><span class="pre">nimet</span></code>, <code class="docutils literal notranslate"><span class="pre">madagascar</span></code>, <em>etc</em>.</p>
+<p>Install this key into each repository you need ansible to access. For example,</p>
 <ul class="simple">
-<li><p>For more information on this choice of operating system, see
-<a class="reference internal" href="overview.html#infrastructure"><span class="std std-ref">Infrastructure</span></a>.</p></li>
-<li><p>To create a bootable CD of the Installation ISO,
-follow <a class="reference external" href="https://docs.centos.org/en-US/centos/install-guide/Making_Media/">these instructions</a>.</p></li>
-<li><p>Installation Notes</p>
+<li><p><code class="docutils literal notranslate"><span class="pre">dlentries_xxx</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">maproom_xxx</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">python_maproom_xxx</span></code> (this one is optional and depends on if you have a python maproom)</p></li>
+</ul>
+<p>You should know where these repositories are, but you can also find them in your playbook.yaml file.</p>
+<p>For each repository, add the access key by navigating to <code class="docutils literal notranslate"><span class="pre">Repository</span> <span class="pre">settings</span></code> → <code class="docutils literal notranslate"><span class="pre">Access</span> <span class="pre">keys</span></code>, clicking the <code class="docutils literal notranslate"><span class="pre">Add</span> <span class="pre">key</span></code> button, and filling out the form as you did for the administrator’s key, but pasting the contents of <code class="docutils literal notranslate"><span class="pre">~/.ssh/datag_access_key.pub</span></code> into the <code class="docutils literal notranslate"><span class="pre">Key</span></code> field.</p>
+</section>
+</section>
+<section id="configure-the-data-library">
+<h2>Configure the Data Library<a class="headerlink" href="#configure-the-data-library" title="Link to this heading"></a></h2>
 <ul>
-<li><p>Install as <em>Server with GUI</em> to make it easier to maintain.</p></li>
-<li><p>When configuring your disk partitions</p>
-<ul>
-<li><p>Use LVM when creating the filesystems. This is the default.</p>
-<ul>
-<li><p>Don’t modify /boot or /boot/efi</p></li>
-</ul>
-</li>
-<li><p>Increase root partition to 100GB</p></li>
-<li><p>Create a /data partition large enough to hold all of your data now
-and in the future.</p></li>
-<li><p>Leave 10% of the disk unallocated. This will allow you to create
-snapshots or increase the size of
-partitions later if necessary.</p></li>
-</ul>
-</li>
-</ul>
-</li>
-</ul>
-</li>
-<li><p>Create a user account for the system administrator who will be performing the
-installation.
-Make that user a member of the <code class="docutils literal notranslate"><span class="pre">wheel</span></code> group so that they will be able to
-perform commands as root using <code class="docutils literal notranslate"><span class="pre">sudo</span></code>.</p></li>
-<li><p>Install git and python3:</p>
-<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>  sudo yum install -y git python3 python3-pip
+<li><p>Create a configuration repository for your account. This will be used to hold
+and store all your data library customizations. These will be put into git
+and shared with any other team members responsible for the DL installations
+and updates.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">mkdir</span> <span class="n">dlconfig</span>
+<span class="n">cd</span> <span class="n">dlconfig</span>
+<span class="n">git</span> <span class="n">init</span>
 </pre></div>
 </div>
 </li>
-<li><p>Install ansible with pip. The <code class="docutils literal notranslate"><span class="pre">--user</span></code> option causes it to be installed in ~
-/.local, to avoid interfering with python
-packages provided by CentOS.</p>
-<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>  # Note: do not use sudo here.
-  python3 -m pip install --user --upgrade pip
-  python3 -m pip install --user ansible==4.5.0
+<li><p>Inside this new git repository, install the IRIDL ansible collection and
+dependencies.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">source</span> <span class="o">/</span><span class="n">opt</span><span class="o">/</span><span class="n">datalib_venv3</span><span class="mf">.12</span><span class="o">/</span><span class="nb">bin</span><span class="o">/</span><span class="n">activate</span>
+<span class="n">ansible</span><span class="o">-</span><span class="n">galaxy</span> <span class="n">collection</span> <span class="n">install</span> <span class="o">-</span><span class="n">p</span> <span class="o">.</span> \
+    <span class="n">git</span><span class="o">+</span><span class="n">https</span><span class="p">:</span><span class="o">//</span><span class="n">github</span><span class="o">.</span><span class="n">com</span><span class="o">/</span><span class="n">iridl</span><span class="o">/</span><span class="n">iridl</span><span class="o">-</span><span class="n">ansible</span><span class="o">.</span><span class="n">git</span>
 </pre></div>
 </div>
 </li>
-<li><p>Disable SELinux and reboot:</p>
-<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>  sudo sed -i s/SELINUX=enforcing/SELINUX=disabled/ /etc/selinux/config
-  sudo shutdown -r now
+<li><p>The previous command should have downloaded the collection to a subdirectory
+called <code class="docutils literal notranslate"><span class="pre">ansible_collections</span></code>. Add that directory to your git repository,
+and commit the changes.</p></li>
+</ul>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>  <span class="n">git</span> <span class="n">add</span> <span class="n">ansible_collections</span>
+  <span class="n">git</span> <span class="n">commit</span> <span class="o">-</span><span class="n">m</span> <span class="s2">&quot;add iridl ansible collection&quot;</span>
+</pre></div>
+</div>
+<ul>
+<li><p>Copy template configuration files from the collection to the top level of the
+repository:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">cp</span> <span class="n">ansible_collections</span><span class="o">/</span><span class="n">iridl</span><span class="o">/</span><span class="n">iridl</span><span class="o">/</span><span class="n">example</span><span class="o">/*</span> <span class="o">.</span>
+</pre></div>
+</div>
+</li>
+<li><p>Modify <code class="docutils literal notranslate"><span class="pre">playbook.yaml</span></code> and <code class="docutils literal notranslate"><span class="pre">secrets.yaml</span></code> to customize them to the specifics
+of your site. The files you copied contain example configuration values that
+should be replaced with real email addresses, usernames, <em>etc</em>. The files
+include comments that explain the purpose of each configuration option. If you
+are not ready to set up your real Data Library server but merely want to
+practice the installation process, <em>e.g.</em> in a virtual machine, you can use
+the example files without modification.</p>
+<div class="admonition seealso">
+<p class="admonition-title">See also</p>
+<p>The example ssh key in <code class="docutils literal notranslate"><span class="pre">secrets.yaml</span></code> should be replaced with the deployment access key you created in <a class="reference internal" href="#create-access-key-for-deployment"><span class="std std-ref">Create access key for deployment</span></a>.</p>
+</div>
+</li>
+<li><p>Move <code class="docutils literal notranslate"><span class="pre">secrets.yaml</span></code> out of the git repository. For security reasons,
+unencrypted secrets should not be committed to version control.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">mv</span> <span class="n">secrets</span><span class="o">.</span><span class="n">yaml</span> <span class="o">..</span>
+</pre></div>
+</div>
+</li>
+<li><p>Commit your customizations and push them to your git server for safe keeping;
+back up <code class="docutils literal notranslate"><span class="pre">secrets.yaml</span></code> by other means, such as copying it to another machine.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">git</span> <span class="n">add</span> <span class="n">inventory</span><span class="o">.</span><span class="n">cfg</span> <span class="n">playbook</span><span class="o">.</span><span class="n">yaml</span>
+<span class="n">git</span> <span class="n">commit</span> <span class="o">-</span><span class="n">m</span> <span class="s2">&quot;add inventory and playbook&quot;</span>
 </pre></div>
 </div>
 </li>
 </ul>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
-<p>If you feel SELinux is important to the security of your server, please start a conversation with us at help&#64;iri.columbia.edu.</p>
-</div>
-</section>
-<section id="create-a-configuration-repository">
-<h2>Create a configuration repository<a class="headerlink" href="#create-a-configuration-repository" title="Link to this heading">¶</a></h2>
-<ul>
-<li><p>Log back into the server after rebooting. Create a git repository to track
-your Data Library configuration. At IRI we
-call ours <code class="docutils literal notranslate"><span class="pre">dlconfig</span></code>.</p>
-<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>  mkdir dlconfig
-  cd dlconfig
-  git init
-</pre></div>
-</div>
-</li>
-<li><p>Inside the new git repository, install the IRIDL ansible collection and
-dependencies:</p>
-<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>  ansible-galaxy collection install \
-      -p . \
-      git+https://github.com/iridl/iridl-ansible.git \
-      community.docker
-</pre></div>
-</div>
-</li>
-<li><p>The previous command should have downloaded the collection to a subdirectory
-called <code class="docutils literal notranslate"><span class="pre">ansible_collections</span></code>. Add and
-commit that directory to your git repository, to ensure that you will use the
-same version of the collection every
-time you run the playbook.</p>
-<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>  git add ansible_collections
-  git commit -m &quot;add iridl ansible collection&quot;
-</pre></div>
-</div>
-</li>
-<li><p>Copy template configuration files from the collection to the top level of the
-repository:</p>
-<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>  cp ansible_collections/iridl/iridl/example/* .
-</pre></div>
-</div>
-</li>
-<li><p>Move <code class="docutils literal notranslate"><span class="pre">secrets.yaml</span></code> out of the git repository. For security reasons,
-unencrypted secrets should not be committed to
-version control.</p>
-<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>  mv secrets.yaml ..
-</pre></div>
-</div>
-</li>
-<li><p>Modify <code class="docutils literal notranslate"><span class="pre">playbook.yaml</span></code> and <code class="docutils literal notranslate"><span class="pre">../secrets.yaml</span></code> to customize them to the
-specifics of your site. The files that you
-copied contain example configuration values that should be replaced with real
-email addresses, usernames, <em>etc.</em> The
-files include comments that explain the purpose of each configuration option.
-If you are not ready to set up your real
-Data Library server but merely want to practice the installation process,
-<em>e.g.</em> in a virtual machine, you can use the
-example files without modification.</p></li>
-<li><p>Commit your customizations and push them to your git server for safe keeping;
-back up <code class="docutils literal notranslate"><span class="pre">secrets.yaml</span></code> by other means,
-such as copying it to another machine.</p></li>
-</ul>
 <p>Never edit the contents of the <code class="docutils literal notranslate"><span class="pre">ansible_collections</span></code> directory. All
-customization should be made in the configuration
-files that you copied from the template. In the future when it comes time to
-upgrade to a newer version of the DL
-software, you will run the <code class="docutils literal notranslate"><span class="pre">ansible-galaxy</span></code> command again and commit the new
-version to your configuration repository.
-Don’t upgrade without checking the release notes first, because in some cases an
-upgrade may require manual migration
-steps. (At this writing, there are no upgrade release notes because this is the
-playbook’s initial release.)</p>
+customization should be made in the configuration files that you copied
+from the template. In the future when it comes time to upgrade to a newer
+version of the DL software, you will run the <code class="docutils literal notranslate"><span class="pre">ansible-galaxy</span></code> command
+again and commit the new version to your configuration repository.</p>
+</div>
 </section>
 <section id="run-the-ansible-playbook">
-<h2>Run the ansible playbook<a class="headerlink" href="#run-the-ansible-playbook" title="Link to this heading">¶</a></h2>
-<p>Now we are ready to run the playbook, which will download, configure, and
-install the Data Library software using the
-parameters you defined in the configuration files.</p>
+<h2>Run the ansible playbook<a class="headerlink" href="#run-the-ansible-playbook" title="Link to this heading"></a></h2>
+<p>Now you are ready to run the playbook, which will download, configure, and
+install the Data Library software using the parameters you defined in the
+configuration files. We have created a convenience script, <code class="docutils literal notranslate"><span class="pre">run-ansible</span></code>,
+for this purpose.</p>
 <p>From the root directory of the configuration repository, run the following
-command:</p>
-<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>ansible-playbook \
-   --ask-become-pass \
-   -i inventory.cfg \
-   -e @../secrets.yaml \
-   -e run_update_script=yes \
-   playbook.yaml
+command</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">./</span><span class="n">run</span><span class="o">-</span><span class="n">ansible</span> <span class="o">--</span><span class="n">build</span>
+</pre></div>
+</div>
+<p>It will prompt you for a password, which will be the password of the user you
+are logged in as, assuming you have sudo privileges.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">BECOME</span> <span class="n">password</span><span class="p">:</span>
 </pre></div>
 </div>
 <p>Each step of the installation will be printed to the terminal. At a site with a
-fast connection to the internet, the
-playbook generally finishes within ten minutes, but if bandwidth is limited it
-may take a few hours, as the installation
-process involves downloading several GB of software packages and container
-images.</p>
+fast connection to the internet, the playbook generally finishes within ten
+minutes, but if bandwidth is limited it may take a few hours, as the
+installation process involves downloading several GB of software packages and
+container images.</p>
 <p>You should now be able to visit your Data Library server in a browser, but the
-maprooms are not yet functional because
-the data that underlies them has yet to be installed.</p>
+maprooms are not yet functional because the data that underlies them has yet
+to be installed.</p>
+<p>Any flag you can pass to <code class="docutils literal notranslate"><span class="pre">ansible-playbook</span></code> can also be passed to the
+<code class="docutils literal notranslate"><span class="pre">run-ansible</span></code> script. For example, if there are errors or failures,
+you can pass <code class="docutils literal notranslate"><span class="pre">-vvv</span></code> to the run-ansible command to get more information
+about why it is failing.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">./</span><span class="n">run</span><span class="o">-</span><span class="n">ansible</span> <span class="o">-</span><span class="n">vvv</span>
+</pre></div>
+</div>
+<p>If you want to run it in <code class="docutils literal notranslate"><span class="pre">check</span></code> mode, pass the flag <code class="docutils literal notranslate"><span class="pre">--check</span></code> to run in
+test mode without changing the Data Library.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">./</span><span class="n">run</span><span class="o">-</span><span class="n">ansible</span> <span class="o">--</span><span class="n">check</span>
+</pre></div>
+</div>
 </section>
 <section id="install-datasets">
-<h2>Install datasets<a class="headerlink" href="#install-datasets" title="Link to this heading">¶</a></h2>
-<p>Among other things, the ansible playbook has created structures (directories,
-groups, a database, and permissions) to
-support the installation of datasets. You can now install your data as described
-in <a class="reference internal" href="../user/index.html#installing-data"><span class="std std-ref">Installing data</span></a>. A member of
-the IRI staff will typically be involved in this process, as it may involve
-copying large amounts of data from an IRI
-server to yours.</p>
+<h2>Install datasets<a class="headerlink" href="#install-datasets" title="Link to this heading"></a></h2>
+<p>Among other things, the ansible playbook creates structures (directories,
+groups, a database, and permissions) to support the installation of datasets.
+You can now install your data as described in <a class="reference internal" href="../user/index.html#installing-data"><span class="std std-ref">Installing data</span></a>. A
+member of the IRI staff will typically be involved in this process, as it
+may involve copying large amounts of data from an IRI server to yours.</p>
 </section>
 <section id="use-your-new-data-library">
-<h2>Use your new Data Library<a class="headerlink" href="#use-your-new-data-library" title="Link to this heading">¶</a></h2>
+<h2>Use your new Data Library<a class="headerlink" href="#use-your-new-data-library" title="Link to this heading"></a></h2>
 <p>You should now be able to visit your Data Library server in a browser. For next
-steps, see the <a class="reference internal" href="maintenance.html"><span class="doc">Maintenance</span></a> page
-of the current guide, and the <a class="reference internal" href="../user/index.html"><span class="doc">User Guide</span></a>.</p>
+steps, see the <a class="reference internal" href="maintenance.html"><span class="doc">Maintenance</span></a> page of the current guide, and the
+<a class="reference internal" href="../user/index.html"><span class="doc">User Guide</span></a>.</p>
 </section>
 </section>
 
 
-            <div class="clearer"></div>
+           </div>
           </div>
-        </div>
-      </div>
-      <div class="sphinxsidebar" role="navigation" aria-label="Main">
-        <div class="sphinxsidebarwrapper">
-  <div>
-    <h3><a href="../index.html">Table of Contents</a></h3>
-    <p class="caption" role="heading"><span class="caption-text">Content:</span></p>
-<ul class="current">
-<li class="toctree-l1"><a class="reference internal" href="../user/index.html">User Guide</a></li>
-<li class="toctree-l1 current"><a class="reference internal" href="index.html">System Administrator Guide</a><ul class="current">
-<li class="toctree-l2"><a class="reference internal" href="prerequisites.html">Prerequisites</a></li>
-<li class="toctree-l2"><a class="reference internal" href="hwrequirements.html">Server Requirements</a></li>
-<li class="toctree-l2"><a class="reference internal" href="overview.html">Overview</a></li>
-<li class="toctree-l2 current"><a class="current reference internal" href="#">Installation</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="#prepare-the-server">Prepare the server</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#create-a-configuration-repository">Create a configuration repository</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#run-the-ansible-playbook">Run the ansible playbook</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#install-datasets">Install datasets</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#use-your-new-data-library">Use your new Data Library</a></li>
-</ul>
-</li>
-<li class="toctree-l2"><a class="reference internal" href="maintenance.html">Maintenance</a></li>
-</ul>
-</li>
-</ul>
+          <footer>
 
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2025, IRI.</p>
   </div>
-<search id="searchbox" style="display: none" role="search">
-  <h3 id="searchlabel">Quick search</h3>
-    <div class="searchformwrapper">
-    <form class="search" action="../search.html" method="get">
-      <input type="text" name="q" aria-labelledby="searchlabel" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false"/>
-      <input type="submit" value="Go" />
-    </form>
-    </div>
-</search>
-<script>document.getElementById('searchbox').style.display = "block"</script>
+
+  
+
+<div>For support or more information, contact <a href='mailto:help@iri.columbia.edu'>help@iri.columbia.edu</a></div>
+
+
+
+</footer>
         </div>
       </div>
-      <div class="clearer"></div>
-    </div>
-    <div class="related" role="navigation" aria-label="Related">
-      <h3>Navigation</h3>
-      <ul>
-        <li class="right" style="margin-right: 10px">
-          <a href="maintenance.html" title="Maintenance"
-             >next</a></li>
-        <li class="right" >
-          <a href="overview.html" title="Overview"
-             >previous</a> |</li>
-        <li class="nav-item nav-item-0"><a href="../index.html">IRI Data Library  documentation</a> &#187;</li>
-          <li class="nav-item nav-item-1"><a href="index.html" >System Administrator Guide</a> &#187;</li>
-        <li class="nav-item nav-item-this"><a href="">Installation</a></li> 
-      </ul>
-    </div>
-    <div class="footer" role="contentinfo">
-    &#169; Copyright 2021, IRI.
-      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 8.1.3.
-    </div>
-  </body>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
 </html>

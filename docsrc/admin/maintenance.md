@@ -4,62 +4,79 @@
 
 ## Configuration updates using ansible
 
-The {ref}`installation` section explains how to create an ansible playbook and
-use it for the initial installation of the Data Library software. We also
-recommend that you use continue using ansible to manage configuration changes
-and software updates over time.
+The {doc}`installation` section explains how to
+create an ansible playbook and use it for the initial installation of the 
+Data Library software. We also recommend that you use continue using ansible
+to manage configuration changes and software updates over time.
+
+You must activate the correct python virtual environment in order to
+use the correct ansible playbook. To always use this version of
+python, you may want to add this line to the end of your
+`~/.bash_profile` file:
+
+```
+source /opt/datalib_venv3.12/bin/activate
+```
 
 To make a configuration change,
 
-- Make sure your local copy of the dlconfig repository is up to date:
+* Make sure your local copy of the `dlconfig` repository is up to date:
 
-        cd dlconfig
-        git pull --ff-only
-  
-- Make your changes in `playbook.yaml`.
+  ```
+  cd dlconfig
+  git pull --ff-only
+  ```
+  and read the output to be sure that the command succeeded. If there are conflicts, resolve them and pull again before proceeding.
 
-- Run the playbook in "check mode" to verify that ansible will make the change
-  you intended:
+* Make your changes in `playbook.yaml`.
 
-        ansible-playbook \
-          --check \
-          --diff \
-          --ask-become-pass \
-          -i inventory.cfg \
-          -e @../secrets.yaml \
-          playbook.yaml
+* Run the playbook in _check mode_ to verify that the changes that ansible is about to make are the ones you intended:
 
-- After verifying the diff, run the playbook without `--check --diff` to apply
+  ```
+  ./run_ansible --check
+  ```
+
+* After verifying the diff, run the playbook without `--check` to apply
   the change.
 
-        ansible-playbook \
-          --ask-become-pass \
-          -i inventory.cfg \
-          -e @../secrets.yaml \
-          playbook.yaml
+  ```
+  ./run_ansible
+  ```
 
-- Review, commit, and push your changes to your git host.
+* If there have been changes to classic maprooms, run with `--build` to pull the new changes. (Rebuilding classic maprooms is skipped by default, because it is time-consuming.)
 
-        git diff
-        git commit -a -m "Description of the changes you made"
-        git push
+  ```
+  ./run_ansible --build
+  ```
 
-To update to a new version of the Data Library software, first consult the
-release notes for any backwards-compatibility warnings and manual migration
-steps. Then use `ansible-galaxy` to update the `ansible_collections` directory
-of your dlconfig repository:
+* Review, commit, and push your changes to your git host.
 
-     ansible-galaxy collection install iridl.iridl:==x.y.z
+  ```
+  git diff
+  git commit -a -m "Description of the changes you made"
+  git push
+  ```
 
-where `x.y.z` is the new Data Library version number. Remember to commit and
-push your changes.
+To update to a new version of the Data Library software, first check
+[https://github.com/iridl/iridl-ansible](https://github.com/iridl/iridl-ansible)
+for any backwards-compatibility warnings or manual migration
+steps. Then use `ansible-galaxy` to update the `ansible_collections`
+directory of your `dlconfig` repository:
+
+```
+git rm -rf ansible_collections
+ansible-galaxy collection install -p . \
+  git+https://github.com/iridl/iridl-ansible.git
+git add ansible_collections
+git commit -m "Update iridl ansible collection"
+```
 
 ## Adding user accounts
 
-As described in {ref}`groups`, users with accounts on the Data Library server
-can be divided in two groups: administrators and authors.
+As described in {ref}`User groups`, users with accounts on the Data Library
+server can be divided in two groups: administrators and authors.
 
-Administrator accounts should be created "by hand", *i.e.* outside of ansible's
+Administrator accounts should be created "by hand", *i.e.* outside ansible's
 control. Remember to add administrators to the `wheel` group so they will have
 sudo privileges.
 
@@ -70,45 +87,50 @@ personal data catalog directory (see {ref}`paths`) for the user. Ansible does
 not set the user's password, so you should do that by hand after running the
 playbook. Remember to commit and push your playbook changes.
 
-(debugging)=
-
 ## Debugging tips
 
-- To see what services are running under docker, use `sudo docker ps`.
+* To see what services are running under docker, use
 
-- To start and stop services, cd to `/usr/local/datalib` and then
-  use `docker-compose`, *e.g.*
+  ```
+  sudo docker ps
+  ```
 
-        cd /usr/local/datalib
-        sudo docker-compose up -d maproom
+* To start and stop services, for example
 
-- Most services output logs to stdout, which is captured by the docker daemon
+  ```
+  cd /usr/local/datalib
+  sudo docker compose start squid
+  sudo docker compose restart squid
+  sudo docker compose up -d maproom
+  ```
+
+* Most services output logs to stdout, which is captured by the docker daemon
   and routed to journald. You can read the logs by using `journalctl`, *e.g.*
 
-        sudo journalctl CONTAINER_NAME=datalib_maproom_1 --since='1 hour ago'
+  ```
+  sudo journalctl CONTAINER_NAME=datalib_maproom_1 --since='1 hour ago'
+  ```
 
-
-- squid produces two separate logs: the error log and the access log. The latter
+* squid produces two separate logs: the error log and the access log. The latter
   contains a line for each request served. The error log is piped to journalctl,
   while the access log is written to a docker volume. To read the access log,
   use `docker exec` to run a command in the squid container, *e.g.*
 
-        sudo docker exec -it datalib_squid_1 tail -n 100 /var/log/squid/access.log
+  ```
+  sudo docker exec -it datalib_squid_1 tail -n 100 /var/log/squid/access.log
+  ```
 
-
-- If an embedded image in a maproom is broken/empty, copy the image URL to a new
-  browser window and remove the .gif at the end. Sometimes this will get you an
+* If an embedded image in a maproom is broken/empty, copy the image URL to a new
+  browser window and remove the `.gif` at the end. Sometimes this will get you an
   informative error message instead of just an empty response.
 
-- If there’s an error message about a specific file or database table, look into
+* If there’s an error message about a specific file or database table, look into
   that as described below. If no specific file or table is mentioned, identify
-  the datasets that are used in the query, and read the catalog entries (
-  dlentries) for those datasets to identify the files and/or tables that they
+  the datasets that are used in the query, and read the catalog entries
+  (dlentries) for those datasets to identify the files and/or tables that they
   use.
 
-- To check on a database table, exec into the postgres container and use psql.
+* To check on a database table, exec into the postgres container and use `psql`.
   If the table doesn’t exist, either run the sql script that creates it, or add
   it to the sql scripts if it’s missing. If the table exists, check that the
-  readonlyaccess role has select permission for it. (Our install process is
-  supposed to grant that permission, but in rehearsing the installation we have
-  sometimes needed to grant it by hand.)
+  `readonlyaccess` role has select permission for it.

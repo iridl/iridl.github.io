@@ -1,0 +1,212 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-VGXWMJJGTJ"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'G-VGXWMJJGTJ');
+    </script>
+    
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Data Library Upgrade Installation &mdash; IRI Data Library  documentation</title>
+      <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=b86133f3" />
+      <link rel="stylesheet" type="text/css" href="../_static/css/theme.css?v=e59714d7" />
+      <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=76b2166b" />
+      <link rel="stylesheet" type="text/css" href="../_static/custom.css" />
+
+  
+    <link rel="canonical" href="https://dldocs.iri.columbia.edu/admin/installation_upgrade.html" />
+      <script src="../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="../_static/documentation_options.js?v=5929fcd5"></script>
+      <script src="../_static/doctools.js?v=9bcbadda"></script>
+      <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+      <script src="../_static/clipboard.min.js?v=a7894cd8"></script>
+      <script src="../_static/copybutton.js?v=f281be69"></script>
+    <script src="../_static/js/theme.js"></script>
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Maintenance" href="maintenance.html" />
+    <link rel="prev" title="Data Library New Installation" href="installation.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../index.html" class="icon icon-home">
+            IRI Data Library
+              <img src="../_static/iri_icon_white.svg" class="logo" alt="Logo"/>
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Content:</span></p>
+<ul class="current">
+<li class="toctree-l1 current"><a class="reference internal" href="index.html">System Administrator Guide</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="overview.html">Overview</a></li>
+<li class="toctree-l2"><a class="reference internal" href="hwrequirements.html">Server Requirements</a></li>
+<li class="toctree-l2"><a class="reference internal" href="centos_stream.html">Install CentOS Stream</a></li>
+<li class="toctree-l2"><a class="reference internal" href="installation.html">Data Library New Installation</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">Data Library Upgrade Installation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="maintenance.html">Maintenance</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../user/index.html">User Guide</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">IRI Data Library</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content style-external-links">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="index.html">System Administrator Guide</a></li>
+      <li class="breadcrumb-item active">Data Library Upgrade Installation</li>
+      <li class="wy-breadcrumbs-aside">
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="data-library-upgrade-installation">
+<h1>Data Library Upgrade Installation<a class="headerlink" href="#data-library-upgrade-installation" title="Link to this heading"></a></h1>
+<p>This section provides instructions for upgrading Data Library software previously installed on a
+CentOS Stream 7 server to a server configured with CentOS Stream 9 or 10.  Make sure your current
+dlconfig repository is pushed to the server and your secrets.yaml file is saved.  It is important to
+back up the entire system before upgrading your server.</p>
+<section id="make-a-backup">
+<h2>Make a backup<a class="headerlink" href="#make-a-backup" title="Link to this heading"></a></h2>
+<p>Make sure you back up the following:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">/home</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">/data</span></code></p></li>
+</ul>
+</section>
+<section id="install-the-new-operating-system">
+<h2>Install the new operating system<a class="headerlink" href="#install-the-new-operating-system" title="Link to this heading"></a></h2>
+<div class="admonition seealso">
+<p class="admonition-title">See also</p>
+<p>To install CentOS Stream 10 on the server, please reference <a class="reference internal" href="centos_stream.html"><span class="doc">Install CentOS Stream</span></a>.</p>
+</div>
+</section>
+<section id="restore-from-backup">
+<h2>Restore from backup<a class="headerlink" href="#restore-from-backup" title="Link to this heading"></a></h2>
+<p>Restore <code class="docutils literal notranslate"><span class="pre">/home</span></code> and <code class="docutils literal notranslate"><span class="pre">/data</span></code> from backups.</p>
+</section>
+<section id="configure-the-upgraded-data-library">
+<h2>Configure the upgraded Data Library<a class="headerlink" href="#configure-the-upgraded-data-library" title="Link to this heading"></a></h2>
+<p>Installation of the Data Library software is automated using
+<a class="reference external" href="https://docs.ansible.com/ansible_community.html">ansible</a>, a configuration
+management tool which uses Python 3.12. If you followed the OS installation process described in <a class="reference internal" href="centos_stream.html#install-python3-12-git-and-ansible"><span class="std std-ref">Install python3.12, git and ansible</span></a>, python and ansible are installed in <code class="docutils literal notranslate"><span class="pre">/opt/datalib_venv3.12</span></code>.</p>
+<section id="pull-the-latest-version-of-your-old-data-library-configuration">
+<h3>Pull the latest version of your old Data Library configuration<a class="headerlink" href="#pull-the-latest-version-of-your-old-data-library-configuration" title="Link to this heading"></a></h3>
+<p>Having restored <code class="docutils literal notranslate"><span class="pre">/home</span></code> from backup, you should have a clone of your <code class="docutils literal notranslate"><span class="pre">dlconfig</span></code> repository in your home directory. Run <code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">pull</span></code> in that repository to be certain that your local copy is up to date.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">cd</span> <span class="o">~/</span><span class="n">dlconfig</span>
+<span class="n">git</span> <span class="n">pull</span>
+</pre></div>
+</div>
+</section>
+<section id="upgrade-ansible-collection">
+<h3>Upgrade ansible collection<a class="headerlink" href="#upgrade-ansible-collection" title="Link to this heading"></a></h3>
+<p>Delete the old version of the ansible galaxy collection, and then install the new one:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">git</span> <span class="n">rm</span> <span class="o">-</span><span class="n">rf</span> <span class="n">ansible_collections</span>
+<span class="n">git</span> <span class="n">commit</span> <span class="o">-</span><span class="n">m</span> <span class="s2">&quot;removing old ansible_collections to upgrade CentOS Stream&quot;</span>
+
+<span class="n">source</span> <span class="o">/</span><span class="n">opt</span><span class="o">/</span><span class="n">datalib_venv3</span><span class="mf">.12</span><span class="o">/</span><span class="nb">bin</span><span class="o">/</span><span class="n">activate</span>
+<span class="n">ansible</span><span class="o">-</span><span class="n">galaxy</span> <span class="n">collection</span> <span class="n">install</span> <span class="o">-</span><span class="n">p</span> <span class="o">.</span> \
+    <span class="n">git</span><span class="o">+</span><span class="n">https</span><span class="p">:</span><span class="o">//</span><span class="n">github</span><span class="o">.</span><span class="n">com</span><span class="o">/</span><span class="n">iridl</span><span class="o">/</span><span class="n">iridl</span><span class="o">-</span><span class="n">ansible</span><span class="o">.</span><span class="n">git</span>
+</pre></div>
+</div>
+<p>Copy new versions of these three configuration files from the
+collection to the top level of the repository:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">cp</span> <span class="n">ansible_collections</span><span class="o">/</span><span class="n">iridl</span><span class="o">/</span><span class="n">iridl</span><span class="o">/</span><span class="n">example</span><span class="o">/</span><span class="n">ansible</span><span class="o">.</span><span class="n">cfg</span> <span class="o">.</span>
+<span class="n">cp</span> <span class="n">ansible_collections</span><span class="o">/</span><span class="n">iridl</span><span class="o">/</span><span class="n">iridl</span><span class="o">/</span><span class="n">example</span><span class="o">/</span><span class="n">inventory</span><span class="o">.</span><span class="n">cfg</span> <span class="o">.</span>
+<span class="n">cp</span> <span class="n">ansible_collections</span><span class="o">/</span><span class="n">iridl</span><span class="o">/</span><span class="n">iridl</span><span class="o">/</span><span class="n">example</span><span class="o">/</span><span class="n">run</span><span class="o">-</span><span class="n">ansible</span> <span class="o">.</span>
+</pre></div>
+</div>
+<p>Commit the new collection and configuration files to your git
+repository, and commit the changes.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">git</span> <span class="n">add</span> <span class="n">ansible_collections</span> <span class="n">ansible</span><span class="o">.</span><span class="n">cfg</span> <span class="n">inventory</span><span class="o">.</span><span class="n">cfg</span> <span class="n">run</span><span class="o">-</span><span class="n">ansible</span>
+<span class="n">git</span> <span class="n">commit</span> <span class="o">-</span><span class="n">m</span> <span class="s2">&quot;add new CentOS Stream iridl ansible collection&quot;</span>
+</pre></div>
+</div>
+<p>Push your changes to your git server for safe keeping; back up
+<code class="docutils literal notranslate"><span class="pre">secrets.yaml</span></code> by other means, such as copying it to another machine.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">git</span> <span class="n">commit</span> <span class="o">-</span><span class="n">m</span> <span class="s2">&quot;updates for new version of CentOS&quot;</span>
+<span class="n">git</span> <span class="n">push</span>
+</pre></div>
+</div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<ul class="simple">
+<li><p>Never edit the contents of the <code class="docutils literal notranslate"><span class="pre">ansible_collections</span></code> directory. All
+customization should be made in the configuration files that you copied
+from the template. In the future when it comes time to upgrade to a newer
+version of the DL software, you will run the <code class="docutils literal notranslate"><span class="pre">ansible-galaxy</span></code> command
+again and commit the new version to your configuration repository.</p></li>
+<li><p>Before upgrading, check <a class="reference external" href="https://github.com/iridl/iridl-ansible">https://github.com/iridl/iridl-ansible</a> for release notes, because in some
+cases an upgrade may require manual migration steps. (At this writing,
+there are no upgrade release notes.)</p></li>
+</ul>
+</div>
+<p>From here, you can continue as for a new installation, starting with <a class="reference internal" href="installation.html#run-the-ansible-playbook"><span class="std std-ref">Run the ansible playbook</span></a>.</p>
+</section>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2025, IRI.</p>
+  </div>
+
+  
+
+<div>For support or more information, contact <a href='mailto:help@iri.columbia.edu'>help@iri.columbia.edu</a></div>
+
+
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

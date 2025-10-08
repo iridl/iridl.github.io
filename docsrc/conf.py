@@ -13,12 +13,12 @@
 # import os
 # import sys
 # sys.path.insert(0, os.path.abspath('.'))
-
+import sphinx_rtd_theme
 
 # -- Project information -----------------------------------------------------
 
 project = 'IRI Data Library'
-copyright = '2021, IRI'
+copyright = '2025, IRI'
 author = 'IRI'
 
 
@@ -29,8 +29,11 @@ author = 'IRI'
 # ones.
 extensions = [
     "myst_parser",
-    "sphinxcontrib.fulltoc",
+    "sphinxcontrib.googleanalytics",
     "sphinx.ext.githubpages",
+    "sphinx_copybutton",
+    "sphinx_rtd_theme",
+    'sphinx.ext.autosectionlabel',
 ]
 
 # Add any paths that contain templates here, relative to this directory.
@@ -47,12 +50,25 @@ exclude_patterns = []
 # The theme to use for HTML and HTML Help pages.  See the documentation for
 # a list of builtin themes.
 #
-html_theme = 'classic'
+html_show_sphinx = False
+html_show_sourcelink = False
+html_use_index = False
+html_baseurl = 'https://dldocs.iri.columbia.edu'
+html_logo = '_static/iri_icon_white.svg'
+
+html_theme = 'sphinx_rtd_theme'
+html_theme_options = {
+    'titles_only': True,
+    'style_external_links': True,
+    'prev_next_buttons_location': None,
+}
+googleanalytics_id =  'G-VGXWMJJGTJ'
 
 # Add any paths that contain custom static files (such as style sheets) here,
 # relative to this directory. They are copied after the builtin static files,
 # so a file named "default.css" will overwrite the builtin "default.css".
-html_static_path = []
+html_static_path = ['_static']
+html_css_files = ['custom.css']
 
 html_sidebars = {
     '**': [
@@ -60,10 +76,3 @@ html_sidebars = {
         'searchbox.html',
     ],
 }
-
-# Suppress index link in navbar, since the index is empty and thus
-# useless. Enable if/when we start adding index entries.
-html_use_index = False
-
-# Used by sphinx.ext.githubpages to generate docs/CNAME
-html_baseurl = 'https://dldocs.iri.columbia.edu'
