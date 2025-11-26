@@ -87,6 +87,45 @@ personal data catalog directory (see {ref}`paths`) for the user. Ansible does
 not set the user's password, so you should do that by hand after running the
 playbook. Remember to commit and push your playbook changes.
 
+## Database Backups
+
+### Backup
+To backup your database, you need to connect to the docker database container and create a backup folder
+and backup your database:
+
+```
+sudo docker exec -it datalib_postgres_1 mkdir /var/lib/pgsql/9.1/backups
+sudo docker exec -it datalib_postgres_1 pg_dump --file /var/lib/pgsql/9.1/backups/iridb_dump iridb
+```
+
+The output file will be located in /data/docker/volumes/datalib_ingriddb/_data/backups/iridb_dump
+Copy this file to an external backup disk.
+
+### Restore
+
+In case of database corruption, you can restore your database from a previously made backup. You will
+need to stop any processes that connect to the database first:
+
+```
+sudo docker container stop datalib_pymaproom_1
+sudo docker container stop datalib_maproom_1
+sudo docker container stop datalib_ingrid_1
+```
+
+Locate your database backup file `$database_file` and copy it to the database container:
+
+```
+sudo cp $database_file /data/docker/volumes/datalib_ingriddb/_data/backups/iridb_dump
+sudo chmod 644 /data/docker/volumes/datalib_ingriddb/_data/backups/iridb_dump
+```
+
+Drop the current iridb database and restore the backup:
+
+```
+sudo docker exec -it datalib_postgres_1 dropdb iridb
+sudo docker exec -it datalib_postgres_1 pg_restore -C -d iridb --file /var/lib/pgsql/9.1/backups/iridb_dump
+```
+
 ## Debugging tips
 
 * To see what services are running under docker, use
