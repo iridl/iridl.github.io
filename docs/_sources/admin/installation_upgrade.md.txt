@@ -11,6 +11,7 @@ Make sure you back up the following:
 
 * `/home`
 * `/data`
+* `postgres iridb database` See {ref}`Database Backups`
 
 ## Install the new operating system
 
@@ -26,7 +27,6 @@ Restore `/home` and `/data` from backups.
 Installation of the Data Library software is automated using 
 [ansible](https://docs.ansible.com/ansible_community.html), a configuration
 management tool which uses Python 3.12. If you followed the OS installation process described in {ref}`Install python3.12, git and ansible`, python and ansible are installed in `/opt/datalib_venv3.12`.
-
 
 ### Pull the latest version of your old Data Library configuration
 

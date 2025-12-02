@@ -170,6 +170,40 @@ personal data catalog directory (see <a class="reference internal" href="overvie
 not set the user’s password, so you should do that by hand after running the
 playbook. Remember to commit and push your playbook changes.</p>
 </section>
+<section id="database-backups">
+<h2>Database Backups<a class="headerlink" href="#database-backups" title="Link to this heading"></a></h2>
+<section id="backup">
+<h3>Backup<a class="headerlink" href="#backup" title="Link to this heading"></a></h3>
+<p>To backup your database, you need to connect to the docker database container and create a backup folder
+and backup your database:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">sudo</span> <span class="n">docker</span> <span class="n">exec</span> <span class="o">-</span><span class="n">it</span> <span class="n">datalib_postgres_1</span> <span class="n">mkdir</span> <span class="o">/</span><span class="n">var</span><span class="o">/</span><span class="n">lib</span><span class="o">/</span><span class="n">pgsql</span><span class="o">/</span><span class="mf">9.1</span><span class="o">/</span><span class="n">backups</span>
+<span class="n">sudo</span> <span class="n">docker</span> <span class="n">exec</span> <span class="o">-</span><span class="n">it</span> <span class="n">datalib_postgres_1</span> <span class="n">pg_dump</span> <span class="o">--</span><span class="n">file</span> <span class="o">/</span><span class="n">var</span><span class="o">/</span><span class="n">lib</span><span class="o">/</span><span class="n">pgsql</span><span class="o">/</span><span class="mf">9.1</span><span class="o">/</span><span class="n">backups</span><span class="o">/</span><span class="n">iridb_dump</span> <span class="n">iridb</span>
+</pre></div>
+</div>
+<p>The output file will be located in /data/docker/volumes/datalib_ingriddb/_data/backups/iridb_dump
+Copy this file to an external backup disk.</p>
+</section>
+<section id="restore">
+<h3>Restore<a class="headerlink" href="#restore" title="Link to this heading"></a></h3>
+<p>In case of database corruption, you can restore your database from a previously made backup. You will
+need to stop any processes that connect to the database first:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">sudo</span> <span class="n">docker</span> <span class="n">container</span> <span class="n">stop</span> <span class="n">datalib_pymaproom_1</span>
+<span class="n">sudo</span> <span class="n">docker</span> <span class="n">container</span> <span class="n">stop</span> <span class="n">datalib_maproom_1</span>
+<span class="n">sudo</span> <span class="n">docker</span> <span class="n">container</span> <span class="n">stop</span> <span class="n">datalib_ingrid_1</span>
+</pre></div>
+</div>
+<p>Locate your database backup file <code class="docutils literal notranslate"><span class="pre">$database_file</span></code> and copy it to the database container:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>sudo cp $database_file /data/docker/volumes/datalib_ingriddb/_data/backups/iridb_dump
+sudo chmod 644 /data/docker/volumes/datalib_ingriddb/_data/backups/iridb_dump
+</pre></div>
+</div>
+<p>Drop the current iridb database and restore the backup:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">sudo</span> <span class="n">docker</span> <span class="n">exec</span> <span class="o">-</span><span class="n">it</span> <span class="n">datalib_postgres_1</span> <span class="n">dropdb</span> <span class="n">iridb</span>
+<span class="n">sudo</span> <span class="n">docker</span> <span class="n">exec</span> <span class="o">-</span><span class="n">it</span> <span class="n">datalib_postgres_1</span> <span class="n">pg_restore</span> <span class="o">-</span><span class="n">C</span> <span class="o">-</span><span class="n">d</span> <span class="n">iridb</span> <span class="o">--</span><span class="n">file</span> <span class="o">/</span><span class="n">var</span><span class="o">/</span><span class="n">lib</span><span class="o">/</span><span class="n">pgsql</span><span class="o">/</span><span class="mf">9.1</span><span class="o">/</span><span class="n">backups</span><span class="o">/</span><span class="n">iridb_dump</span>
+</pre></div>
+</div>
+</section>
+</section>
 <section id="debugging-tips">
 <h2>Debugging tips<a class="headerlink" href="#debugging-tips" title="Link to this heading"></a></h2>
 <ul>
